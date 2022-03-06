@@ -1,0 +1,26 @@
+/**
+ * START --- SETUP TAILWINDCSS EDIT
+ *
+ * `yarn rw setup ui tailwindcss` placed these imports here
+ * to inject Tailwind's styles into your CSS.
+ * For more information, see: https://tailwindcss.com/docs/installation#include-tailwind-in-your-css
+ */
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+/**
+ * END --- SETUP TAILWINDCSS EDIT
+ */
+
+.logo {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  mix-blend-mode: exclusion;
+  filter: invert(100%);
+  -webkit-filter: invert(100%);
+}
+
+.truncate-overflow {
+  line-clamp: 6;
+}

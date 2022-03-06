@@ -1,0 +1,10 @@
+{
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "ecmaFeatures": {
+      "legacyDecorators": true,
+      "jsx": true
+    },
+    "sourceType": "module"
+  }
+}

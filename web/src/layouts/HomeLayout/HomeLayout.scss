@@ -1,0 +1,7 @@
+.animate-slidemenu {
+  transition: max-width 0.5s;
+
+  &:hover {
+    max-width: 512px;
+  }
+}
