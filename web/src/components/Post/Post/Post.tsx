@@ -42,7 +42,7 @@ const timeTag = (datetime) => {
 }
 
 const checkboxInputTag = (checked) => {
-  return <input type="checkbox" checked={checked} disabled />
+  return <input type='checkbox' checked={checked} disabled />
 }
 
 const Post = ({ post }) => {
@@ -64,38 +64,43 @@ const Post = ({ post }) => {
 
   return (
     <>
-      <div className="rw-segment">
-        <header className="rw-segment-header">
-          <h2 className="rw-heading rw-heading-secondary">Post {post.id} Detail</h2>
+      <div className='rw-segment'>
+        <header className='rw-segment-header'>
+          <h2 className='rw-heading rw-heading-secondary'>
+            Post {post.id} Detail
+          </h2>
         </header>
-        <table className="rw-table">
+        <table className='rw-table'>
           <tbody>
             <tr>
               <th>Id</th>
               <td>{post.id}</td>
-            </tr><tr>
+            </tr>
+            <tr>
               <th>Title</th>
               <td>{post.title}</td>
-            </tr><tr>
+            </tr>
+            <tr>
               <th>Body</th>
               <td>{post.body}</td>
-            </tr><tr>
+            </tr>
+            <tr>
               <th>Created at</th>
               <td>{timeTag(post.createdAt)}</td>
             </tr>
           </tbody>
         </table>
       </div>
-      <nav className="rw-button-group">
+      <nav className='rw-button-group'>
         <Link
           to={routes.editPost({ id: post.id })}
-          className="rw-button rw-button-blue"
+          className='rw-button rw-button-blue'
         >
           Edit
         </Link>
         <button
-          type="button"
-          className="rw-button rw-button-red"
+          type='button'
+          className='rw-button rw-button-red'
           onClick={() => onDeleteClick(post.id)}
         >
           Delete

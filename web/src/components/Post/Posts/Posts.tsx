@@ -50,7 +50,7 @@ const timeTag = (datetime) => {
 }
 
 const checkboxInputTag = (checked) => {
-  return <input type="checkbox" checked={checked} disabled />
+  return <input type='checkbox' checked={checked} disabled />
 }
 
 const PostsList = ({ posts }) => {
@@ -75,8 +75,8 @@ const PostsList = ({ posts }) => {
   }
 
   return (
-    <div className="rw-segment rw-table-wrapper-responsive">
-      <table className="rw-table">
+    <div className='rw-segment rw-table-wrapper-responsive'>
+      <table className='rw-table'>
         <thead>
           <tr>
             <th>Id</th>
@@ -94,25 +94,25 @@ const PostsList = ({ posts }) => {
               <td>{truncate(post.body)}</td>
               <td>{timeTag(post.createdAt)}</td>
               <td>
-                <nav className="rw-table-actions">
+                <nav className='rw-table-actions'>
                   <Link
                     to={routes.post({ id: post.id })}
                     title={'Show post ' + post.id + ' detail'}
-                    className="rw-button rw-button-small"
+                    className='rw-button rw-button-small'
                   >
                     Show
                   </Link>
                   <Link
                     to={routes.editPost({ id: post.id })}
                     title={'Edit post ' + post.id}
-                    className="rw-button rw-button-small rw-button-blue"
+                    className='rw-button rw-button-small rw-button-blue'
                   >
                     Edit
                   </Link>
                   <button
-                    type="button"
+                    type='button'
                     title={'Delete post ' + post.id}
-                    className="rw-button rw-button-small rw-button-red"
+                    className='rw-button rw-button-small rw-button-red'
                     onClick={() => onDeleteClick(post.id)}
                   >
                     Delete

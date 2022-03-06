@@ -27,11 +27,11 @@ const NewPost = () => {
   }
 
   return (
-    <div className="rw-segment">
-      <header className="rw-segment-header">
-        <h2 className="rw-heading rw-heading-secondary">New Post</h2>
+    <div className='rw-segment'>
+      <header className='rw-segment-header'>
+        <h2 className='rw-heading rw-heading-secondary'>New Post</h2>
       </header>
-      <div className="rw-segment-main">
+      <div className='rw-segment-main'>
         <PostForm onSave={onSave} loading={loading} error={error} />
       </div>
     </div>
