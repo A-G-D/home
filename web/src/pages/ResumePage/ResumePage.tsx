@@ -3,7 +3,7 @@ import { MetaTags } from '@redwoodjs/web'
 
 const ResumeWrapper = ({ children, title }) => {
   return (
-    <div className='flex flex-col gap-[4px] mx-4 my-8 py-4 px-3 h-max rounded-[6px] bg-purple-300'>
+    <div className='flex flex-col gap-[4px] mx-4 my-8 py-4 px-3 h-max w-max rounded-[6px] bg-purple-300'>
       <div className='flex flex-row justify-between'>
         <div className='flex flex-row justify-between items-center gap-x-[6px]'>
           <div className='h-[14px] w-[14px] rounded-[50%] bg-red-500' />

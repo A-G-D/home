@@ -2,6 +2,8 @@ import type { ArticlesQuery } from 'types/graphql'
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 import { Link, routes } from '@redwoodjs/router'
 
+import TextTruncate from 'react-text-truncate'
+
 export const QUERY = gql`
   query ArticlesQuery {
     posts {
@@ -28,7 +30,15 @@ const Article = ({ post }) => {
         <Link to={routes.article({ id: post.id })}>{post.title}</Link>
       </h1>
       <p>Posted on: {post.createdAt}</p>
-      <p>{post.body}</p>
+      <TextTruncate
+        line={5}
+        element='div'
+        text={post.body}
+        truncateText='...'
+        truncateTextChild={
+          <Link to={routes.article({ id: post.id })}>Read on</Link>
+        }
+      ></TextTruncate>
     </li>
   )
 }

@@ -23,7 +23,7 @@ export const Failure = ({ error }: CellFailureProps) => (
 export const Success = ({ article }: CellSuccessProps<ArticleQuery>) => {
   return (
     <>
-      <h1 className='text-lg text-center font-bold'>{article.title}</h1>
+      <h1 className='text-2xl text-center font-bold'>{article.title}</h1>
       <h2 className='text-sm italic'>{article.createdAt}</h2>
       <p>{article.body}</p>
     </>
