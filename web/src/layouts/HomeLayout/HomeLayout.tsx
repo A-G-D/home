@@ -5,12 +5,139 @@ import { FaKeybase } from 'react-icons/fa'
 import { SiGmail } from 'react-icons/si'
 import './HomeLayout.scss'
 
+// const FRAME_RATE = 10
+
+// window.onload = () => {
+//   const background: HTMLDivElement = document.querySelector('#background')
+//   const canvas: HTMLCanvasElement = document.querySelector('#background-canvas')
+//   const canvasContext = canvas.getContext('2d')
+
+//   canvasContext.imageSmoothingEnabled = true
+
+//   let time = 0
+//   setInterval(drawBackgroundImage, 1000 / FRAME_RATE)
+
+//   function drawBackgroundImage() {
+//     canvas.width = background.clientWidth / 2
+//     canvas.height = background.clientHeight / 2
+//     const imgData = canvasContext.getImageData(
+//       0,
+//       0,
+//       canvas.width,
+//       canvas.height
+//     )
+//     const data = imgData.data
+//     const width = imgData.width
+//     const height = imgData.height
+//     const min = Math.max(1, Math.min(width, height))
+//     const maxX = width / min
+//     const maxY = height / min
+
+//     for (let i = 0; i < data.length; i += 4) {
+//       const r = data[i + 0]
+//       const g = data[i + 1]
+//       const b = data[i + 2]
+//       const a = data[i + 3]
+//       const index = i / 4
+//       const y = Math.floor(index / width)
+//       const x = index - y * width
+//       const ny = y / (min - 1) - 0.5 * maxY
+//       const nx = x / (min - 1) - 0.5 * maxX
+//       const color = onBackgroundPeriod(
+//         [r, g, b, a],
+//         [nx, ny, time],
+//         [maxX, maxY]
+//       )
+//       data[i + 0] = color[0]
+//       data[i + 1] = color[1]
+//       data[i + 2] = color[2]
+//       data[i + 3] = color[3]
+//     }
+
+//     console.log(maxX, maxY)
+//     canvasContext.putImageData(imgData, 0, 0)
+//     background.style.backgroundImage = `url(${canvas.toDataURL()})`
+//     time += 1 / FRAME_RATE
+//   }
+
+//   function onBackgroundPeriod(colors, [x, y, time], [maxX, maxY]) {
+//     // Shader pattern copied from https://www.shadertoy.com/view/NdKXzw then
+//     // translated to JavaScript.
+
+//     const clamp = (value, min, max) => Math.max(Math.min(value, max), min)
+//     const length = (vx, vy) => Math.sqrt(vx * vx + vy * vy)
+//     const mix = (lo, hi, value) => lo * (1 - value) + hi * a
+//     const smoothstep = (lo, hi, value) => {
+//       let t = clamp((value - lo) / (hi - lo), 0, 1)
+//       return t * t * (3 - 2 * t)
+//     }
+
+//     const MIN_DIAM = 0.5
+//     const MAX_DIAM = 0.8
+
+//     // let uvx = x - 0.5 * maxX
+//     // let uvy = y - 0.5 * maxY
+//     let uvx = x
+//     let uvy = y
+//     const a = Math.PI / 4
+//     const c = Math.cos(a)
+//     const s = Math.sin(a)
+
+//     const mat = [c, -s, s, c]
+//     const nuvx = mat[0] * uvx + mat[2] * uvy
+//     const nuvy = mat[1] * uvx + mat[3] * uvy
+//     uvx = 8 * nuvx
+//     uvy = 8 * nuvy
+
+//     const gvx = uvx % 1
+//     const gvy = uvy % 1
+//     const idx = Math.floor(uvx)
+//     const idy = Math.floor(uvy)
+//     let m = 0
+
+//     const nd = 1
+
+//     for (let i = -nd; i <= nd; ++i) {
+//       for (let j = -nd; j <= nd; ++j) {
+//         const d = length(gvx - i, gvy - j)
+//         const dist = length(idx + i, idy + j)
+//         const truc = Math.sin(dist - 7 * time) * 0.5 + 0.5
+
+//         let rx = mix(MIN_DIAM, MAX_DIAM, truc)
+//         let ry = rx - 0.00009
+
+//         m += smoothstep(rx, ry, d) * 0.3
+//       }
+//     }
+
+//     // return rgba as array
+//     return [
+//       0xff * (m + 0.4),
+//       0xff * (m * 0.6 + 0.6),
+//       0xff * (m * 0.5 + 0.4),
+//       0xff,
+//     ]
+//     // return [0, 0xff * (x + maxX * 0.5 + 0.1), 0xff * (y + maxY * 0.5 + 0.1), 0xff]
+//   }
+// }
+
 type HomeLayoutProps = {
   children?: React.ReactNode
 }
 
-const Background = () => {
-  return <div className=''></div>
+// const BackgroundCanvas = () => {
+//   return <canvas id='background-canvas' className='hidden' />
+// }
+
+const Background = ({ children }) => {
+  return (
+    <div
+      id='background'
+      className='bg-cover bg-no-repeat h-full flex-auto flex flex-row justify-center overflow-auto'
+    >
+      {children}
+    </div>
+  )
 }
 
 const SocialLinks = () => {
@@ -32,7 +159,7 @@ const SocialLinks = () => {
         </a>
       </li>
       <li>
-        <a href='mailto:aloeverdulay@gmail.com?subject=Mail from Personal PProjectsortfolio'>
+        <a href='mailto:aloeverdulay@gmail.com?subject=Mail from Personal Portfolio'>
           <SiGmail />
         </a>
       </li>
@@ -55,24 +182,34 @@ const Projects = () => {
   )
 }
 
+const LinkItem = ({ children }) => {
+  return (
+    <li className='hover:bg-gray-200 px-[8px] py-[4px] rounded-[11px]'>
+      {children}
+    </li>
+  )
+}
+
 const Links = () => {
   return (
     <ul className='flex flex-row justify-evenly items-center gap-x-3'>
-      <li>
-        <Link to={routes.blog()}>Blog</Link>
-      </li>
-      <li>
+      <LinkItem>
         <Tippy
           content={<Projects />}
-          placement='right'
+          placement='bottom'
           interactive={true}
           arrow={true}
         >
           {/* Create projects page */}
           <Link to={routes.projects()}>Projects</Link>
         </Tippy>
-      </li>
-      <li>Resume</li>
+      </LinkItem>
+      <LinkItem>
+        <Link to={routes.blog()}>Blog</Link>
+      </LinkItem>
+      <LinkItem>
+        <Link to={routes.resume()}>Resume</Link>
+      </LinkItem>
     </ul>
   )
 }
@@ -80,7 +217,6 @@ const Links = () => {
 const Title = () => {
   return (
     <div className='animate-slidemenu max-w-[128px] overflow-hidden flex gap-x-[48px] px-[32px] rounded-[64px] bg-violet-200'>
-      {/* <Tippy content={<SocialLinks/>} placement='right' interactive={true} delay={20} arrow={true}> */}
       <Link to={routes.home()}>
         <img
           className='logo min-h-[64px] min-w-[64px]'
@@ -89,7 +225,6 @@ const Title = () => {
         />
       </Link>
       <SocialLinks />
-      {/* </Tippy> */}
     </div>
   )
 }
@@ -120,11 +255,16 @@ const Footer = () => {
 
 const HomeLayout = ({ children }: HomeLayoutProps) => {
   return (
-    <div className='flex flex-col h-full max-w-[720px]'>
-      <Header />
-      {children}
-      <Footer />
-    </div>
+    <>
+      <Background>
+        <div className='flex flex-col h-full max-w-[720px]'>
+          <Header />
+          <div className='bg-gray-200 flex-auto'>{children}</div>
+          <Footer />
+        </div>
+      </Background>
+      {/* <BackgroundCanvas /> */}
+    </>
   )
 }
 

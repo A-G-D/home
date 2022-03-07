@@ -24,3 +24,10 @@
 .truncate-overflow {
   line-clamp: 6;
 }
+
+.shader-web-background-fallback {
+  background-color: black;
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+}

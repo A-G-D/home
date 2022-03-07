@@ -1,8 +1,7 @@
 import { MetaTags } from '@redwoodjs/web'
 
 const AboutMe = () => {
-  const aboutMeText = `I'm an aspiring Full-Stack Web Developer.
-In the past, I've had experience in game modding, software development, and CAD programming.`
+  const aboutMeText = `I'm an aspiring Full-Stack Web Developer. I've also had experience in software development, game modding, and CAD programming.`
   return <div className='py-6'>{aboutMeText}</div>
 }
 

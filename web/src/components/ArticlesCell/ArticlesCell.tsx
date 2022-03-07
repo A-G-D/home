@@ -1,5 +1,6 @@
 import type { ArticlesQuery } from 'types/graphql'
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
+import { Link, routes } from '@redwoodjs/router'
 
 export const QUERY = gql`
   query ArticlesQuery {
@@ -23,7 +24,9 @@ export const Failure = ({ error }: CellFailureProps) => (
 const Article = ({ post }) => {
   return (
     <li className='truncate-overflow' key={post.id}>
-      <h1>{post.title}</h1>
+      <h1>
+        <Link to={routes.article({ id: post.id })}>{post.title}</Link>
+      </h1>
       <p>Posted on: {post.createdAt}</p>
       <p>{post.body}</p>
     </li>
