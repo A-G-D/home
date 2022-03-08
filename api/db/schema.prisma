@@ -17,3 +17,11 @@ model Post {
   body      String
   createdAt DateTime @default(now())
 }
+
+model Contact {
+  id        String    @id @default(uuid())
+  name      String
+  email     String
+  message   String
+  createdAt DateTime  @default(now())
+}
