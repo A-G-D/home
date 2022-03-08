@@ -20,6 +20,7 @@ import {
 } from '@redwoodjs/forms'
 import { useMutation } from '@redwoodjs/web'
 import { toast, Toaster } from '@redwoodjs/web/toast'
+import { useAuth } from '@redwoodjs/auth'
 
 type HomeLayoutProps = {
   children?: React.ReactNode
@@ -224,11 +225,26 @@ const Title = () => {
   )
 }
 
-const Header = () => {
+const UserRibbon = ({ currentUser, onLogout }) => {
+  return (
+    <div className='bg-gray-400 border-2 border-gray-600 absolute top-0 right-0 rounded-b-[12px] flex flex-row gap-2 px-4 py-2'>
+      <div>{currentUser.email}</div>
+      <div className='bg-gray-600 self-stretch w-[2px]' />
+      <div className='hover:cursor-pointer' onClick={onLogout}>
+        Logout
+      </div>
+    </div>
+  )
+}
+
+const Header = ({ isAuthenticated, currentUser, logOut }) => {
   return (
     <div className='bg-violet-600 px-6 py-3 flex flex-row justify-between'>
       <Title />
       <Links />
+      {isAuthenticated && (
+        <UserRibbon currentUser={currentUser} onLogout={logOut} />
+      )}
     </div>
   )
 }
@@ -249,16 +265,21 @@ const Footer = () => {
 }
 
 const HomeLayout = ({ children }: HomeLayoutProps) => {
+  const { isAuthenticated, currentUser, logOut } = useAuth()
+
   return (
     <>
       <Background>
         <div className='flex flex-col h-full max-w-[720px]'>
-          <Header />
+          <Header
+            isAuthenticated={isAuthenticated}
+            currentUser={currentUser}
+            logOut={logOut}
+          />
           <div className='bg-gray-200 flex-auto'>{children}</div>
           <Footer />
         </div>
       </Background>
-      {/* <BackgroundCanvas /> */}
     </>
   )
 }
