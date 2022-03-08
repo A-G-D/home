@@ -1,9 +1,23 @@
 import { Link, routes } from '@redwoodjs/router'
 import Tippy from '@tippyjs/react'
-import { BsGithub, BsLinkedin } from 'react-icons/bs'
+import { BsGithub, BsLinkedin, BsInstagram } from 'react-icons/bs'
+import { RiCloseFill } from 'react-icons/ri'
 import { FaKeybase } from 'react-icons/fa'
 import { SiGmail } from 'react-icons/si'
+
+import React from 'react'
+import Modal from 'react-modal'
+
 import './HomeLayout.scss'
+import {
+  FieldError,
+  Form,
+  FormError,
+  Label,
+  Submit,
+  TextAreaField,
+  TextField,
+} from '@redwoodjs/forms'
 
 // const FRAME_RATE = 10
 
@@ -141,6 +155,18 @@ const Background = ({ children }) => {
 }
 
 const SocialLinks = () => {
+  const [contactModalOpen, setContactModalOpen] = React.useState(false)
+  const openContactModal = () => {
+    setContactModalOpen(true)
+  }
+  const closeContactModal = () => {
+    setContactModalOpen(false)
+  }
+  const submitForm = ({ name, email, message }) => {
+    console.log({ name, email, message })
+    closeContactModal()
+  }
+
   return (
     <ul className='flex flex-row justify-evenly items-center gap-x-3'>
       <li>
@@ -159,9 +185,86 @@ const SocialLinks = () => {
         </a>
       </li>
       <li>
-        <a href='mailto:aloeverdulay@gmail.com?subject=Mail from Personal Portfolio'>
-          <SiGmail />
+        <a href='https://www.instagram.com/agd.91939'>
+          <BsInstagram />
         </a>
+      </li>
+      <li>
+        {/* <a href='mailto:aloeverdulay@gmail.com?subject=Mail from Personal Portfolio'> */}
+        <SiGmail className='hover:cursor-pointer' onClick={openContactModal} />
+        <Modal
+          className='bg-violet-600 flex flex-col rounded-[8px] w-[720px] h-[50%] m-auto'
+          isOpen={contactModalOpen}
+          style={{
+            overlay: {
+              display: 'flex',
+              justifyContents: 'center',
+              alignItems: 'center',
+            },
+          }}
+        >
+          <ul className='flex flex-row justify-between px-4 py-3'>
+            <li className='w-[16px]' />
+            <li className='flex-auto text-center'>What Can I Help You With?</li>
+            <li className='w-[16px] flex flex-row justify-end items-center'>
+              <RiCloseFill
+                className='hover:cursor-pointer'
+                onClick={closeContactModal}
+              />
+            </li>
+          </ul>
+          <Form
+            className='flex flex-col flex-auto px-4 py-3'
+            onSubmit={submitForm}
+            config={{ mode: 'onBlur' }}
+          >
+            <Label name='name' errorClassName='error'>
+              Name
+            </Label>
+            <TextField
+              name='name'
+              validation={{
+                required: false,
+                pattern: {
+                  value: /(?:[_a-zA-Z0-9]+)(?: [_a-zA-Z0-9]+)*/,
+                  message: 'Please enter a valid name.',
+                },
+              }}
+              errorClassName='error'
+            />
+            <FieldError name='name' className='error' />
+
+            <Label name='email' errorClassName='error'>
+              Email
+            </Label>
+            <TextField
+              name='email'
+              validation={{
+                required: true,
+                pattern: {
+                  value: /^[._a-zA-Z0-9]+@[^.]+\..+$/,
+                  message: 'Please enter a valid email address.',
+                },
+              }}
+              errorClassName='error'
+            />
+            <FieldError name='email' className='error' />
+
+            <Label name='message' errorClassName='error'>
+              Message
+            </Label>
+            <TextAreaField
+              className='flex-auto'
+              name='message'
+              validation={{ required: true }}
+              errorClassName='error'
+            />
+            <FieldError name='message' className='error' />
+
+            <Submit>Submit</Submit>
+          </Form>
+        </Modal>
+        {/* </a> */}
       </li>
     </ul>
   )
