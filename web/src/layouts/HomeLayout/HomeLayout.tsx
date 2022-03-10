@@ -194,7 +194,6 @@ const Links = () => {
           interactive={true}
           arrow={true}
         >
-          {/* Create projects page */}
           <Link to={routes.projects()}>Projects</Link>
         </Tippy>
       </LinkItem>
@@ -270,13 +269,13 @@ const HomeLayout = ({ children }: HomeLayoutProps) => {
   return (
     <>
       <Background>
-        <div className='flex flex-col h-full max-w-[720px]'>
+        <div className='flex flex-col min-h-full w-[720px] max-w-[720px]'>
           <Header
             isAuthenticated={isAuthenticated}
             currentUser={currentUser}
             logOut={logOut}
           />
-          <div className='bg-gray-200 flex-auto'>{children}</div>
+          <div className='bg-gray-200 flex-auto flex flex-col'>{children}</div>
           <Footer />
         </div>
       </Background>
