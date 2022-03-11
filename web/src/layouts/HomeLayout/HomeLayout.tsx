@@ -7,6 +7,7 @@ import React from 'react'
 import Modal from 'react-modal'
 import Tippy from '@tippyjs/react'
 
+import 'tippy.js/animations/shift-away.css'
 import './HomeLayout.scss'
 import {
   FieldError,
@@ -163,7 +164,7 @@ const SocialLinks = () => {
 
 const Projects = () => {
   return (
-    <ul className='flex flex-col bg-cyan-600'>
+    <ul className='bg-purple-600 px-6 py-3 flex flex-col rounded-[8px]'>
       <li>
         <a href='https://a-g-d.github.io/digital-canvas/'>Digital Canvas</a>
       </li>
@@ -176,35 +177,44 @@ const Projects = () => {
   )
 }
 
-const LinkItem = ({ children }) => {
-  return (
-    <li className='hover:bg-gray-200 px-[8px] py-[4px] rounded-[11px]'>
-      {children}
-    </li>
-  )
-}
-
 const Links = () => {
   return (
     <ul className='flex flex-row justify-evenly items-center gap-x-3'>
-      <LinkItem>
+      <li>
         <Tippy
           content={<Projects />}
           placement='bottom'
           interactive={true}
           arrow={true}
+          animation='shift-away'
+          duration={200}
         >
-          <Link to={routes.projects()}>Projects</Link>
+          <Link
+            className='hover:bg-gray-200 px-[8px] py-[4px] rounded-[12px] font-bold'
+            to={routes.projects()}
+          >
+            Projects
+          </Link>
         </Tippy>
-      </LinkItem>
-      <LinkItem>
-        <Link to={routes.blog()}>Blog</Link>
-      </LinkItem>
-      <LinkItem>
-        <Link to={routes.resume()} target='_blank' rel='noopener noreferrer'>
+      </li>
+      <li>
+        <Link
+          className='hover:bg-gray-200 px-[8px] py-[4px] rounded-[12px] font-bold'
+          to={routes.blog()}
+        >
+          Blog
+        </Link>
+      </li>
+      <li>
+        <Link
+          className='hover:bg-gray-200 px-[8px] py-[4px] rounded-[12px] font-bold'
+          to={routes.resume()}
+          target='_blank'
+          rel='noopener noreferrer'
+        >
           Resume
         </Link>
-      </LinkItem>
+      </li>
     </ul>
   )
 }
@@ -238,7 +248,7 @@ const UserRibbon = ({ currentUser, onLogout }) => {
 
 const Header = ({ isAuthenticated, currentUser, logOut }) => {
   return (
-    <div className='bg-violet-600 px-6 py-3 flex flex-row justify-between'>
+    <div className='sticky top-0 bg-violet-600/80 px-6 py-3 flex flex-row justify-between'>
       <Title />
       <Links />
       {isAuthenticated && (
@@ -250,14 +260,26 @@ const Header = ({ isAuthenticated, currentUser, logOut }) => {
 
 const Footer = () => {
   return (
-    <div className='bg-violet-600 px-6 py-3 flex flex-col items-center'>
-      <div>Copyright © 2022 Aloever Dulay</div>
-      <div>
-        Made with{' '}
-        <a className='text-sky-700' href='https://redwoodjs.com'>
-          RedwoodJS
+    <div className='bg-violet-600/80 px-6 py-6 flex flex-col gap-4 items-center'>
+      <div className='text-sm italic'>
+        The background shader pattern is an edited fork from{' '}
+        <a
+          className='text-pink-600 font-bold'
+          href='https://www.shadertoy.com/view/WldSRn'
+        >
+          this source
         </a>
         .
+      </div>
+      <div className='flex flex-col items-center'>
+        <div>Copyright © 2022 Aloever Dulay</div>
+        <div>
+          Made with{' '}
+          <a className='text-red-600 font-bold' href='https://redwoodjs.com'>
+            RedwoodJS
+          </a>
+          .
+        </div>
       </div>
     </div>
   )
@@ -275,7 +297,9 @@ const HomeLayout = ({ children }: HomeLayoutProps) => {
             currentUser={currentUser}
             logOut={logOut}
           />
-          <div className='bg-gray-200 flex-auto flex flex-col'>{children}</div>
+          <div className='bg-gray-200/80 flex-auto flex flex-col'>
+            {children}
+          </div>
           <Footer />
         </div>
       </Background>
