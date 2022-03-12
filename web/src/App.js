@@ -63,7 +63,7 @@ shaderWebBackground.shade({
 
 const App = () => (
   <FatalErrorBoundary page={FatalErrorPage}>
-    <RedwoodProvider titleTemplate='%PageTitle | %AppTitle'>
+    <RedwoodProvider titleTemplate='AGD | %PageTitle'>
       <AuthProvider type='dbAuth'>
         <RedwoodApolloProvider>
           <Routes />

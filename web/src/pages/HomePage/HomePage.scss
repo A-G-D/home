@@ -1,0 +1,6 @@
+.tippy-box {
+  @apply bg-violet-400 p-[0px];
+  .tippy-svg-arrow {
+    @apply fill-violet-400;
+  }
+}

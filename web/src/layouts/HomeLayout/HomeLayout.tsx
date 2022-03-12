@@ -1,4 +1,4 @@
-import { Link, routes } from '@redwoodjs/router'
+import { Link, NavLink, routes } from '@redwoodjs/router'
 import { BsGithub, BsLinkedin, BsTwitter, BsInstagram } from 'react-icons/bs'
 import { RiCloseFill } from 'react-icons/ri'
 import { SiGmail } from 'react-icons/si'
@@ -178,6 +178,10 @@ const Projects = () => {
 }
 
 const Links = () => {
+  const activeNavStyle = 'border-indigo-900 border-b-4 text-fuchsia-900'
+  const navStyle =
+    'hover:border-indigo-700 hover:border-b-4 hover:text-fuchsia-900 px-[8px] py-[4px] font-bold'
+
   return (
     <ul className='flex flex-row justify-evenly items-center gap-x-3'>
       <li>
@@ -189,31 +193,34 @@ const Links = () => {
           animation='shift-away'
           duration={200}
         >
-          <Link
-            className='hover:bg-gray-200 px-[8px] py-[4px] rounded-[12px] font-bold'
+          <NavLink
+            className={navStyle}
+            activeClassName={activeNavStyle}
             to={routes.projects()}
           >
             Projects
-          </Link>
+          </NavLink>
         </Tippy>
       </li>
       <li>
-        <Link
-          className='hover:bg-gray-200 px-[8px] py-[4px] rounded-[12px] font-bold'
+        <NavLink
+          className={navStyle}
+          activeClassName={activeNavStyle}
           to={routes.blog()}
         >
           Blog
-        </Link>
+        </NavLink>
       </li>
       <li>
-        <Link
-          className='hover:bg-gray-200 px-[8px] py-[4px] rounded-[12px] font-bold'
+        <NavLink
+          className={navStyle}
+          activeClassName={activeNavStyle}
           to={routes.resume()}
           target='_blank'
           rel='noopener noreferrer'
         >
           Resume
-        </Link>
+        </NavLink>
       </li>
     </ul>
   )
@@ -271,7 +278,7 @@ const Footer = () => {
         </a>
         .
       </div>
-      <div className='flex flex-col items-center'>
+      <div className='flex flex-col items-center font-semibold'>
         <div>Copyright © 2022 Aloever Dulay</div>
         <div>
           Made with{' '}
@@ -289,21 +296,17 @@ const HomeLayout = ({ children }: HomeLayoutProps) => {
   const { isAuthenticated, currentUser, logOut } = useAuth()
 
   return (
-    <>
-      <Background>
-        <div className='flex flex-col min-h-full w-[720px] max-w-[720px]'>
-          <Header
-            isAuthenticated={isAuthenticated}
-            currentUser={currentUser}
-            logOut={logOut}
-          />
-          <div className='bg-gray-200/80 flex-auto flex flex-col'>
-            {children}
-          </div>
-          <Footer />
-        </div>
-      </Background>
-    </>
+    <Background>
+      <div className='flex flex-col min-h-full w-[720px] max-w-[720px]'>
+        <Header
+          isAuthenticated={isAuthenticated}
+          currentUser={currentUser}
+          logOut={logOut}
+        />
+        <div className='bg-gray-200/80 flex-auto flex flex-col'>{children}</div>
+        <Footer />
+      </div>
+    </Background>
   )
 }
 
