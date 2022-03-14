@@ -1,5 +1,6 @@
 import { Link, NavLink, routes } from '@redwoodjs/router'
 import { BsGithub, BsLinkedin, BsTwitter, BsInstagram } from 'react-icons/bs'
+import { MdOutlineDoubleArrow } from 'react-icons/md'
 import { RiCloseFill } from 'react-icons/ri'
 import { SiGmail } from 'react-icons/si'
 
@@ -183,53 +184,55 @@ const Links = () => {
     'hover:border-indigo-700 hover:border-b-4 hover:text-fuchsia-900 px-[8px] py-[4px] font-bold'
 
   return (
-    <ul className='flex flex-row justify-evenly items-center gap-x-3'>
-      <li>
-        <Tippy
-          content={<Projects />}
-          placement='bottom'
-          interactive={true}
-          arrow={true}
-          animation='shift-away'
-          duration={200}
-          maxWidth={360}
-        >
+    <nav className='flex items-center'>
+      <ul className='flex justify-evenly items-center gap-x-3'>
+        <li>
+          <Tippy
+            content={<Projects />}
+            placement='bottom'
+            interactive={true}
+            arrow={true}
+            animation='shift-away'
+            duration={200}
+            maxWidth={360}
+          >
+            <NavLink
+              className={navStyle}
+              activeClassName={activeNavStyle}
+              to={routes.projects()}
+            >
+              Projects
+            </NavLink>
+          </Tippy>
+        </li>
+        <li>
           <NavLink
             className={navStyle}
             activeClassName={activeNavStyle}
-            to={routes.projects()}
+            to={routes.blog()}
           >
-            Projects
+            Blog
           </NavLink>
-        </Tippy>
-      </li>
-      <li>
-        <NavLink
-          className={navStyle}
-          activeClassName={activeNavStyle}
-          to={routes.blog()}
-        >
-          Blog
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          className={navStyle}
-          activeClassName={activeNavStyle}
-          to={routes.resume()}
-          target='_blank'
-          rel='noopener noreferrer'
-        >
-          Resume
-        </NavLink>
-      </li>
-    </ul>
+        </li>
+        <li>
+          <NavLink
+            className={navStyle}
+            activeClassName={activeNavStyle}
+            to={routes.resume()}
+            target='_blank'
+            rel='noopener noreferrer'
+          >
+            Resume
+          </NavLink>
+        </li>
+      </ul>
+    </nav>
   )
 }
 
 const Title = () => {
   return (
-    <div className='animate-slidemenu max-w-[128px] overflow-hidden flex gap-x-[48px] px-[32px] rounded-[64px] bg-violet-200'>
+    <div className='hover:max-w-[512px] transition-[max-width] duration-500 max-w-[128px] overflow-hidden flex items-center gap-x-8 px-[32px] rounded-[64px] bg-violet-200'>
       <Link to={routes.home()}>
         <img
           className='logo min-h-[64px] min-w-[64px]'
@@ -256,21 +259,21 @@ const UserRibbon = ({ currentUser, onLogout }) => {
 
 const Header = ({ isAuthenticated, currentUser, logOut }) => {
   return (
-    <div className='sticky top-0 bg-violet-600/80 px-6 py-3 flex flex-row justify-between'>
+    <header className='sticky top-0 bg-violet-600/80 px-6 py-3 flex flex-row justify-between'>
       <Title />
       <Links />
       {isAuthenticated && (
         <UserRibbon currentUser={currentUser} onLogout={logOut} />
       )}
-    </div>
+    </header>
   )
 }
 
 const Footer = () => {
   return (
-    <div className='bg-violet-600/80 px-6 py-6 flex flex-col gap-4 items-center'>
+    <footer className='bg-violet-600/80 px-6 py-6 flex flex-col gap-4 items-center'>
       <div className='text-sm italic'>
-        The background shader pattern is an edited fork from{' '}
+        Resume The background shader pattern is an edited fork from{' '}
         <a
           className='text-pink-600 font-bold'
           href='https://www.shadertoy.com/view/WldSRn'
@@ -289,7 +292,7 @@ const Footer = () => {
           .
         </div>
       </div>
-    </div>
+    </footer>
   )
 }
 
