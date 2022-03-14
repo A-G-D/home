@@ -67,6 +67,7 @@ const ContactForm = ({ onClose, ...props }) => {
           display: 'flex',
           justifyContents: 'center',
           alignItems: 'center',
+          overflowY: 'scroll',
         },
       }}
       {...props}
