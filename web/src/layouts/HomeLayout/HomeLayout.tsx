@@ -1,6 +1,6 @@
 import { Link, NavLink, routes } from '@redwoodjs/router'
 import { BsGithub, BsLinkedin, BsTwitter, BsInstagram } from 'react-icons/bs'
-import { MdOutlineDoubleArrow } from 'react-icons/md'
+import { MdOutlineKeyboardArrowDown } from 'react-icons/md'
 import { RiCloseFill } from 'react-icons/ri'
 import { SiGmail } from 'react-icons/si'
 
@@ -180,9 +180,9 @@ const Projects = () => {
 }
 
 const Links = () => {
-  const activeNavStyle = 'border-indigo-900 border-b-4 text-fuchsia-900'
+  const activeNavStyle = 'border-b-indigo-900 text-fuchsia-900'
   const navStyle =
-    'hover:border-indigo-700 hover:border-b-4 hover:text-fuchsia-900 px-[8px] py-[4px] font-bold'
+    'hover:border-b-indigo-700 hover:text-fuchsia-900 border-y-4 border-transparent flex items-center gap-2 px-[8px] py-[4px] font-bold'
 
   return (
     <nav className='flex items-center'>
@@ -192,7 +192,7 @@ const Links = () => {
             content={<Projects />}
             placement='bottom'
             interactive={true}
-            arrow={true}
+            arrow={false}
             animation='shift-away'
             duration={200}
             maxWidth={360}
@@ -202,7 +202,7 @@ const Links = () => {
               activeClassName={activeNavStyle}
               to={routes.projects()}
             >
-              Projects
+              Projects <MdOutlineKeyboardArrowDown />
             </NavLink>
           </Tippy>
         </li>
