@@ -59,6 +59,30 @@ const LinkImage = React.forwardRef(
   }
 )
 
+const PuffUpElement = React.forwardRef(
+  (
+    { children, className, ...props }: HTMLAttributes<HTMLElement>,
+    ref: React.RefObject<HTMLDivElement>
+  ): JSX.Element => {
+    return (
+      <div
+        ref={ref}
+        className={['flex justify-center items-center', className].join(' ')}
+        {...props}
+      >
+        {React.Children.map(children, (child: React.ReactElement) =>
+          React.cloneElement(child, {
+            className: [
+              'hover:w-full hover:h-full transition-all',
+              child.props.className,
+            ].join(' '),
+          })
+        )}
+      </div>
+    )
+  }
+)
+
 interface TechTipPropTypes {
   children?: React.ReactNode
   href?: string
@@ -78,161 +102,246 @@ const TechTip = ({ children, href }: TechTipPropTypes) => {
 }
 
 const TechStack = () => {
-  const [source, target] = useSingleton()
-
   return (
     <div className='bg-gray-200 px-8 py-8 flex flex-col gap-12 rounded-[8px]'>
-      <h1 className='text-center font-semibold'>Technologies</h1>
+      <h2 className='text-center font-semibold'>Technologies</h2>
       <div className='flex flex-col gap-12'>
-        <Tippy singleton={source} duration={100} placement='top' arrow={true} />
-        <ul className='flex flex-row justify-center gap-8'>
+        <ul className='flex flex-row justify-center gap-4'>
           <li>
-            <Tippy singleton={target} content={<TechTip>HTML</TechTip>}>
-              <LinkImage
-                className='w-[64px] h-[64px]'
-                src='https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/HTML5_logo_and_wordmark.svg/130px-HTML5_logo_and_wordmark.svg.png'
-                alt='HTML5'
-              />
+            <Tippy
+              duration={500}
+              placement='top'
+              arrow={false}
+              hideOnClick={false}
+              content={<TechTip>HTML</TechTip>}
+            >
+              <PuffUpElement className='w-[96px] h-[96px]'>
+                <LinkImage
+                  className='w-[64px] h-[64px]'
+                  src='https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/HTML5_logo_and_wordmark.svg/130px-HTML5_logo_and_wordmark.svg.png'
+                  alt='HTML5'
+                />
+              </PuffUpElement>
             </Tippy>
           </li>
           <li>
-            <Tippy singleton={target} content={<TechTip>CSS</TechTip>}>
-              <LinkImage
-                className='w-[64px] h-[64px]'
-                src='https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/CSS3_logo_and_wordmark.svg/120px-CSS3_logo_and_wordmark.svg.png'
-                alt='CSS3'
-              />
+            <Tippy
+              duration={500}
+              placement='top'
+              arrow={false}
+              hideOnClick={false}
+              content={<TechTip>CSS</TechTip>}
+            >
+              <PuffUpElement className='w-[96px] h-[96px]'>
+                <LinkImage
+                  className='w-[64px] h-[64px]'
+                  src='https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/CSS3_logo_and_wordmark.svg/120px-CSS3_logo_and_wordmark.svg.png'
+                  alt='CSS3'
+                />
+              </PuffUpElement>
             </Tippy>
           </li>
           <li>
-            <Tippy singleton={target} content={<TechTip>Javascript</TechTip>}>
-              <LinkImage
-                className='w-[64px] h-[64px]'
-                src='https://raw.githubusercontent.com/voodootikigod/logo.js/master/js.png'
-                alt='Javascript'
-              />
+            <Tippy
+              duration={500}
+              placement='top'
+              arrow={false}
+              hideOnClick={false}
+              content={<TechTip>Javascript</TechTip>}
+            >
+              <PuffUpElement className='w-[96px] h-[96px]'>
+                <LinkImage
+                  className='w-[64px] h-[64px]'
+                  src='https://raw.githubusercontent.com/voodootikigod/logo.js/master/js.png'
+                  alt='Javascript'
+                />
+              </PuffUpElement>
             </Tippy>
           </li>
           <li>
-            <Tippy singleton={target} content={<TechTip>Typescript</TechTip>}>
-              <LinkImage
-                className='w-[64px] h-[64px]'
-                src='https://github.com/microsoft/TypeScript-Website/blob/v2/packages/typescriptlang-org/static/icons/ts-logo-512.png?raw=true'
-                alt='Typescript'
-              />
+            <Tippy
+              duration={500}
+              placement='top'
+              arrow={false}
+              hideOnClick={false}
+              content={<TechTip>Typescript</TechTip>}
+            >
+              <PuffUpElement className='w-[96px] h-[96px]'>
+                <LinkImage
+                  className='w-[64px] h-[64px]'
+                  src='https://github.com/microsoft/TypeScript-Website/blob/v2/packages/typescriptlang-org/static/icons/ts-logo-512.png?raw=true'
+                  alt='Typescript'
+                />
+              </PuffUpElement>
             </Tippy>
           </li>
           <li>
-            <Tippy singleton={target} content={<TechTip>Git</TechTip>}>
-              <LinkImage
-                className='w-[64px] h-[64px]'
-                src='https://avatars.githubusercontent.com/u/18133?s=200&v=4'
-                alt='Git'
-              />
+            <Tippy
+              duration={500}
+              placement='top'
+              arrow={false}
+              hideOnClick={false}
+              content={<TechTip>Git</TechTip>}
+            >
+              <PuffUpElement className='w-[96px] h-[96px]'>
+                <LinkImage
+                  className='w-[64px] h-[64px]'
+                  src='https://avatars.githubusercontent.com/u/18133?s=200&v=4'
+                  alt='Git'
+                />
+              </PuffUpElement>
             </Tippy>
           </li>
         </ul>
         <ul className='flex flex-row justify-center gap-4'>
           <li>
             <Tippy
-              singleton={target}
+              duration={500}
+              placement='top'
+              arrow={false}
+              hideOnClick={false}
               content={<TechTip href='https://reactjs.org'>ReactJS</TechTip>}
+              interactive={true}
             >
-              <LinkImage
-                className='w-[32px] h-[32px]'
-                src='https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/220px-React-icon.svg.png'
-                alt='ReactJS'
-              />
+              <PuffUpElement className='w-[48px] h-[48px]'>
+                <LinkImage
+                  className='w-[32px] h-[32px]'
+                  src='https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/220px-React-icon.svg.png'
+                  alt='ReactJS'
+                />
+              </PuffUpElement>
             </Tippy>
           </li>
           <li>
             <Tippy
-              singleton={target}
+              duration={500}
+              placement='top'
+              arrow={false}
+              hideOnClick={false}
               content={
                 <TechTip href='https://storybook.js.org'>StorybookJS</TechTip>
               }
+              interactive={true}
             >
-              <LinkImage
-                className='w-[32px] h-[32px]'
-                src='https://avatars.githubusercontent.com/u/22632046?s=200&v=4'
-                alt='StorybookJS'
-              />
+              <PuffUpElement className='w-[48px] h-[48px]'>
+                <LinkImage
+                  className='w-[32px] h-[32px]'
+                  src='https://avatars.githubusercontent.com/u/22632046?s=200&v=4'
+                  alt='StorybookJS'
+                />
+              </PuffUpElement>
             </Tippy>
           </li>
           <li>
             <Tippy
-              singleton={target}
+              duration={500}
+              placement='top'
+              arrow={false}
+              hideOnClick={false}
               content={<TechTip href='https://jestjs.io'>Jest</TechTip>}
+              interactive={true}
             >
-              <LinkImage
-                className='w-[32px] h-[32px]'
-                src='https://github.com/facebook/jest/blob/main/website/static/img/favicon/favicon-32x32.png?raw=true'
-                alt='Jest'
-              />
+              <PuffUpElement className='w-[48px] h-[48px]'>
+                <LinkImage
+                  className='w-[32px] h-[32px]'
+                  src='https://github.com/facebook/jest/blob/main/website/static/img/favicon/favicon-32x32.png?raw=true'
+                  alt='Jest'
+                />
+              </PuffUpElement>
             </Tippy>
           </li>
           <li>
             <Tippy
-              singleton={target}
+              duration={500}
+              placement='top'
+              arrow={false}
+              hideOnClick={false}
               content={
                 <TechTip href='https://redwoodjs.com'>RedwoodJS</TechTip>
               }
+              interactive={true}
             >
-              <LinkImage
-                className='w-[32px] h-[32px]'
-                src='https://avatars.githubusercontent.com/u/45050444?s=200&v=4'
-                alt='RedwoodJS'
-              />
+              <PuffUpElement className='w-[48px] h-[48px]'>
+                <LinkImage
+                  className='w-[32px] h-[32px]'
+                  src='https://avatars.githubusercontent.com/u/45050444?s=200&v=4'
+                  alt='RedwoodJS'
+                />
+              </PuffUpElement>
             </Tippy>
           </li>
           <li>
             <Tippy
-              singleton={target}
+              duration={500}
+              placement='top'
+              arrow={false}
+              hideOnClick={false}
               content={<TechTip href='https://sass-lang.com'>Sass</TechTip>}
+              interactive={true}
             >
-              <LinkImage
-                className='w-[32px] h-[32px]'
-                src='https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Sass_Logo_Color.svg/220px-Sass_Logo_Color.svg.png'
-                alt='Sass'
-              />
+              <PuffUpElement className='w-[48px] h-[48px]'>
+                <LinkImage
+                  className='w-[32px] h-[32px]'
+                  src='https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Sass_Logo_Color.svg/220px-Sass_Logo_Color.svg.png'
+                  alt='Sass'
+                />
+              </PuffUpElement>
             </Tippy>
           </li>
           <li>
             <Tippy
-              singleton={target}
+              duration={500}
+              placement='top'
+              arrow={false}
+              hideOnClick={false}
               content={<TechTip href='https://lesscss.org'>Less</TechTip>}
+              interactive={true}
             >
-              <LinkImage
-                className='w-[32px] h-[32px]'
-                src='https://lesscss.org/public/img/less_logo.png'
-                alt='Less'
-              />
+              <PuffUpElement className='w-[48px] h-[48px]'>
+                <LinkImage
+                  className='w-[32px] h-[32px]'
+                  src='https://lesscss.org/public/img/less_logo.png'
+                  alt='Less'
+                />
+              </PuffUpElement>
             </Tippy>
           </li>
           <li>
             <Tippy
-              singleton={target}
+              duration={500}
+              placement='top'
+              arrow={false}
+              hideOnClick={false}
               content={
                 <TechTip href='https://tailwindcss.com'>Tailwind CSS</TechTip>
               }
+              interactive={true}
             >
-              <LinkImage
-                className='w-[32px] h-[32px]'
-                src='https://avatars.githubusercontent.com/u/67109815?s=200&v=4'
-                alt='Tailwind CSS'
-              />
+              <PuffUpElement className='w-[48px] h-[48px]'>
+                <LinkImage
+                  className='w-[32px] h-[32px]'
+                  src='https://avatars.githubusercontent.com/u/67109815?s=200&v=4'
+                  alt='Tailwind CSS'
+                />
+              </PuffUpElement>
             </Tippy>
           </li>
           <li>
             <Tippy
-              singleton={target}
+              duration={500}
+              placement='top'
+              arrow={false}
+              hideOnClick={false}
               content={<TechTip href='https://github.com'>GitHub</TechTip>}
+              interactive={true}
             >
-              <LinkImage
-                className='w-[32px] h-[32px]'
-                src='https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png'
-                alt='GitHub'
-              />
+              <PuffUpElement className='w-[48px] h-[48px]'>
+                <LinkImage
+                  className='w-[32px] h-[32px]'
+                  src='https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png'
+                  alt='GitHub'
+                />
+              </PuffUpElement>
             </Tippy>
           </li>
         </ul>
@@ -243,10 +352,10 @@ const TechStack = () => {
 
 const Body = () => {
   return (
-    <div className='px-6 py-24 flex-auto flex flex-col gap-24'>
+    <main className='px-6 py-24 flex-auto flex flex-col gap-24'>
       <AboutMe />
       <TechStack />
-    </div>
+    </main>
   )
 }
 
