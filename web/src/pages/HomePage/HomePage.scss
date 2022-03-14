@@ -1,6 +1,23 @@
 .tippy-box {
-  @apply bg-violet-400 p-[0px];
-  .tippy-svg-arrow {
-    @apply fill-violet-400;
+  @apply bg-violet-400 p-0;
+
+  & > .tippy-content {
+    @apply p-0;
+  }
+
+  &[data-placement^='top'] > .tippy-arrow::before {
+    @apply border-t-violet-400;
+  }
+
+  &[data-placement^='bottom'] > .tippy-arrow::before {
+    @apply border-b-violet-400;
+  }
+
+  &[data-placement^='left'] > .tippy-arrow::before {
+    @apply border-l-violet-400;
+  }
+
+  &[data-placement^='right'] > .tippy-arrow::before {
+    @apply border-r-violet-400;
   }
 }

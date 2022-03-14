@@ -1,8 +1,8 @@
 import { MetaTags } from '@redwoodjs/web'
 import { HTMLAttributes } from 'react'
 
+import { BiLinkExternal } from 'react-icons/bi'
 import Tippy, { useSingleton } from '@tippyjs/react'
-import { roundArrow } from 'tippy.js'
 
 import 'tippy.js/dist/tippy.css'
 import './HomePage.scss'
@@ -30,7 +30,7 @@ const AboutMe = () => {
           never-ending.
         </p>
         <p className='text-lg text-center'>
-          One day, I will become Full Stack Web Developer.
+          One day, I will become a Full Stack Web Developer.
         </p>
       </div>
     </div>
@@ -59,8 +59,22 @@ const LinkImage = React.forwardRef(
   }
 )
 
-const TechTip = ({ children }) => {
-  return <div className='bg-violet-400 px-2 py-1 rounded-[4px]'>{children}</div>
+interface TechTipPropTypes {
+  children?: React.ReactNode
+  href?: string
+}
+
+const TechTip = ({ children, href }: TechTipPropTypes) => {
+  return (
+    <div className='flex gap-1 px-2 py-1 rounded-[4px]'>
+      {children}
+      {href && (
+        <a href={href}>
+          <BiLinkExternal />
+        </a>
+      )}
+    </div>
+  )
 }
 
 const TechStack = () => {
@@ -70,98 +84,158 @@ const TechStack = () => {
     <div className='bg-gray-200 px-8 py-8 flex flex-col gap-12 rounded-[8px]'>
       <h1 className='text-center font-semibold'>Technologies</h1>
       <div className='flex flex-col gap-12'>
-        <div className='flex flex-row justify-center gap-8'>
-          <LinkImage
-            className='w-[64px] h-[64px]'
-            src='https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/HTML5_logo_and_wordmark.svg/130px-HTML5_logo_and_wordmark.svg.png'
-            alt='HTML5'
-          />
-          <LinkImage
-            className='w-[64px] h-[64px]'
-            src='https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/CSS3_logo_and_wordmark.svg/120px-CSS3_logo_and_wordmark.svg.png'
-            alt='CSS3'
-          />
-          <LinkImage
-            className='w-[64px] h-[64px]'
-            src='https://raw.githubusercontent.com/voodootikigod/logo.js/master/js.png'
-            alt='Javascript'
-          />
-          <LinkImage
-            className='w-[64px] h-[64px]'
-            src='https://github.com/microsoft/TypeScript-Website/blob/v2/packages/typescriptlang-org/static/icons/ts-logo-512.png?raw=true'
-            alt='Typescript'
-          />
-          <LinkImage
-            className='w-[64px] h-[64px]'
-            src='https://avatars.githubusercontent.com/u/18133?s=200&v=4'
-            alt='Git'
-          />
-        </div>
-        <div className='flex flex-row justify-center gap-4'>
-          <Tippy
-            // className='bg-violet-400'
-            singleton={source}
-            duration={100}
-            placement='top'
-            arrow={true}
-          />
-          <Tippy singleton={target} content={<TechTip>ReactJS</TechTip>}>
-            <LinkImage
-              className='w-[32px] h-[32px]'
-              href='https://reactjs.org'
-              src='https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/220px-React-icon.svg.png'
-              alt='ReactJS'
-            />
-          </Tippy>
-          <Tippy singleton={target} content={<TechTip>StorybookJS</TechTip>}>
-            <LinkImage
-              className='w-[32px] h-[32px]'
-              href='https://storybook.js.org'
-              src='https://avatars.githubusercontent.com/u/22632046?s=200&v=4'
-              alt='StorybookJS'
-            />
-          </Tippy>
-          <Tippy singleton={target} content={<TechTip>Jest</TechTip>}>
-            <LinkImage
-              className='w-[32px] h-[32px]'
-              href='https://jestjs.io'
-              src='https://github.com/facebook/jest/blob/main/website/static/img/favicon/favicon-32x32.png?raw=true'
-              alt='Jest'
-            />
-          </Tippy>
-          <Tippy singleton={target} content={<TechTip>RedwoodJS</TechTip>}>
-            <LinkImage
-              className='w-[32px] h-[32px]'
-              href='https://redwoodjs.com'
-              src='https://avatars.githubusercontent.com/u/45050444?s=200&v=4'
-              alt='RedwoodJS'
-            />
-          </Tippy>
-          <Tippy singleton={target} content={<TechTip>Sass</TechTip>}>
-            <LinkImage
-              className='w-[32px] h-[32px]'
-              href='https://sass-lang.com'
-              src='https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Sass_Logo_Color.svg/220px-Sass_Logo_Color.svg.png'
-              alt='Sass'
-            />
-          </Tippy>
-          <Tippy singleton={target} content={<TechTip>Less</TechTip>}>
-            <LinkImage
-              className='w-[32px] h-[32px]'
-              href='https://lesscss.org'
-              src='https://lesscss.org/public/img/less_logo.png'
-              alt='Less'
-            />
-          </Tippy>
-          <Tippy singleton={target} content={<TechTip>GitHub</TechTip>}>
-            <LinkImage
-              className='w-[32px] h-[32px]'
-              href='https://github.com'
-              src='https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png'
-              alt='GitHub'
-            />
-          </Tippy>
-        </div>
+        <Tippy singleton={source} duration={100} placement='top' arrow={true} />
+        <ul className='flex flex-row justify-center gap-8'>
+          <li>
+            <Tippy singleton={target} content={<TechTip>HTML</TechTip>}>
+              <LinkImage
+                className='w-[64px] h-[64px]'
+                src='https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/HTML5_logo_and_wordmark.svg/130px-HTML5_logo_and_wordmark.svg.png'
+                alt='HTML5'
+              />
+            </Tippy>
+          </li>
+          <li>
+            <Tippy singleton={target} content={<TechTip>CSS</TechTip>}>
+              <LinkImage
+                className='w-[64px] h-[64px]'
+                src='https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/CSS3_logo_and_wordmark.svg/120px-CSS3_logo_and_wordmark.svg.png'
+                alt='CSS3'
+              />
+            </Tippy>
+          </li>
+          <li>
+            <Tippy singleton={target} content={<TechTip>Javascript</TechTip>}>
+              <LinkImage
+                className='w-[64px] h-[64px]'
+                src='https://raw.githubusercontent.com/voodootikigod/logo.js/master/js.png'
+                alt='Javascript'
+              />
+            </Tippy>
+          </li>
+          <li>
+            <Tippy singleton={target} content={<TechTip>Typescript</TechTip>}>
+              <LinkImage
+                className='w-[64px] h-[64px]'
+                src='https://github.com/microsoft/TypeScript-Website/blob/v2/packages/typescriptlang-org/static/icons/ts-logo-512.png?raw=true'
+                alt='Typescript'
+              />
+            </Tippy>
+          </li>
+          <li>
+            <Tippy singleton={target} content={<TechTip>Git</TechTip>}>
+              <LinkImage
+                className='w-[64px] h-[64px]'
+                src='https://avatars.githubusercontent.com/u/18133?s=200&v=4'
+                alt='Git'
+              />
+            </Tippy>
+          </li>
+        </ul>
+        <ul className='flex flex-row justify-center gap-4'>
+          <li>
+            <Tippy
+              singleton={target}
+              content={<TechTip href='https://reactjs.org'>ReactJS</TechTip>}
+            >
+              <LinkImage
+                className='w-[32px] h-[32px]'
+                src='https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/220px-React-icon.svg.png'
+                alt='ReactJS'
+              />
+            </Tippy>
+          </li>
+          <li>
+            <Tippy
+              singleton={target}
+              content={
+                <TechTip href='https://storybook.js.org'>StorybookJS</TechTip>
+              }
+            >
+              <LinkImage
+                className='w-[32px] h-[32px]'
+                src='https://avatars.githubusercontent.com/u/22632046?s=200&v=4'
+                alt='StorybookJS'
+              />
+            </Tippy>
+          </li>
+          <li>
+            <Tippy
+              singleton={target}
+              content={<TechTip href='https://jestjs.io'>Jest</TechTip>}
+            >
+              <LinkImage
+                className='w-[32px] h-[32px]'
+                src='https://github.com/facebook/jest/blob/main/website/static/img/favicon/favicon-32x32.png?raw=true'
+                alt='Jest'
+              />
+            </Tippy>
+          </li>
+          <li>
+            <Tippy
+              singleton={target}
+              content={
+                <TechTip href='https://redwoodjs.com'>RedwoodJS</TechTip>
+              }
+            >
+              <LinkImage
+                className='w-[32px] h-[32px]'
+                src='https://avatars.githubusercontent.com/u/45050444?s=200&v=4'
+                alt='RedwoodJS'
+              />
+            </Tippy>
+          </li>
+          <li>
+            <Tippy
+              singleton={target}
+              content={<TechTip href='https://sass-lang.com'>Sass</TechTip>}
+            >
+              <LinkImage
+                className='w-[32px] h-[32px]'
+                src='https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Sass_Logo_Color.svg/220px-Sass_Logo_Color.svg.png'
+                alt='Sass'
+              />
+            </Tippy>
+          </li>
+          <li>
+            <Tippy
+              singleton={target}
+              content={<TechTip href='https://lesscss.org'>Less</TechTip>}
+            >
+              <LinkImage
+                className='w-[32px] h-[32px]'
+                src='https://lesscss.org/public/img/less_logo.png'
+                alt='Less'
+              />
+            </Tippy>
+          </li>
+          <li>
+            <Tippy
+              singleton={target}
+              content={
+                <TechTip href='https://tailwindcss.com'>Tailwind CSS</TechTip>
+              }
+            >
+              <LinkImage
+                className='w-[32px] h-[32px]'
+                src='https://avatars.githubusercontent.com/u/67109815?s=200&v=4'
+                alt='Tailwind CSS'
+              />
+            </Tippy>
+          </li>
+          <li>
+            <Tippy
+              singleton={target}
+              content={<TechTip href='https://github.com'>GitHub</TechTip>}
+            >
+              <LinkImage
+                className='w-[32px] h-[32px]'
+                src='https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png'
+                alt='GitHub'
+              />
+            </Tippy>
+          </li>
+        </ul>
       </div>
     </div>
   )

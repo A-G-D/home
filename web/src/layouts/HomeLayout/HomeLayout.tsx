@@ -164,7 +164,7 @@ const SocialLinks = () => {
 
 const Projects = () => {
   return (
-    <ul className='bg-purple-600 px-6 py-3 flex flex-col rounded-[8px]'>
+    <ul className='px-6 py-3 flex flex-col rounded-[8px]'>
       <li>
         <a href='https://a-g-d.github.io/digital-canvas/'>Digital Canvas</a>
       </li>
@@ -192,6 +192,7 @@ const Links = () => {
           arrow={true}
           animation='shift-away'
           duration={200}
+          maxWidth={360}
         >
           <NavLink
             className={navStyle}
