@@ -290,7 +290,7 @@ const Header = ({ isAuthenticated, currentUser, logOut }) => {
           <UserRibbon currentUser={currentUser} onLogout={logOut} />
         )}
       </header>
-      <div className='flex-auto min-h-[88px]'></div>
+      <div className='min-h-[88px]'></div>
     </>
   )
 }
