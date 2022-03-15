@@ -22,13 +22,13 @@ export const Failure = ({ error }: CellFailureProps) => (
 
 export const Success = ({ article }: CellSuccessProps<ArticleQuery>) => {
   return (
-    <div className='flex-auto flex flex-col px-6 py-3'>
+    <article className='flex-auto flex flex-col gap-8 px-12 py-12'>
       <h1 className='text-2xl text-center font-bold'>{article.title}</h1>
-      <h2 className='text-sm italic'>{article.createdAt}</h2>
-      <p
-        className='flex-auto flex flex-col items-stetch'
+      <p className='text-sm italic'>Posted on: {article.createdAt}</p>
+      <section
+        className='flex-auto flex flex-col items-stetch gap-8'
         dangerouslySetInnerHTML={{ __html: article.body }}
-      ></p>
-    </div>
+      />
+    </article>
   )
 }

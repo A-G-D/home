@@ -27,62 +27,11 @@ const ResumeWrapper = ({ children, title }) => {
 const Resume = () => {
   return (
     <ResumeWrapper title='resume.pdf'>
-      <section className='w-[794px] h-[1123px] bg-white flex flex-col border border-black px-6'>
-        <h1 className='text-center'>Aloever Dulay</h1>
-        <p className='text-center'>aloeverdulay@gmail.com</p>
-        <p className='text-center'>
-          Blk 71 Lot 1, The Prestige Subdivision, Indangan, Davao City,
-          Philippines
-        </p>
-        <div className='h-[2px] w-[100%] bg-gray-600' />
-        <section className='flex flex-col'>
-          <h2>Related Skills</h2>
-          <div className='flex flex-row'>
-            <ul className='flex flex-col flex-auto'>
-              <li>Html, Markdown</li>
-              <li>CSS, Sass, Less</li>
-              <li>Javascript, Typescript, Python, Lua, C++, C#, Bash</li>
-              <li>React, TailwindCSS</li>
-            </ul>
-            <ul className='flex flex-col flex-auto'>
-              <li>Jest</li>
-              <li>Webpack</li>
-              <li>Storybook</li>
-              <li>RedwoodJS</li>
-            </ul>
-            <ul className='flex flex-col flex-auto'>
-              <li>Git</li>
-              <li>GitHub</li>
-            </ul>
-          </div>
-        </section>
-        <div className='h-[2px] w-[100%] bg-gray-600' />
-        <section className='flex flex-col'>
-          <h2>Other Skills</h2>
-          <ul className='flex flex-col'>
-            <li>Gimp, Canva</li>
-            <li>Microsoft Office, LibreOffice, Google Docs</li>
-            <li>Problem solving, Troubleshooting, Design optimization</li>
-          </ul>
-        </section>
-        <div className='h-[2px] w-[100%] bg-gray-600' />
-        <section className='flex flex-col'>
-          <h2>Education</h2>
-          <p>University of Southeastern Philippines</p>
-          <p>Bachelor of Science in Mechanical Engineering (BSME)</p>
-          <p>2015-2021</p>
-        </section>
-        <div className='h-[2px] w-[100%] bg-gray-600' />
-        <section className='flex flex-col'>
-          <h2>Interests</h2>
-          <ul>
-            <li>Movies and Animations</li>
-            <li>Music</li>
-            <li>Mobile Games</li>
-            <li>Math and Physics</li>
-          </ul>
-        </section>
-      </section>
+      <iframe
+        src='https://docs.google.com/viewer?url=https://a_g_d.keybase.pub/Documents/DULAY_A_G__resume.pdf&embedded=true'
+        width={210 * 4}
+        height={297 * 4}
+      ></iframe>
     </ResumeWrapper>
   )
 }
