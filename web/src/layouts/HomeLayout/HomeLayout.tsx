@@ -145,22 +145,32 @@ const SocialLinks = () => {
   }
 
   return (
-    <div className='flex flex-row justify-evenly items-center gap-x-3'>
-      <a href='https://github.com/A-G-D/'>
-        <BsGithub />
-      </a>
-      <a href='https://www.linkedin.com/in/aloever-dulay-249226159'>
-        <BsLinkedin />
-      </a>
-      <a href='https://twitter.com/__A_G_D__'>
-        <BsTwitter />
-      </a>
-      <a href='https://www.instagram.com/agd.91939'>
-        <BsInstagram />
-      </a>
-      <SiGmail className='hover:cursor-pointer' onClick={openContactModal} />
+    <ul className='flex flex-row justify-evenly items-center gap-x-3'>
+      <li>
+        <a href='https://github.com/A-G-D/'>
+          <BsGithub />
+        </a>
+      </li>
+      <li>
+        <a href='https://www.linkedin.com/in/aloever-dulay-249226159'>
+          <BsLinkedin />
+        </a>
+      </li>
+      <li>
+        <a href='https://twitter.com/__A_G_D__'>
+          <BsTwitter />
+        </a>
+      </li>
+      <li>
+        <a href='https://www.instagram.com/agd.91939'>
+          <BsInstagram />
+        </a>
+      </li>
+      <li>
+        <SiGmail className='hover:cursor-pointer' onClick={openContactModal} />
+      </li>
       <ContactForm isOpen={contactModalOpen} onClose={closeContactModal} />
-    </div>
+    </ul>
   )
 }
 
@@ -231,9 +241,13 @@ const Links = () => {
   )
 }
 
-const Title = () => {
+const Logo = () => {
   return (
-    <div className='hover:max-w-[512px] transition-[max-width] duration-500 max-w-[128px] overflow-hidden flex items-center gap-x-8 px-[32px] rounded-[64px] bg-violet-200'>
+    <div
+      id='agd-logo'
+      className='focus:max-w-[512px] hover:max-w-[512px] transition-[max-width] duration-500 max-w-[128px] overflow-hidden flex items-center gap-x-8 px-[32px] rounded-[64px] bg-violet-200'
+      tabIndex={-1}
+    >
       <Link to={routes.home()}>
         <img
           className='logo min-h-[64px] min-w-[64px]'
@@ -261,7 +275,7 @@ const UserRibbon = ({ currentUser, onLogout }) => {
 const Header = ({ isAuthenticated, currentUser, logOut }) => {
   return (
     <header className='sticky top-0 bg-violet-600/80 px-6 py-3 flex flex-row justify-between'>
-      <Title />
+      <Logo />
       <Links />
       {isAuthenticated && (
         <UserRibbon currentUser={currentUser} onLogout={logOut} />

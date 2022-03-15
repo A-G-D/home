@@ -103,7 +103,7 @@ const TechTip = ({ children, href }: TechTipPropTypes) => {
 
 const TechStack = () => {
   return (
-    <div className='bg-gray-200 px-8 py-8 flex flex-col gap-12 rounded-[8px]'>
+    <section className='bg-gray-200 px-8 py-8 flex flex-col gap-12 rounded-[8px]'>
       <h2 className='text-center font-semibold'>Technologies</h2>
       <div className='flex flex-col gap-12'>
         <ul className='flex flex-row justify-center gap-4'>
@@ -346,7 +346,26 @@ const TechStack = () => {
           </li>
         </ul>
       </div>
-    </div>
+    </section>
+  )
+}
+
+const ContactMe = () => {
+  const logo: HTMLElement = document.querySelector('#agd-logo')
+
+  return (
+    <section className='bg-gray-200 px-8 py-8 flex flex-col gap-12 items-center rounded-[8px]'>
+      <h2 className='text-center font-semibold'>Want to Work Together?</h2>
+      <button
+        className='bg-green-500 border-blue-800 border-2 shadow-lg text-xl rounded-full max-w-max px-4 py-3'
+        onClick={() => {
+          console.log(logo)
+          logo.focus()
+        }}
+      >
+        Contact Me
+      </button>
+    </section>
   )
 }
 
@@ -355,6 +374,7 @@ const Body = () => {
     <main className='px-6 py-24 flex-auto flex flex-col gap-24'>
       <AboutMe />
       <TechStack />
+      <ContactMe />
     </main>
   )
 }
