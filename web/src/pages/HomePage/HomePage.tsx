@@ -359,7 +359,6 @@ const ContactMe = () => {
       <button
         className='bg-green-500 border-blue-800 border-2 shadow-lg text-xl rounded-full max-w-max px-4 py-3'
         onClick={() => {
-          console.log(logo)
           logo.focus()
         }}
       >
