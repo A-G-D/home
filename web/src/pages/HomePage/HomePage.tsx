@@ -9,7 +9,7 @@ import './HomePage.scss'
 
 const AboutMe = () => {
   return (
-    <div className='bg-gray-200 px-8 py-8 flex flex-col gap-4 rounded-[8px]'>
+    <section className='bg-gray-200 px-8 py-8 flex flex-col gap-4 rounded-[8px]'>
       <div className='flex flex-col gap-4'>
         <h1 className='text-3xl text-center'>
           HI! I'm <span className='font-bold'>Aloever Dulay</span>
@@ -33,7 +33,7 @@ const AboutMe = () => {
           One day, I will become a Full Stack Web Developer.
         </p>
       </div>
-    </div>
+    </section>
   )
 }
 

@@ -176,12 +176,20 @@ const SocialLinks = () => {
 
 const Projects = () => {
   return (
-    <ul className='px-6 py-3 flex flex-col rounded-[8px]'>
-      <li>
-        <a href='https://a-g-d.github.io/digital-canvas/'>Digital Canvas</a>
+    <ul className='bg-indigo-900 flex flex-col rounded-[4px] py-1'>
+      <li className='flex'>
+        <a
+          className='hover:bg-violet-600 flex-auto px-4 py-2'
+          href='https://a-g-d.github.io/digital-canvas/'
+        >
+          Digital Canvas
+        </a>
       </li>
-      <li>
-        <a href='htpps://modular-ui-react.github.io/modular-ui-react'>
+      <li className='flex'>
+        <a
+          className='hover:bg-violet-600 flex-auto px-4 py-2'
+          href='htpps://modular-ui-react.github.io/modular-ui-react'
+        >
           Modular-UI React Framework
         </a>
       </li>
@@ -245,7 +253,7 @@ const Logo = () => {
   return (
     <div
       id='agd-logo'
-      className='focus:max-w-[512px] hover:max-w-[512px] transition-[max-width] duration-500 max-w-[128px] overflow-hidden flex items-center gap-x-8 px-[32px] rounded-[64px] bg-violet-200'
+      className='focus:max-w-[512px] hover:max-w-[512px] transition-[max-width] duration-500 max-w-[128px] overflow-hidden flex items-center gap-x-8 px-[32px] rounded-full bg-violet-200'
       tabIndex={-1}
     >
       <Link to={routes.home()}>
@@ -274,13 +282,16 @@ const UserRibbon = ({ currentUser, onLogout }) => {
 
 const Header = ({ isAuthenticated, currentUser, logOut }) => {
   return (
-    <header className='sticky top-0 bg-violet-600/80 px-6 py-3 flex flex-row justify-between'>
-      <Logo />
-      <Links />
-      {isAuthenticated && (
-        <UserRibbon currentUser={currentUser} onLogout={logOut} />
-      )}
-    </header>
+    <>
+      <header className='fixed w-[720px] bg-violet-600/80 px-6 py-3 flex flex-row justify-between'>
+        <Logo />
+        <Links />
+        {isAuthenticated && (
+          <UserRibbon currentUser={currentUser} onLogout={logOut} />
+        )}
+      </header>
+      <div className='flex-auto min-h-[88px]'></div>
+    </>
   )
 }
 
