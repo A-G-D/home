@@ -61,13 +61,14 @@ const ContactForm = ({ onClose, ...props }) => {
 
   return (
     <Modal
-      className='bg-violet-600 flex flex-col rounded-[8px] w-[720px] h-[50%] m-auto'
+      className='bg-violet-600 flex flex-col rounded-[8px] w-[720px] h-[50%] m-auto z-[101]'
       style={{
         overlay: {
           display: 'flex',
           justifyContents: 'center',
           alignItems: 'center',
           overflowY: 'scroll',
+          zIndex: '100',
         },
       }}
       {...props}
@@ -283,7 +284,7 @@ const UserRibbon = ({ currentUser, onLogout }) => {
 const Header = ({ isAuthenticated, currentUser, logOut }) => {
   return (
     <>
-      <header className='fixed w-[720px] bg-violet-600/80 px-6 py-3 flex flex-row justify-between'>
+      <header className='fixed w-[720px] bg-violet-600/80 px-6 py-3 flex flex-row justify-between z-10'>
         <Logo />
         <Links />
         {isAuthenticated && (
