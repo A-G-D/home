@@ -300,7 +300,7 @@ const Footer = () => {
   return (
     <footer className='bg-violet-600/80 px-6 py-6 flex flex-col gap-4 items-center'>
       <div className='text-sm italic'>
-        Resume The background shader pattern is an edited fork from{' '}
+        The background shader pattern is an edited fork from{' '}
         <a
           className='text-pink-600 font-bold'
           href='https://www.shadertoy.com/view/WldSRn'
