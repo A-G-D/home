@@ -28,7 +28,7 @@ const Resume = () => {
   return (
     <ResumeWrapper title='resume.pdf'>
       <iframe
-        src='https://docs.google.com/viewer?url=https://a_g_d.keybase.pub/Documents/DULAY_A_G__resume.pdf&embedded=true'
+        src='https://drive.google.com/file/d/1L1KcofeMWaRl7QzFn7I2Z9m03KcpsruT/preview'
         width={210 * 4}
         height={297 * 4}
       ></iframe>

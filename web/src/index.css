@@ -12,6 +12,13 @@
  * END --- SETUP TAILWINDCSS EDIT
  */
 
+@font-face {
+  font-family: 'Raw Print Formal';
+  src: url('../data/fonts/raw-print-formal_regular.otf') format('opentype'),
+    url('../data/fonts/raw-print-formal_regular.woff') format('woff'),
+    url('../data/fonts/raw-print-formal_regular.woff2') format('woff2');
+}
+
 .logo {
   width: 64px;
   height: 64px;
