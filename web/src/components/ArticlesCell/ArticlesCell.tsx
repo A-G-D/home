@@ -1,10 +1,11 @@
 import type { ArticlesQuery } from 'types/graphql'
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 import { Link, routes } from '@redwoodjs/router'
+import { MdOutlineArrowDropUp } from 'react-icons/md'
+
+import { formattedDate } from 'web/src/lib/utils'
 
 import ArticleCell from '../ArticleCell'
-
-import { HTMLAttributes } from 'react'
 
 export const QUERY = gql`
   query ArticlesQuery {
@@ -17,20 +18,35 @@ export const QUERY = gql`
   }
 `
 
-export const Loading = () => <div>Loading...</div>
-
-export const Empty = () => <div>Empty</div>
-
-export const Failure = ({ error }: CellFailureProps) => (
-  <div style={{ color: 'red' }}>Error: {error.message}</div>
+export const Loading = () => (
+  <div className='flex-auto flex flex-col gap-4 justify-center items-center'>
+    <div className='animate-spin border-blue-600 border-t-2 border-r-2 border-b-2 h-5 w-5 rounded-full' />
+    <h2>Loading...</h2>
+  </div>
 )
 
-interface CollapsiblePreviewPropTypes extends HTMLAttributes<HTMLElement> {
+export const Empty = () => (
+  <div className='flex-auto flex justify-center items-center'>
+    <h2>There are No Blog Posts to Show</h2>
+  </div>
+)
+
+export const Failure = ({ error }: CellFailureProps) => (
+  <div
+    className='flex-auto flex justify-center items-center'
+    style={{ color: 'red' }}
+  >
+    <h2>Error: {error.message}</h2>
+  </div>
+)
+
+interface CollapsiblePreviewPropTypes
+  extends React.HTMLAttributes<HTMLElement> {
   options?: {
     open?: boolean
     header?: { open?: React.ReactNode; closed?: React.ReactNode }
     footer?: { open?: React.ReactNode; closed?: React.ReactNode }
-    viewportClassName?: string
+    viewportClassName?: { open?: string; closed?: string }
   }
   eventHandlers?: {
     onHeaderClick?: (e: React.MouseEvent) => boolean
@@ -48,25 +64,40 @@ const CollapsiblePreview = ({
   eventHandlers = {},
   ...props
 }: CollapsiblePreviewPropTypes) => {
+  const ref: React.RefObject<HTMLDivElement> = React.useRef()
   const overlayRef: React.RefObject<HTMLDivElement> = React.useRef()
   const [minHeight, setMinHeight] = React.useState(0)
+
   const [isOpen, setIsOpen] = React.useState(open)
+  const [articlePaperHeader, setArticlePaperHeader] =
+    React.useState<HTMLElement>()
+  const [articlePaperPaddingTop, setArticlePaperPaddingTop] = React.useState(0)
 
   const onHeaderClickHandler = (e: React.MouseEvent) => {
-    if (eventHandlers?.onHeaderClick(e)) {
+    if (eventHandlers?.onHeaderClick?.(e)) {
       setIsOpen((isOpenFlag) => !isOpenFlag)
     }
   }
   const onBodyClickHandler = (e: React.MouseEvent) => {
-    if (eventHandlers?.onBodyClick(e)) {
+    if (eventHandlers?.onBodyClick?.(e)) {
       setIsOpen((isOpenFlag) => !isOpenFlag)
     }
   }
   const onFooterClickHandler = (e: React.MouseEvent) => {
-    if (eventHandlers?.onFooterClick(e)) {
+    if (eventHandlers?.onFooterClick?.(e)) {
       setIsOpen((isOpenFlag) => !isOpenFlag)
     }
   }
+
+  React.useEffect(() => {
+    if (ref.current != null) {
+      setArticlePaperHeader(ref.current.querySelector('header'))
+      const padding = window.getComputedStyle(
+        ref.current.children[0]
+      ).paddingTop
+      setArticlePaperPaddingTop(Number.parseInt(padding))
+    }
+  }, [isOpen])
 
   React.useEffect(() => {
     setIsOpen(open)
@@ -89,7 +120,7 @@ const CollapsiblePreview = ({
     >
       <div
         ref={overlayRef}
-        className='absolute top-0 bottom-0 left-0 right-0 flex flex-col items-stretch z-[200]'
+        className='absolute top-0 bottom-0 left-0 right-0 flex flex-col items-stretch z-[1]'
       >
         <div
           className='bg-gradient-to-b from-white via-white'
@@ -98,9 +129,28 @@ const CollapsiblePreview = ({
           {isOpen ? header.open : header.closed}
         </div>
         <div
-          className={['', viewportClassName].join(' ')}
+          className={[
+            'relative',
+            isOpen ? viewportClassName.open : viewportClassName.closed,
+          ].join(' ')}
           onClick={onBodyClickHandler}
-        />
+        >
+          {isOpen ? (
+            <div className=''>{children}</div>
+          ) : (
+            <div
+              ref={ref}
+              className='absolute left-0 right-0 z-[-1]'
+              style={{
+                top: -(
+                  articlePaperHeader?.offsetHeight + articlePaperPaddingTop
+                ),
+              }}
+            >
+              {children}
+            </div>
+          )}
+        </div>
         <div
           className='bg-gradient-to-t from-white'
           onClick={onFooterClickHandler}
@@ -108,7 +158,6 @@ const CollapsiblePreview = ({
           {isOpen ? footer.open : footer.closed}
         </div>
       </div>
-      <div className='absolute top-[-256px]'>{children}</div>
     </section>
   )
 }
@@ -116,7 +165,7 @@ const CollapsiblePreview = ({
 export const Success = ({ posts }: CellSuccessProps<ArticlesQuery>) => {
   return (
     <ul className='flex flex-col items-stretch gap-8'>
-      {posts.map((post) => {
+      {posts.map((post, i) => {
         const header = {
           closed: (
             <div className='py-8'>
@@ -126,7 +175,9 @@ export const Success = ({ posts }: CellSuccessProps<ArticlesQuery>) => {
                 </Link>
               </h1>
               <p className='text-center text-sm'>
-                <span className='bg-white'>Posted on: {post.createdAt}</span>
+                <span className='bg-white'>
+                  Posted on: {formattedDate(post.createdAt)}
+                </span>
               </p>
             </div>
           ),
@@ -137,16 +188,33 @@ export const Success = ({ posts }: CellSuccessProps<ArticlesQuery>) => {
               Read More
             </div>
           ),
+          open: (
+            <div className='flex justify-center cursor-pointer p-4'>
+              <MdOutlineArrowDropUp className='scale-[3]' />
+            </div>
+          ),
         }
         return (
-          <li key={post.id}>
-            <CollapsiblePreview
-              className=''
-              options={{ header, footer, viewportClassName: 'min-h-[128px]' }}
-            >
-              <ArticleCell id={post.id} />
-            </CollapsiblePreview>
-          </li>
+          <>
+            {i > 0 && (
+              <li>
+                <hr className='bg-white border-white' />
+              </li>
+            )}
+            <li key={post.id}>
+              <CollapsiblePreview
+                className=''
+                options={{
+                  header,
+                  footer,
+                  viewportClassName: { closed: 'min-h-[72px]' },
+                }}
+                eventHandlers={{ onFooterClick: (e) => true }}
+              >
+                <ArticleCell id={post.id} />
+              </CollapsiblePreview>
+            </li>
+          </>
         )
       })}
     </ul>
