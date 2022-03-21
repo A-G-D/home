@@ -1,14 +1,27 @@
 import React from 'react'
 
 interface MarginPropTypes {
+  className?: string
   thickness?: number
   offset?: number
   border?: number
-  className?: string
   style?: object
 }
 
+type SectionAttributes = React.HTMLAttributes<HTMLDivElement>
+
 export interface NotePagePropTypes extends React.HTMLAttributes<HTMLElement> {
+  section?: {
+    topLeft?: SectionAttributes
+    topCenter?: SectionAttributes
+    topRight?: SectionAttributes
+    centerLeft?: SectionAttributes
+    body?: SectionAttributes
+    centerRight?: SectionAttributes
+    bottomLeft?: SectionAttributes
+    bottomCenter?: SectionAttributes
+    bottomRight?: SectionAttributes
+  }
   options?: {
     margin?: {
       top?: MarginPropTypes
@@ -16,8 +29,10 @@ export interface NotePagePropTypes extends React.HTMLAttributes<HTMLElement> {
       left?: MarginPropTypes
       right?: MarginPropTypes
     }
-    hLineColor?: string
-    vLineColor?: string
+    hLineClassName?: string
+    vLineClassName?: string
+    hLineStyle?: object
+    vLineStyle?: object
     lineHeight?: number
     lineDividerThickness?: number
     fontSize?: number
@@ -38,10 +53,10 @@ const traverseElementTree = (
 }
 
 const MarginDefaultProps = {
+  className: '',
   thickness: 0,
   offset: 0,
   border: 1,
-  className: '',
   style: {},
 }
 
@@ -51,6 +66,7 @@ const NotePage = React.forwardRef(
       children,
       className,
       dangerouslySetInnerHTML,
+      section = {},
       options: {
         margin: {
           top = MarginDefaultProps,
@@ -63,8 +79,10 @@ const NotePage = React.forwardRef(
           left: MarginDefaultProps,
           right: MarginDefaultProps,
         },
-        hLineColor = 'blue',
-        vLineColor = 'pink',
+        hLineClassName,
+        vLineClassName,
+        hLineStyle,
+        vLineStyle,
         lineHeight = 1.2,
         lineDividerThickness = 1,
         fontSize = 12,
@@ -77,8 +95,6 @@ const NotePage = React.forwardRef(
           left: MarginDefaultProps,
           right: MarginDefaultProps,
         },
-        hLineColor: 'blue',
-        vLineColor: 'pink',
         lineHeight: 1.2,
         lineDividerThickness: 1,
         fontSize: 12,
@@ -90,12 +106,16 @@ const NotePage = React.forwardRef(
     ref: React.RefObject<HTMLElement>
   ): JSX.Element => {
     const styleClasses = 'relative'
+    const rowHeight = lineHeight * fontSize
 
     const innerRef: React.RefObject<HTMLDivElement> = React.useRef()
     const [lines, setLines] = React.useState(0)
     const [state, setState] = React.useState(0) // dummy state for forcing rerender
 
-    const rowHeight = lineHeight * fontSize
+    const onResizeHandler = React.useCallback((entries) => {
+      const innerBodyHeight = innerRef.current.clientHeight
+      setLines(Math.ceil(innerBodyHeight / rowHeight) + 1)
+    }, [])
 
     React.useEffect(() => {
       traverseElementTree(innerRef.current, (child) => {
@@ -116,8 +136,15 @@ const NotePage = React.forwardRef(
     }, [])
 
     React.useEffect(() => {
-      const bodyHeight = innerRef.current.clientHeight
-      setLines(Math.ceil(bodyHeight / rowHeight) + 1)
+      const innerElement = innerRef.current
+      const resizeObserver = new ResizeObserver(onResizeHandler)
+      resizeObserver.observe(innerElement)
+      return () => resizeObserver.unobserve(innerElement)
+    }, [])
+
+    React.useEffect(() => {
+      const innerBodyHeight = innerRef.current.clientHeight
+      setLines(Math.ceil(innerBodyHeight / rowHeight) + 1)
     })
 
     const topFlag = top.thickness > 0
@@ -141,23 +168,36 @@ const NotePage = React.forwardRef(
           return (
             <div
               key={`hrule-${topOffset}`}
-              className='bg-blue-400 absolute left-0 right-0'
-              style={{ top: topOffset, height: lineDividerThickness }}
+              className={[
+                'bg-blue-400 absolute left-0 right-0',
+                hLineClassName,
+              ].join(' ')}
+              style={{
+                ...hLineStyle,
+                top: topOffset,
+                height: lineDividerThickness,
+              }}
             />
           )
         })}
         {leftFlag && (
           <div
             key='vrule-left'
-            className='bg-pink-400 absolute top-0 bottom-0 w-[1px] h-full'
-            style={{ left: left.thickness }}
+            className={[
+              'bg-pink-400 absolute top-0 bottom-0 w-[1px] h-full',
+              vLineClassName,
+            ].join(' ')}
+            style={{ ...vLineStyle, left: left.thickness }}
           />
         )}
         {rightFlag && (
           <div
             key='vrule-right'
-            className='bg-pink-400 absolute top-0 bottom-0 w-[1px] h-full'
-            style={{ right: right.thickness }}
+            className={[
+              'bg-pink-400 absolute top-0 bottom-0 w-[1px] h-full',
+              vLineClassName,
+            ].join(' ')}
+            style={{ ...vLineStyle, right: right.thickness }}
           />
         )}
         {topFlag && (
