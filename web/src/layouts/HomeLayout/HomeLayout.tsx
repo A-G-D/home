@@ -284,7 +284,7 @@ const UserRibbon = ({ currentUser, onLogout }) => {
 const Header = ({ isAuthenticated, currentUser, logOut }) => {
   return (
     <>
-      <header className='fixed w-[720px] bg-violet-600/80 px-6 py-3 flex flex-row justify-between z-10'>
+      <header className='fixed w-full bg-violet-600/80 px-6 py-3 flex flex-row justify-between z-10'>
         <Logo />
         <Links />
         {isAuthenticated && (
@@ -328,7 +328,7 @@ const HomeLayout = ({ children }: HomeLayoutProps) => {
 
   return (
     <Background>
-      <div className='flex flex-col min-h-full w-[720px] max-w-[720px]'>
+      <div className='translate-x-0 flex flex-col min-h-full w-[720px] max-w-[720px]'>
         <Header
           isAuthenticated={isAuthenticated}
           currentUser={currentUser}

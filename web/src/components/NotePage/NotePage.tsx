@@ -60,6 +60,13 @@ const MarginDefaultProps = {
   style: {},
 }
 
+const DefaultMargins = {
+  top: MarginDefaultProps,
+  bottom: MarginDefaultProps,
+  left: MarginDefaultProps,
+  right: MarginDefaultProps,
+}
+
 const NotePage = React.forwardRef(
   (
     {
@@ -73,12 +80,7 @@ const NotePage = React.forwardRef(
           bottom = MarginDefaultProps,
           left = MarginDefaultProps,
           right = MarginDefaultProps,
-        } = {
-          top: MarginDefaultProps,
-          bottom: MarginDefaultProps,
-          left: MarginDefaultProps,
-          right: MarginDefaultProps,
-        },
+        } = DefaultMargins,
         hLineClassName,
         vLineClassName,
         hLineStyle,
@@ -89,12 +91,7 @@ const NotePage = React.forwardRef(
         bodyClassName = '',
         bodyStyles = null,
       } = {
-        margin: {
-          top: MarginDefaultProps,
-          bottom: MarginDefaultProps,
-          left: MarginDefaultProps,
-          right: MarginDefaultProps,
-        },
+        margin: DefaultMargins,
         lineHeight: 1.2,
         lineDividerThickness: 1,
         fontSize: 12,
