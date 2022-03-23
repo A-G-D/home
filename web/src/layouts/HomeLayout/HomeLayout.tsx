@@ -283,16 +283,13 @@ const UserRibbon = ({ currentUser, onLogout }) => {
 
 const Header = ({ isAuthenticated, currentUser, logOut }) => {
   return (
-    <>
-      <header className='fixed w-full bg-violet-600/80 px-6 py-3 flex flex-row justify-between z-10'>
-        <Logo />
-        <Links />
-        {isAuthenticated && (
-          <UserRibbon currentUser={currentUser} onLogout={logOut} />
-        )}
-      </header>
-      <div className='min-h-[88px]'></div>
-    </>
+    <header className='sticky top-0 w-full bg-violet-600/80 px-6 py-3 flex flex-row justify-between z-10'>
+      <Logo />
+      <Links />
+      {isAuthenticated && (
+        <UserRibbon currentUser={currentUser} onLogout={logOut} />
+      )}
+    </header>
   )
 }
 
@@ -328,7 +325,7 @@ const HomeLayout = ({ children }: HomeLayoutProps) => {
 
   return (
     <Background>
-      <div className='translate-x-0 flex flex-col min-h-full w-[720px] max-w-[720px]'>
+      <div className='flex flex-col h-fit min-h-full w-[720px] max-w-[720px]'>
         <Header
           isAuthenticated={isAuthenticated}
           currentUser={currentUser}
