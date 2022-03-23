@@ -18,7 +18,7 @@ const viewports = {
 }
 
 export const parameters = {
-  viewports: {
+  viewport: {
     viewports: {
       ...MINIMAL_VIEWPORTS,
       ...viewports,
