@@ -106,7 +106,7 @@ const TechStack = () => {
     <section className='bg-gray-200 px-8 py-8 flex flex-col gap-12 rounded-[8px]'>
       <h2 className='text-center font-semibold'>Technologies</h2>
       <div className='flex flex-col gap-12'>
-        <ul className='flex flex-row justify-center gap-4'>
+        <ul className='flex flex-row flex-wrap justify-center gap-4'>
           <li>
             <Tippy
               duration={500}
@@ -193,7 +193,7 @@ const TechStack = () => {
             </Tippy>
           </li>
         </ul>
-        <ul className='flex flex-row justify-center gap-4'>
+        <ul className='flex flex-row flex-wrap justify-center gap-4'>
           <li>
             <Tippy
               duration={500}
