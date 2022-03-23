@@ -370,11 +370,11 @@ const ContactMe = () => {
 
 const Body = () => {
   return (
-    <main className='px-6 py-24 flex-auto flex flex-col gap-24'>
+    <div className='px-6 py-24 flex-auto flex flex-col gap-24'>
       <AboutMe />
       <TechStack />
       <ContactMe />
-    </main>
+    </div>
   )
 }
 

@@ -5,9 +5,9 @@ import ArticlesCell from 'src/components/ArticlesCell'
 
 const Body = () => {
   return (
-    <main className='px-6 py-12'>
+    <div className='px-6 py-12'>
       <ArticlesCell />
-    </main>
+    </div>
   )
 }
 

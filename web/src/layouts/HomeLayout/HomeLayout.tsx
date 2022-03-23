@@ -331,7 +331,9 @@ const HomeLayout = ({ children }: HomeLayoutProps) => {
           currentUser={currentUser}
           logOut={logOut}
         />
-        <div className='bg-gray-200/80 flex-auto flex flex-col'>{children}</div>
+        <main className='bg-gray-200/80 flex-auto flex flex-col'>
+          {children}
+        </main>
         <Footer />
       </div>
     </Background>
