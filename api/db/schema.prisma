@@ -15,6 +15,7 @@ model Post {
   id        String   @id @default(uuid())
   title     String
   body      String
+  comments  Comment[]
   createdAt DateTime @default(now())
 }
 
@@ -34,4 +35,13 @@ model User {
   salt                String
   resetToken          String?
   resetTokenExpiresAt DateTime?
+}
+
+model Comment {
+  id        String    @id @default(uuid())
+  name      String
+  body      String
+  post      Post      @relation(fields: [postId], references: [id])
+  postId    String
+  createdAt DateTime  @default(now())
 }

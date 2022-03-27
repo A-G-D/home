@@ -28,7 +28,13 @@ const Window = ({
   )
 }
 
-Window.Header = ({ children, controlBar }): JSX.Element => {
+Window.Header = ({
+  children,
+  controlBar,
+}: {
+  children?: React.ReactNode
+  controlBar?: React.ReactNode
+}): JSX.Element => {
   return (
     <>
       <div>{controlBar}</div>

@@ -10,6 +10,10 @@ const Comment = ({ comment }) => {
         </time>
       </header>
       <p className='text-sm'>{comment.body}</p>
+      <footer className='flex gap-4'>
+        <button className='text-xs'>Like</button>
+        <button className='text-xs'>Replies</button>
+      </footer>
     </div>
   )
 }
