@@ -20,7 +20,7 @@ export const QUERY = gql`
 
 export const Loading = () => (
   <div className='flex-auto flex flex-col gap-4 justify-center items-center'>
-    <div className='animate-spin border-blue-600 border-t-2 border-r-2 border-b-2 h-5 w-5 rounded-full' />
+    <div className='spin' />
     <h2>Loading...</h2>
   </div>
 )

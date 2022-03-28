@@ -19,12 +19,21 @@ export const QUERY = gql`
   }
 `
 
-export const Loading = () => <div>Loading...</div>
+export const Loading = () => (
+  <div className='flex justify-center items-center gap-2'>
+    <div className='spin' />
+    Loading...
+  </div>
+)
 
-export const Empty = () => <div>Empty</div>
+export const Empty = () => (
+  <div className='flex justify-center items-center'>No Comments Yet</div>
+)
 
 export const Failure = ({ error }: CellFailureProps) => (
-  <div style={{ color: 'red' }}>Error: {error.message}</div>
+  <div className='flex justify-center items-center' style={{ color: 'red' }}>
+    Error: {error.message}
+  </div>
 )
 
 export const Success = ({ comments }: CellSuccessProps<CommentsQuery>) => {

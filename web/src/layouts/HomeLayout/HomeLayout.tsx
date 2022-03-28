@@ -307,7 +307,12 @@ const Footer = () => {
         .
       </div>
       <div className='flex flex-col items-center font-semibold'>
-        <div>Copyright © 2022 Aloever Dulay</div>
+        <div>
+          Copyright © 2022{'  '}
+          <span className="text-xl font-['Raw_Print_Formal'] font-bold">
+            Aloever Dulay
+          </span>
+        </div>
         <div>
           Made with{' '}
           <a className='text-red-600 font-bold' href='https://redwoodjs.com'>
