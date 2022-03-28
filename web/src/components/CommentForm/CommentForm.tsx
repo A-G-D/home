@@ -16,10 +16,9 @@ const CommentForm = ({
 }: CommentFormPropTypes): JSX.Element => {
   return (
     <Window
-      className={[
-        'bg-purple-300 mx-4 my-8 rounded-[6px] w-full',
-        className,
-      ].join(' ')}
+      className={['bg-purple-300 rounded-[6px] min-w-full', className].join(
+        ' '
+      )}
       childrenAttributes={{
         header: {
           children: <Window.Header>Leave a Comment</Window.Header>,
