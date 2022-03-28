@@ -3,6 +3,7 @@ import { HTMLAttributes } from 'react'
 
 import { BiLinkExternal } from 'react-icons/bi'
 import Tippy, { useSingleton } from '@tippyjs/react'
+import AuthorName from 'src/components/AuthorName'
 
 import 'tippy.js/dist/tippy.css'
 import './HomePage.scss'
@@ -12,7 +13,7 @@ const AboutMe = () => {
     <section className='bg-gray-200 px-8 py-8 flex flex-col gap-4 rounded-[8px]'>
       <div className='flex flex-col gap-4'>
         <h1 className='text-3xl text-center'>
-          HI! I'm <span className='font-bold'>Aloever Dulay</span>
+          HI! I'm <AuthorName className='ml-2 text-4xl' />
         </h1>
         <h2 className='text-2xl text-center'>
           a <span className='font-bold'>Front End Web Developer</span>.

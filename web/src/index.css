@@ -19,6 +19,10 @@
     url('../data/fonts/raw-print-formal_regular.woff2') format('woff2');
 }
 
+.flex-center {
+  @apply flex justify-center items-center;
+}
+
 .spin {
   @apply animate-spin border-blue-600 border-t-2 border-r-2 border-b-2 h-5 w-5 rounded-full;
 }

@@ -25,12 +25,12 @@ const CommentForm = ({
           className: 'bg-purple-800 p-3 rounded-t-[6px]',
         },
         body: {
-          className: 'p-3 rounded-b-[6px]',
+          className: 'p-5 rounded-b-[6px]',
         },
       }}
       {...props}
     >
-      <Form className='flex flex-col items-stretch gap-4 p-2 w-full'>
+      <Form className='flex flex-col items-stretch gap-4 w-full'>
         <div className='flex flex-col'>
           <Label name='name' className=''>
             Name

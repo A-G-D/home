@@ -19,33 +19,60 @@ export const QUERY = gql`
   }
 `
 
+type CommentsDisplayPropTypes = React.HTMLAttributes<HTMLElement>
+
+const CommentsDisplay = ({ children, className }: CommentsDisplayPropTypes) => {
+  return (
+    <section
+      className={['flex flex-col items-stretch rounded-[6px]', className].join(
+        ' '
+      )}
+    >
+      <h2 className='bg-purple-800 text-center text-md p-3 rounded-t-[6px]'>
+        Comments
+      </h2>
+      <div className='bg-purple-300 flex flex-col items-stretch p-5 rounded-b-[6px]'>
+        {children}
+      </div>
+    </section>
+  )
+}
+
 export const Loading = () => (
-  <div className='flex justify-center items-center gap-2'>
-    <div className='spin' />
-    Loading...
-  </div>
+  <CommentsDisplay>
+    <div className='flex-center gap-2'>
+      <div className='spin' />
+      Loading...
+    </div>
+  </CommentsDisplay>
 )
 
 export const Empty = () => (
-  <div className='flex justify-center items-center'>No Comments Yet</div>
+  <CommentsDisplay>
+    <div className='text-center'>No Comments Yet</div>
+  </CommentsDisplay>
 )
 
 export const Failure = ({ error }: CellFailureProps) => (
-  <div className='flex justify-center items-center' style={{ color: 'red' }}>
-    Error: {error.message}
-  </div>
+  <CommentsDisplay>
+    <div className='text-center' style={{ color: 'red' }}>
+      Error: {error.message}
+    </div>
+  </CommentsDisplay>
 )
 
 export const Success = ({ comments }: CellSuccessProps<CommentsQuery>) => {
   return (
-    <ul className='flex flex-col gap-4'>
-      {comments.map((comment) => {
-        return (
-          <li key={comment.id}>
-            <Comment comment={comment}></Comment>
-          </li>
-        )
-      })}
-    </ul>
+    <CommentsDisplay>
+      <ul className='flex flex-col gap-4'>
+        {comments.map((comment) => {
+          return (
+            <li key={comment.id}>
+              <Comment comment={comment}></Comment>
+            </li>
+          )
+        })}
+      </ul>
+    </CommentsDisplay>
   )
 }

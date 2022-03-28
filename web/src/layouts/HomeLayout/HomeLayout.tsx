@@ -7,6 +7,7 @@ import { SiGmail } from 'react-icons/si'
 import React from 'react'
 import Modal from 'react-modal'
 import Tippy from '@tippyjs/react'
+import AuthorName from 'src/components/AuthorName'
 
 import 'tippy.js/animations/shift-away.css'
 import './HomeLayout.scss'
@@ -308,10 +309,7 @@ const Footer = () => {
       </div>
       <div className='flex flex-col items-center font-semibold'>
         <div>
-          Copyright © 2022{'  '}
-          <span className="text-xl font-['Raw_Print_Formal'] font-bold">
-            Aloever Dulay
-          </span>
+          Copyright © 2022 <AuthorName className='ml-1 text-lg' />
         </div>
         <div>
           Made with{' '}

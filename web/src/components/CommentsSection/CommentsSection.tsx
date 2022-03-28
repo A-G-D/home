@@ -3,8 +3,7 @@ import CommentForm from 'src/components/CommentForm'
 
 const CommentsSection = () => {
   return (
-    <section className='flex flex-col items-stretch gap-2'>
-      <h2>Comments</h2>
+    <section className='flex flex-col items-stretch gap-8 px-4 py-6'>
       <CommentsCell />
       <CommentForm />
     </section>

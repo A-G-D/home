@@ -4,8 +4,7 @@ import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 import { formattedDate } from 'web/src/lib/utils'
 
 import NotePage from 'src/components/NotePage/NotePage'
-import CommentsCell from 'src/components/CommentsCell'
-import CommentForm from 'src/components/CommentForm'
+import CommentsSection from 'src/components/CommentsSection'
 
 export const QUERY = gql`
   query ArticleQuery($id: String!) {
@@ -90,8 +89,7 @@ export const Success = ({ article }: CellSuccessProps<ArticleQuery>) => {
   return (
     <div className='flex flex-col gap-4'>
       <ArticlePaper className='gap-8 px-12 py-12' bodyHTML={bodyHTML} />
-      <CommentsCell />
-      <CommentForm />
+      <CommentsSection />
     </div>
   )
 }
