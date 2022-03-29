@@ -1,19 +1,50 @@
 import Window from 'src/components/Window'
 import {
   Form,
+  FormError,
   FormProps,
   Label,
   Submit,
   TextAreaField,
   TextField,
+  useForm,
 } from '@redwoodjs/forms'
+import { useMutation } from '@redwoodjs/web'
+import { toast, Toaster } from '@redwoodjs/web/toast'
+import { QUERY as CommentsQuery } from 'src/components/CommentsCell'
 
-interface CommentFormPropTypes extends FormProps {}
+const CREATE = gql`
+  mutation CreateCommentMutation($input: CreateCommentInput!) {
+    createComment(input: $input) {
+      id
+      name
+      body
+      createdAt
+    }
+  }
+`
+
+interface CommentFormPropTypes extends FormProps {
+  postId: string
+}
 
 const CommentForm = ({
   className,
+  postId,
   ...props
 }: CommentFormPropTypes): JSX.Element => {
+  const formMethods = useForm({ mode: 'onBlur' })
+  const [createComment, { loading, error }] = useMutation(CREATE, {
+    refetchQueries: [{ query: CommentsQuery }],
+    onCompleted: () => {
+      toast.success('Comment Submitted!')
+      formMethods.reset()
+    },
+  })
+  const onSubmit = (input) => {
+    createComment({ variables: { input: { postId, ...input } } })
+  }
+
   return (
     <Window
       className={['bg-purple-300 rounded-[6px] min-w-full', className].join(
@@ -30,7 +61,17 @@ const CommentForm = ({
       }}
       {...props}
     >
-      <Form className='flex flex-col items-stretch gap-4 w-full'>
+      <Toaster />
+      <Form
+        className='flex flex-col items-stretch gap-4 w-full'
+        onSubmit={onSubmit}
+        formMethods={formMethods}
+      >
+        <FormError
+          error={error}
+          titleClassName='font-semibold'
+          wrapperClassName='bg-red-100 text-red-900 text-sm p-3 rounded'
+        />
         <div className='flex flex-col'>
           <Label name='name' className=''>
             Name
@@ -47,7 +88,10 @@ const CommentForm = ({
             validation={{ required: true }}
           />
         </div>
-        <Submit className='bg-indigo-600 self-stretch p-2 rounded-[8px]'>
+        <Submit
+          disabled={loading}
+          className='bg-indigo-600 self-stretch p-2 rounded-[8px]'
+        >
           Submit
         </Submit>
       </Form>

@@ -9,6 +9,7 @@ export const QUERY = gql`
       name
       body
       createdAt
+      postId
       post {
         id
         title

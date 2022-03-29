@@ -47,7 +47,9 @@ const ArticlePaper = ({
         }}
         dangerouslySetInnerHTML={!!bodyHTML ? { __html: bodyHTML } : undefined}
       />
-      <div className='absolute top-0 bottom-0 left-0 right-0'>{children}</div>
+      {children && (
+        <div className='absolute top-0 bottom-0 left-0 right-0'>{children}</div>
+      )}
     </article>
   )
 }
@@ -89,7 +91,7 @@ export const Success = ({ article }: CellSuccessProps<ArticleQuery>) => {
   return (
     <div className='flex flex-col gap-4'>
       <ArticlePaper className='gap-8 px-12 py-12' bodyHTML={bodyHTML} />
-      <CommentsSection />
+      {/* <CommentsSection /> */}
     </div>
   )
 }

@@ -6,14 +6,14 @@ export const standard = defineScenario<Prisma.CommentCreateArgs>({
       data: {
         name: 'Tux',
         body: 'Hey, Moses.',
-        post: { create: { title: 'String', body: 'String' } },
+        post: { create: { title: 'Letter to Tux', body: 'Hey, Tux.' } },
       },
     },
     moses: {
       data: {
         name: 'Moses',
         body: 'Yo, Tux.',
-        post: { create: { title: 'String', body: 'String' } },
+        post: { create: { title: 'Letter to Moses', body: 'Yo, Moses' } },
       },
     },
   },
