@@ -78,12 +78,16 @@ const ContactFormModal = ({ onClose, ...props }) => {
 }
 
 const SocialLinks = () => {
+  const logo: HTMLElement = document.querySelector('#agd-logo')
   const [contactModalOpen, setContactModalOpen] = React.useState(false)
   const openContactModal = () => {
     setContactModalOpen(true)
   }
-  const closeContactModal = () => {
+  const closeContactModal = (e) => {
     setContactModalOpen(false)
+    setTimeout(() => {
+      logo.blur()
+    }, 0)
   }
 
   return (
