@@ -1,29 +1,21 @@
 import { Link, NavLink, routes } from '@redwoodjs/router'
 import { BsGithub, BsLinkedin, BsTwitter, BsInstagram } from 'react-icons/bs'
 import { MdOutlineKeyboardArrowDown } from 'react-icons/md'
-import { RiCloseFill } from 'react-icons/ri'
 import { SiGmail } from 'react-icons/si'
+
+import { useForm } from '@redwoodjs/forms'
+import { useMutation } from '@redwoodjs/web'
+import { toast } from '@redwoodjs/web/toast'
+import { useAuth } from '@redwoodjs/auth'
 
 import React from 'react'
 import Modal from 'react-modal'
 import Tippy from '@tippyjs/react'
 import AuthorName from 'src/components/AuthorName'
+import ContactForm from 'src/components/ContactForm'
 
 import 'tippy.js/animations/shift-away.css'
 import './HomeLayout.scss'
-import {
-  FieldError,
-  Form,
-  FormError,
-  Label,
-  Submit,
-  TextAreaField,
-  TextField,
-  useForm,
-} from '@redwoodjs/forms'
-import { useMutation } from '@redwoodjs/web'
-import { toast, Toaster } from '@redwoodjs/web/toast'
-import { useAuth } from '@redwoodjs/auth'
 
 type HomeLayoutProps = {
   children?: React.ReactNode
@@ -48,16 +40,16 @@ const Background = ({ children }) => {
   )
 }
 
-const ContactForm = ({ onClose, ...props }) => {
-  const formsMethod = useForm({ mode: 'onBlur' })
+const ContactFormModal = ({ onClose, ...props }) => {
+  const formMethods = useForm({ mode: 'onBlur' })
   const [createContact, { loading, error }] = useMutation(CREATE_CONTACT, {
     onCompleted: () => {
       toast.success('Thank you for reaching out!')
-      formsMethod.reset()
+      formMethods.reset()
     },
   })
-  const submitForm = (fields) => {
-    createContact({ variables: { input: fields } })
+  const onSubmit = (input) => {
+    createContact({ variables: { input } })
   }
 
   return (
@@ -74,65 +66,13 @@ const ContactForm = ({ onClose, ...props }) => {
       }}
       {...props}
     >
-      <div className='flex flex-row justify-between px-4 py-3'>
-        <div className='w-[16px]' />
-        <div className='flex-auto text-center'>What Can I Help You With?</div>
-        <div className='w-[16px] flex flex-row justify-end items-center'>
-          <RiCloseFill className='hover:cursor-pointer' onClick={onClose} />
-        </div>
-      </div>
-      <Toaster />
-      <Form
-        className='flex flex-col flex-auto px-4 py-3'
-        onSubmit={submitForm}
+      <ContactForm
         error={error}
-        formMethods={formsMethod}
-      >
-        <Label name='name' errorClassName='error'>
-          Name
-        </Label>
-        <TextField
-          name='name'
-          validation={{
-            required: false,
-            pattern: {
-              value: /(?:[_a-zA-Z0-9]+)(?: [_a-zA-Z0-9]+)*/,
-              message: 'Please enter a valid name.',
-            },
-          }}
-          errorClassName='error'
-        />
-        <FieldError name='name' className='error' />
-
-        <Label name='email' errorClassName='error'>
-          Email
-        </Label>
-        <TextField
-          name='email'
-          validation={{
-            required: true,
-            pattern: {
-              value: /^[._a-zA-Z0-9]+@[^.]+\..+$/,
-              message: 'Please enter a valid email address.',
-            },
-          }}
-          errorClassName='error'
-        />
-        <FieldError name='email' className='error' />
-
-        <Label name='message' errorClassName='error'>
-          Message
-        </Label>
-        <TextAreaField
-          className='flex-auto'
-          name='message'
-          validation={{ required: true }}
-          errorClassName='error'
-        />
-        <FieldError name='message' className='error' />
-
-        <Submit disabled={loading}>Submit</Submit>
-      </Form>
+        loading={loading}
+        formMethods={formMethods}
+        onClose={onClose}
+        onSubmit={onSubmit}
+      />
     </Modal>
   )
 }
@@ -171,7 +111,7 @@ const SocialLinks = () => {
       <li>
         <SiGmail className='hover:cursor-pointer' onClick={openContactModal} />
       </li>
-      <ContactForm isOpen={contactModalOpen} onClose={closeContactModal} />
+      <ContactFormModal isOpen={contactModalOpen} onClose={closeContactModal} />
     </ul>
   )
 }
