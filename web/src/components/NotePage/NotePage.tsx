@@ -103,7 +103,7 @@ const NotePage = React.forwardRef(
     ref: React.RefObject<HTMLElement>
   ): JSX.Element => {
     const styleClasses = 'relative'
-    const rowHeight = (lineHeight * fontSize) / window.devicePixelRatio
+    const rowHeight = lineHeight * fontSize
 
     const innerRef: React.RefObject<HTMLDivElement> = React.useRef()
     const [lines, setLines] = React.useState(0)
