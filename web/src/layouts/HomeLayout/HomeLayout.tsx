@@ -54,7 +54,7 @@ const ContactFormModal = ({ onClose, ...props }) => {
 
   return (
     <Modal
-      className='bg-violet-600 flex flex-col rounded-[8px] w-[720px] h-[50%] m-auto z-[101]'
+      className='m-auto z-[101]'
       style={{
         overlay: {
           display: 'flex',

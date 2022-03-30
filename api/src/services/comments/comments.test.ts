@@ -14,6 +14,15 @@ describe('comments', () => {
     expect(result.length).toEqual(Object.keys(scenario.comment).length)
   })
 
+  scenario(
+    'returns all comments belonging to a post',
+    async (scenario: StandardScenario) => {
+      const result = await comments({ postId: scenario.comment.tux.postId })
+
+      expect(result.length).toEqual(Object.keys(scenario.comment).length)
+    }
+  )
+
   scenario('postOnly', 'creates a new comment', async (scenario) => {
     const comment = await createComment({
       input: {

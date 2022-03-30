@@ -17,7 +17,12 @@ const ResumeWrapper = ({ children, title }) => {
       childrenAttributes={{
         header: {
           children: (
-            <Window.Header controlBar={headerControlBar}>{title}</Window.Header>
+            <Window.Header
+              controlBar={headerControlBar}
+              controlBarPosition='left'
+            >
+              {title}
+            </Window.Header>
           ),
           className: 'bg-purple-800 p-3 rounded-t-[6px]',
         },

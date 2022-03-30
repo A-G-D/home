@@ -35,15 +35,18 @@ const Window = ({
 Window.Header = ({
   children,
   controlBar,
+  controlBarPosition = 'right',
 }: {
   children?: React.ReactNode
   controlBar?: React.ReactNode
+  controlBarPosition?: string
 }): JSX.Element => {
+  const placeLeft = controlBarPosition === 'left'
   return (
     <>
-      <div>{controlBar}</div>
+      <div className={placeLeft ? '' : 'invisible'}>{controlBar}</div>
       <div>{children}</div>
-      <div className='invisible'>{controlBar}</div>
+      <div className={placeLeft ? 'invisible' : ''}>{controlBar}</div>
     </>
   )
 }

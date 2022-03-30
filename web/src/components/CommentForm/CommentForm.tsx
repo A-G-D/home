@@ -47,13 +47,11 @@ const CommentForm = ({
 
   return (
     <Window
-      className={['bg-purple-300 rounded-[6px] min-w-full', className].join(
-        ' '
-      )}
+      className={['bg-gray-200 rounded-[6px] min-w-full', className].join(' ')}
       childrenAttributes={{
         header: {
           children: <Window.Header>Leave a Comment</Window.Header>,
-          className: 'bg-purple-800 p-3 rounded-t-[6px]',
+          className: 'bg-gray-400 p-3 rounded-t-[6px]',
         },
         body: {
           className: 'p-5 rounded-b-[6px]',
@@ -90,7 +88,7 @@ const CommentForm = ({
         </div>
         <Submit
           disabled={loading}
-          className='bg-indigo-600 self-stretch p-2 rounded-[8px]'
+          className='bg-purple-600 self-stretch p-2 rounded-[8px]'
         >
           Submit
         </Submit>

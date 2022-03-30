@@ -3,8 +3,8 @@ import type { ResolverArgs } from '@redwoodjs/graphql-server'
 
 import { db } from 'src/lib/db'
 
-export const comments = () => {
-  return db.comment.findMany()
+export const comments = (selector?: object) => {
+  return db.comment.findMany(selector)
 }
 
 export const comment = ({ id }: Prisma.CommentWhereUniqueInput) => {

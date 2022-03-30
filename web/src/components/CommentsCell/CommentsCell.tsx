@@ -25,16 +25,12 @@ type CommentsDisplayPropTypes = React.HTMLAttributes<HTMLElement>
 const CommentsDisplay = ({ children, className }: CommentsDisplayPropTypes) => {
   return (
     <section
-      className={['flex flex-col items-stretch rounded-[6px]', className].join(
-        ' '
-      )}
+      className={['flex flex-col items-stretch gap-5', className].join(' ')}
     >
-      <h2 className='bg-purple-800 text-center text-md p-3 rounded-t-[6px]'>
+      <h2 className='bg-gray-400 text-center text-md p-3 rounded-[6px]'>
         Comments
       </h2>
-      <div className='bg-purple-300 flex flex-col items-stretch p-5 rounded-b-[6px]'>
-        {children}
-      </div>
+      <div className='flex flex-col items-stretch'>{children}</div>
     </section>
   )
 }
