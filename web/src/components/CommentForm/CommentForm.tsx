@@ -88,7 +88,7 @@ const CommentForm = ({
         </div>
         <Submit
           disabled={loading}
-          className='bg-purple-600 self-stretch p-2 rounded-[8px]'
+          className='bg-gray-600 self-stretch p-2 rounded-[8px]'
         >
           Submit
         </Submit>
