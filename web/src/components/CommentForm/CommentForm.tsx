@@ -35,7 +35,7 @@ const CommentForm = ({
 }: CommentFormPropTypes): JSX.Element => {
   const formMethods = useForm({ mode: 'onBlur' })
   const [createComment, { loading, error }] = useMutation(CREATE, {
-    refetchQueries: [{ query: CommentsQuery }],
+    refetchQueries: [{ query: CommentsQuery, variables: { postId } }],
     onCompleted: () => {
       toast.success('Comment Submitted!')
       formMethods.reset()

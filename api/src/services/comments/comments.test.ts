@@ -1,3 +1,4 @@
+import { db } from 'src/lib/db'
 import { comments, createComment } from './comments'
 import type { StandardScenario } from './comments.scenarios'
 
@@ -15,11 +16,15 @@ describe('comments', () => {
   })
 
   scenario(
-    'returns all comments belonging to a post',
+    'returns all comments for a single post',
     async (scenario: StandardScenario) => {
       const result = await comments({ postId: scenario.comment.tux.postId })
+      const post = await db.post.findUnique({
+        where: { id: scenario.comment.tux.postId },
+        include: { comments: true },
+      })
 
-      expect(result.length).toEqual(Object.keys(scenario.comment).length)
+      expect(result.length).toEqual(post.comments.length)
     }
   )
 
