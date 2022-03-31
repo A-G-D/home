@@ -54,9 +54,10 @@ const ContactFormModal = ({ onClose, ...props }) => {
 
   return (
     <Modal
-      className='m-auto z-[101]'
+      className='max-w-full m-auto z-[101]'
       style={{
         overlay: {
+          maxWidth: '100%',
           display: 'flex',
           justifyContents: 'center',
           alignItems: 'center',
