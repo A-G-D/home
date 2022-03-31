@@ -19,6 +19,28 @@
     url('../data/fonts/raw-print-formal_regular.woff2') format('woff2');
 }
 
+.article.title {
+  @apply text-center font-bold;
+}
+.article.date {
+  @apply text-sm italic;
+}
+.article.body {
+  @apply flex flex-col gap-8;
+}
+.article.section {
+  @apply flex flex-col gap-4;
+}
+.article.h2 {
+  @apply text-lg font-semibold;
+}
+.article.p {
+  @apply text-justify;
+}
+.article.a {
+  @apply underline text-sky-600;
+}
+
 .flex-center {
   @apply flex justify-center items-center;
 }
