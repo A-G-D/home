@@ -37,7 +37,7 @@ const ContactForm = ({
   return (
     <Window
       className={[
-        'bg-purple-300 flex flex-col rounded-[8px] min-w-[720px] h-[50%]',
+        'bg-purple-300 flex flex-col rounded-[8px] max-w-full w-[720px] h-[50%]',
         className,
       ].join(' ')}
       childrenAttributes={{
