@@ -13,7 +13,7 @@ const ResumeWrapper = ({ children, title }) => {
 
   return (
     <Window
-      className='bg-purple-300 mx-4 my-8 rounded-[6px]'
+      className='bg-purple-300 mx-4 my-8 rounded-[6px] w-fit'
       childrenAttributes={{
         header: {
           children: (

@@ -13,7 +13,7 @@ const Window = ({
 }: WindowPropTypes): JSX.Element => {
   return (
     <article
-      className={['flex flex-col w-fit h-fit', className].join(' ')}
+      className={['flex flex-col h-fit', className].join(' ')}
       {...props}
     >
       <header
