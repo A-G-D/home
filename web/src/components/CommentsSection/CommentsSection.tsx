@@ -3,10 +3,10 @@ import CommentForm from 'src/components/CommentForm'
 
 const CommentsSection = ({ postId }) => {
   return (
-    <section className='flex flex-col items-stretch gap-8 px-12 py-12'>
+    <div className='flex flex-col items-stretch gap-8 px-12 py-12'>
       <CommentsCell postId={postId} />
       <CommentForm postId={postId} />
-    </section>
+    </div>
   )
 }
 

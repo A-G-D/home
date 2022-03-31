@@ -6,11 +6,15 @@ export interface CommentPropTypes extends React.HTMLAttributes<HTMLDivElement> {
     body: string
     createdAt: string
   }
+  onLike?: React.MouseEventHandler<HTMLButtonElement>
+  onReply?: React.MouseEventHandler<HTMLButtonElement>
 }
 
 const Comment = ({
   className,
   comment,
+  onLike,
+  onReply,
   ...props
 }: CommentPropTypes): JSX.Element => {
   return (
@@ -29,8 +33,12 @@ const Comment = ({
       </header>
       <p className='text-sm'>{comment.body}</p>
       <footer className='flex gap-4'>
-        <button className='text-xs'>Like</button>
-        <button className='text-xs'>Replies</button>
+        <button className='text-xs' onClick={onLike}>
+          Like
+        </button>
+        <button className='text-xs' onClick={onReply}>
+          Reply
+        </button>
       </footer>
     </div>
   )
