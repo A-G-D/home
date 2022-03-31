@@ -1,5 +1,6 @@
 import { Link, routes } from '@redwoodjs/router'
 import { MetaTags } from '@redwoodjs/web'
+import { getRootContainer } from 'src/lib/utils'
 import Window from 'web/src/components/Window/Window'
 
 const ResumeWrapper = ({ children, title }) => {
@@ -37,14 +38,15 @@ const ResumeWrapper = ({ children, title }) => {
 }
 
 const Resume = () => {
+  const scale = window.devicePixelRatio
   return (
     <ResumeWrapper title='resume.pdf'>
       <iframe
         title='resume.pdf'
         src='https://drive.google.com/file/d/1L1KcofeMWaRl7QzFn7I2Z9m03KcpsruT/preview'
-        width={210 * 4}
-        height={297 * 4}
-      ></iframe>
+        width={(210 * 4) / scale}
+        height={(297 * 4) / scale}
+      />
     </ResumeWrapper>
   )
 }
