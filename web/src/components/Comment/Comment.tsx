@@ -1,3 +1,4 @@
+import { useAuth } from '@redwoodjs/auth'
 import { formattedDate } from 'web/src/lib/utils'
 
 export interface CommentPropTypes extends React.HTMLAttributes<HTMLDivElement> {
@@ -8,6 +9,7 @@ export interface CommentPropTypes extends React.HTMLAttributes<HTMLDivElement> {
   }
   onLike?: React.MouseEventHandler<HTMLButtonElement>
   onReply?: React.MouseEventHandler<HTMLButtonElement>
+  onDelete?: React.MouseEventHandler<HTMLButtonElement>
 }
 
 const Comment = ({
@@ -15,8 +17,10 @@ const Comment = ({
   comment,
   onLike,
   onReply,
+  onDelete,
   ...props
 }: CommentPropTypes): JSX.Element => {
+  const { hasRole } = useAuth()
   return (
     <div
       className={[
@@ -39,6 +43,11 @@ const Comment = ({
         <button className='text-xs' onClick={onReply}>
           Reply
         </button>
+        {hasRole(['admin', 'moderator']) && (
+          <button className='text-xs' onClick={onDelete}>
+            Delete
+          </button>
+        )}
       </footer>
     </div>
   )
