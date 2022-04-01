@@ -1,15 +1,23 @@
-import { useAuth } from '@redwoodjs/auth'
-import { formattedDate } from 'web/src/lib/utils'
+import { formattedDate } from 'src/lib/utils'
+
+interface CommentData {
+  id: string
+  name: string
+  body: string
+  createdAt: string
+  postId: string
+}
+
+export type CommentActionHandler = (
+  event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+  comment: CommentData
+) => void
 
 export interface CommentPropTypes extends React.HTMLAttributes<HTMLDivElement> {
-  comment: {
-    name: string
-    body: string
-    createdAt: string
-  }
-  onLike?: React.MouseEventHandler<HTMLButtonElement>
-  onReply?: React.MouseEventHandler<HTMLButtonElement>
-  onDelete?: React.MouseEventHandler<HTMLButtonElement>
+  comment: CommentData
+  onLike?: CommentActionHandler
+  onReply?: CommentActionHandler
+  onDelete?: CommentActionHandler
 }
 
 const Comment = ({
@@ -20,7 +28,6 @@ const Comment = ({
   onDelete,
   ...props
 }: CommentPropTypes): JSX.Element => {
-  const { hasRole } = useAuth()
   return (
     <div
       className={[
@@ -37,14 +44,33 @@ const Comment = ({
       </header>
       <p className='text-sm'>{comment.body}</p>
       <footer className='flex gap-4'>
-        <button className='text-xs' onClick={onLike}>
-          Like
-        </button>
-        <button className='text-xs' onClick={onReply}>
-          Reply
-        </button>
-        {hasRole(['admin', 'moderator']) && (
-          <button className='text-xs' onClick={onDelete}>
+        {onLike && (
+          <button
+            className='text-xs'
+            onClick={(e) => {
+              onLike(e, comment)
+            }}
+          >
+            Like
+          </button>
+        )}
+        {onReply && (
+          <button
+            className='text-xs'
+            onClick={(e) => {
+              onReply(e, comment)
+            }}
+          >
+            Reply
+          </button>
+        )}
+        {onDelete && (
+          <button
+            className='text-xs'
+            onClick={(e) => {
+              onDelete(e, comment)
+            }}
+          >
             Delete
           </button>
         )}

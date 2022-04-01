@@ -1,6 +1,7 @@
 import type { CommentsQuery } from 'types/graphql'
-import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
+import { CellSuccessProps, CellFailureProps, useMutation } from '@redwoodjs/web'
 import Comment from 'src/components/Comment'
+import { useAuth } from '@redwoodjs/auth'
 
 export const QUERY = gql`
   query CommentsQuery($postId: String!) {
@@ -20,6 +21,14 @@ export const QUERY = gql`
   }
 `
 
+export const DELETE = gql`
+  mutation DeleteCommentMutation($id: String!) {
+    deleteComment(id: $id) {
+      postId
+    }
+  }
+`
+
 type CommentsDisplayPropTypes = React.HTMLAttributes<HTMLElement>
 
 const CommentsDisplay = ({ children, className }: CommentsDisplayPropTypes) => {
@@ -27,7 +36,7 @@ const CommentsDisplay = ({ children, className }: CommentsDisplayPropTypes) => {
     <section
       className={['flex flex-col items-stretch gap-5', className].join(' ')}
     >
-      <h2 className='bg-gray-400 text-center text-md p-3 rounded-[6px]'>
+      <h2 className='bg-purple-300 text-center text-md p-3 rounded-[6px]'>
         Comments
       </h2>
       <div className='flex flex-col items-stretch'>{children}</div>
@@ -59,13 +68,26 @@ export const Failure = ({ error }: CellFailureProps) => (
 )
 
 export const Success = ({ comments }: CellSuccessProps<CommentsQuery>) => {
+  const { hasRole } = useAuth()
+
+  const isModerator = hasRole('admin') || hasRole('moderator')
+
+  const onLike = (e) => {}
+  const onReply = (e) => {}
+  const onDelete = (e) => {}
+
   return (
     <CommentsDisplay>
       <ul className='flex flex-col gap-4'>
         {comments.map((comment) => {
           return (
             <li key={comment.id}>
-              <Comment comment={comment}></Comment>
+              <Comment
+                comment={comment}
+                onLike={onLike}
+                onReply={onReply}
+                onDelete={isModerator ? onDelete : null}
+              />
             </li>
           )
         })}

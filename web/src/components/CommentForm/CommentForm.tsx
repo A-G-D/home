@@ -51,7 +51,7 @@ const CommentForm = ({
       childrenAttributes={{
         header: {
           children: <Window.Header>Leave a Comment</Window.Header>,
-          className: 'bg-gray-400 p-3 rounded-t-[6px]',
+          className: 'bg-purple-300 p-3 rounded-t-[6px]',
         },
         body: {
           className: 'p-5 rounded-b-[6px]',

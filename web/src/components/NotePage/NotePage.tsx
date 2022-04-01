@@ -110,7 +110,8 @@ const NotePage = React.forwardRef(
     const [state, setState] = React.useState(0) // dummy state for forcing rerender
 
     const onResizeHandler = React.useCallback((entries) => {
-      const innerBodyHeight = innerRef.current.clientHeight
+      const entry = entries[0]
+      const innerBodyHeight = entry.clientHeight
       setLines(Math.ceil(innerBodyHeight / rowHeight) + 1)
     }, [])
 

@@ -5,7 +5,7 @@ import { MdOutlineArrowDropUp } from 'react-icons/md'
 
 import { formattedDate } from 'web/src/lib/utils'
 
-import ArticleCell from '../ArticleCell'
+import ArticleCell from 'src/components/ArticleCell'
 
 export const QUERY = gql`
   query ArticlesQuery {
@@ -72,6 +72,10 @@ const CollapsiblePreview = ({
   const [articlePaperHeader, setArticlePaperHeader] =
     React.useState<HTMLElement>()
   const [articlePaperPaddingTop, setArticlePaperPaddingTop] = React.useState(0)
+
+  const headerOffsetHeight = articlePaperHeader
+    ? articlePaperHeader.clientHeight
+    : 0
 
   const onHeaderClickHandler = (e: React.MouseEvent) => {
     if (eventHandlers?.onHeaderClick?.(e)) {
@@ -142,9 +146,7 @@ const CollapsiblePreview = ({
               ref={ref}
               className='absolute left-0 right-0 z-[-1]'
               style={{
-                top: -(
-                  articlePaperHeader?.offsetHeight + articlePaperPaddingTop
-                ),
+                top: -(headerOffsetHeight + articlePaperPaddingTop),
               }}
             >
               {children}
@@ -197,7 +199,7 @@ export const Success = ({ posts }: CellSuccessProps<ArticlesQuery>) => {
         return (
           <>
             {i > 0 && (
-              <li>
+              <li key={`${post.id}-rule`}>
                 <hr className='bg-white border-white' />
               </li>
             )}
