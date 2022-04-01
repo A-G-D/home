@@ -6,7 +6,9 @@ const bodyHTML = `<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut
 
 <p>Putabam equidem satis, inquit, me dixisse. Sin te auctoritas commovebat, nobisne omnibus et Platoni ipsi nescio quem illum anteponebas? Virtutibus igitur rectissime mihi videris et ad consuetudinem nostrae orationis vitia posuisse contraria. Quid est, quod ab ea absolvi et perfici debeat? </p>
 
-<p>Omnes enim iucundum motum, quo sensus hilaretur. Sed ad haec, nisi molestum est, habeo quae velim. Et quidem saepe quaerimus verbum Latinum par Graeco et quod idem valeat; An, partus ancillae sitne in fructu habendus, disseretur inter principes civitatis, P. Summum a vobis bonum voluptas dicitur. </p>`
+<p>Omnes enim iucundum motum, quo sensus hilaretur. Sed ad haec, nisi molestum est, habeo quae velim. Et quidem saepe quaerimus verbum Latinum par Graeco et quod idem valeat; An, partus ancillae sitne in fructu habendus, disseretur inter principes civitatis, P. Summum a vobis bonum voluptas dicitur. </p>
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg/270px-Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg" alt="Mona Lisa"/>`
 
 export const generated = () => {
   return (

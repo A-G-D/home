@@ -226,7 +226,7 @@ const NotePage = React.forwardRef(
           )}
           <div
             ref={innerRef}
-            className={['main-body flex-auto', bodyClassName].join(' ')}
+            className={['main-body flex-auto z-[1]', bodyClassName].join(' ')}
             dangerouslySetInnerHTML={dangerouslySetInnerHTML}
             style={{
               ...bodyStyles,
