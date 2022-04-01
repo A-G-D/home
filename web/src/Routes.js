@@ -14,10 +14,10 @@ import HomeLayout from 'src/layouts/HomeLayout'
 const Routes = () => {
   return (
     <Router>
-      <Route path="/login" page={LoginPage} name="login" />
-      <Route path="/signup" page={SignupPage} name="signup" />
-      <Route path="/forgot-password" page={ForgotPasswordPage} name="forgotPassword" />
-      <Route path="/reset-password" page={ResetPasswordPage} name="resetPassword" />
+      <Route path='/login' page={LoginPage} name='login' />
+      <Route path='/signup' page={SignupPage} name='signup' />
+      <Route path='/forgot-password' page={ForgotPasswordPage} name='forgotPassword' />
+      <Route path='/reset-password' page={ResetPasswordPage} name='resetPassword' />
       <Private unauthenticated='home'>
         <Set wrap={PostsLayout}>
           <Route path='/admin/posts/new' page={PostNewPostPage} name='newPost' />
@@ -29,7 +29,7 @@ const Routes = () => {
       <Set wrap={HomeLayout}>
         <Route path='/' page={HomePage} name='home' />
         <Route path='/blog' page={BlogPage} name='blog' />
-        <Route path='/article/{id:String}' page={ArticlePage} name='article' />
+        <Route path='/blog/article/{id:String}' page={ArticlePage} name='article' />
         <Route path='/projects' page={ProjectsPage} name='projects' />
       </Set>
       <Route path='/resume' page={ResumePage} name='resume' />
