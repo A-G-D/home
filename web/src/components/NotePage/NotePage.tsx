@@ -171,8 +171,8 @@ const NotePage = React.forwardRef(
               ].join(' ')}
               style={{
                 ...hLineStyle,
-                top: topOffset,
-                height: lineDividerThickness,
+                top: topOffset + 'px',
+                height: lineDividerThickness + 'px',
               }}
             />
           )
