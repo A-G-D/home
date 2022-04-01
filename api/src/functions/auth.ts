@@ -101,16 +101,23 @@ export const handler = async (event, context) => {
     //
     // If this returns anything else, it will be returned by the
     // `signUp()` function in the form of: `{ message: 'String here' }`.
-    handler: ({ username, hashedPassword, salt, userAttributes }) => {
-      // return db.user.create({
-      //   data: {
-      //     email: username,
-      //     hashedPassword: hashedPassword,
-      //     salt: salt,
-      //     // name: userAttributes.name
-      //   },
-      // })
-      throw new Error('Cannot create a new account.')
+    handler: async ({ username, hashedPassword, salt, userAttributes }) => {
+      const maxUsersCount = 100
+      const usersCount = await db.user.count()
+
+      if (usersCount >= maxUsersCount) {
+        throw new Error(
+          'Cannot create a new account. Maximum registered accounts limit reached. If you really need to register, contact the site owner.'
+        )
+      }
+
+      return db.user.create({
+        data: {
+          email: username,
+          hashedPassword: hashedPassword,
+          salt: salt,
+        },
+      })
     },
 
     errors: {
