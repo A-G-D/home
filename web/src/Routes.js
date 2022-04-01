@@ -18,7 +18,7 @@ const Routes = () => {
       <Route path='/signup' page={SignupPage} name='signup' />
       <Route path='/forgot-password' page={ForgotPasswordPage} name='forgotPassword' />
       <Route path='/reset-password' page={ResetPasswordPage} name='resetPassword' />
-      <Private unauthenticated='home'>
+      <Private unauthenticated='login' role='admin'>
         <Set wrap={PostsLayout}>
           <Route path='/admin/posts/new' page={PostNewPostPage} name='newPost' />
           <Route path='/admin/posts/{id:String}/edit' page={PostEditPostPage} name='editPost' />
