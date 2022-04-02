@@ -1,10 +1,11 @@
 import { standard as standardCell } from '../ArticleCell/ArticleCell.mock'
 
-// Define your own mock data here:
+const standardArticle = standardCell().article
+
 export const standard = (/* vars, { ctx, req } */) => ({
   posts: [
-    { ...standardCell().article, id: '42' },
-    { ...standardCell().article, id: '43' },
-    { ...standardCell().article, id: '44' },
+    { ...standardArticle, id: '42', title: standardArticle.title + ' (1)' },
+    { ...standardArticle, id: '43', title: standardArticle.title + ' (2)' },
+    { ...standardArticle, id: '44', title: standardArticle.title + ' (3)' },
   ],
 })

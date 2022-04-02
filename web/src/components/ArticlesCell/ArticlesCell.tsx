@@ -167,58 +167,64 @@ const CollapsiblePreview = ({
 export const Success = ({ posts }: CellSuccessProps<ArticlesQuery>) => {
   return (
     <ul className='flex flex-col items-stretch gap-8'>
-      {posts.map((post, i) => {
-        const header = {
-          closed: (
-            <div className='py-8'>
-              <h1 className='text-center text-2xl font-bold'>
-                <Link className='bg-white' to={routes.article({ id: post.id })}>
-                  {post.title}
-                </Link>
-              </h1>
-              <p className='text-center text-sm'>
-                <span className='bg-white'>
-                  Posted on: {formattedDate(post.createdAt)}
-                </span>
-              </p>
-            </div>
-          ),
-        }
-        const footer = {
-          closed: (
-            <div className='text-center text-xl font-semibold p-4 cursor-pointer'>
-              Read More
-            </div>
-          ),
-          open: (
-            <div className='flex justify-center cursor-pointer p-4'>
-              <MdOutlineArrowDropUp className='scale-[3]' />
-            </div>
-          ),
-        }
-        return (
-          <>
-            {i > 0 && (
-              <li key={`${post.id}-rule`}>
-                <hr className='bg-white border-white' />
+      {posts
+        .slice(0)
+        .reverse()
+        .map((post, i) => {
+          const header = {
+            closed: (
+              <div className='py-8'>
+                <h1 className='text-center text-2xl font-bold'>
+                  <Link
+                    className='bg-white'
+                    to={routes.article({ id: post.id })}
+                  >
+                    {post.title}
+                  </Link>
+                </h1>
+                <p className='text-center text-sm'>
+                  <span className='bg-white'>
+                    Posted on: {formattedDate(post.createdAt)}
+                  </span>
+                </p>
+              </div>
+            ),
+          }
+          const footer = {
+            closed: (
+              <div className='text-center text-xl font-semibold p-4 cursor-pointer'>
+                Read More
+              </div>
+            ),
+            open: (
+              <div className='flex justify-center cursor-pointer p-4'>
+                <MdOutlineArrowDropUp className='scale-[3]' />
+              </div>
+            ),
+          }
+          return (
+            <>
+              {i > 0 && (
+                <li key={`${post.id}-rule`}>
+                  <hr className='bg-white border-white' />
+                </li>
+              )}
+              <li key={post.id}>
+                <CollapsiblePreview
+                  className=''
+                  options={{
+                    header,
+                    footer,
+                    viewportClassName: { closed: 'min-h-[72px]' },
+                  }}
+                  eventHandlers={{ onFooterClick: (e) => true }}
+                >
+                  <ArticleCell id={post.id} />
+                </CollapsiblePreview>
               </li>
-            )}
-            <li key={post.id}>
-              <CollapsiblePreview
-                className=''
-                options={{
-                  header,
-                  footer,
-                  viewportClassName: { closed: 'min-h-[72px]' },
-                }}
-                eventHandlers={{ onFooterClick: (e) => true }}
-              >
-                <ArticleCell id={post.id} />
-              </CollapsiblePreview>
-            </li>
-          </>
-        )
-      })}
+            </>
+          )
+        })}
     </ul>
   )
 }
