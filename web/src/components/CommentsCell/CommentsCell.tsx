@@ -83,9 +83,9 @@ export const Success = ({ comments }: CellSuccessProps<CommentsQuery>) => {
   const onLike = (e, comment) => {}
   const onReply = (e, comment) => {}
   const onDelete = (e, comment) => {
-    deleteComment({
-      variables: { id: comment.id },
-    })
+    if (confirm('Confirm Delete Reply')) {
+      deleteComment({ variables: { id: comment.id } })
+    }
   }
 
   return (
