@@ -56,11 +56,11 @@ export const hasRole = ({ roles }: { roles: AllowedRoles }): boolean => {
   // If your User model includes roles, uncomment the role checks on currentUser
   if (roles) {
     if (Array.isArray(roles)) {
-      // return context.currentUser.roles?.some((r) => roles.includes(r))
+      return roles.some((role) => context.currentUser.roles.includes(role))
     }
 
     if (typeof roles === 'string') {
-      // return context.currentUser.roles?.includes(roles)
+      return context.currentUser.roles?.includes(roles)
     }
 
     // roles not found
