@@ -1,3 +1,4 @@
+import { CurrentUser } from '@redwoodjs/auth'
 import CommentsSection from './CommentsSection'
 
 mockGraphQLMutation('CreateCommentMutation', (variables, { ctx }) => {
@@ -14,11 +15,23 @@ mockGraphQLMutation('CreateCommentMutation', (variables, { ctx }) => {
   }
 })
 
-export const post1 = () => {
+export const post1UserView = () => {
+  mockCurrentUser({ id: '1', email: '', roles: ['user'] })
   return <CommentsSection postId='1' />
 }
 
-export const post2 = () => {
+export const post1ModeratorView = () => {
+  mockCurrentUser({ id: '1', email: '', roles: ['moderator'] })
+  return <CommentsSection postId='1' />
+}
+
+export const post2UserView = () => {
+  mockCurrentUser({ id: '1', email: '', roles: ['user'] })
+  return <CommentsSection postId='2' />
+}
+
+export const post2ModeratorView = () => {
+  mockCurrentUser({ id: '1', email: '', roles: ['moderator'] })
   return <CommentsSection postId='2' />
 }
 
