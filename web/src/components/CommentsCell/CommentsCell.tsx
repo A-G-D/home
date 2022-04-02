@@ -69,12 +69,24 @@ export const Failure = ({ error }: CellFailureProps) => (
 
 export const Success = ({ comments }: CellSuccessProps<CommentsQuery>) => {
   const { hasRole } = useAuth()
+  const [deleteComment] = useMutation(DELETE, {
+    refetchQueries: [
+      {
+        query: QUERY,
+        variables: { postId: comments[0].postId },
+      },
+    ],
+  })
 
   const isModerator = hasRole('admin') || hasRole('moderator')
 
-  const onLike = (e) => {}
-  const onReply = (e) => {}
-  const onDelete = (e) => {}
+  const onLike = (e, comment) => {}
+  const onReply = (e, comment) => {}
+  const onDelete = (e, comment) => {
+    deleteComment({
+      variables: { id: comment.id },
+    })
+  }
 
   return (
     <CommentsDisplay>
