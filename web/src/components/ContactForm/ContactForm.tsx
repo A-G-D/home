@@ -54,7 +54,7 @@ const ContactForm = ({
               What Can I Help You With?
             </Window.Header>
           ),
-          className: 'bg-purple-800 p-3 rounded-t-[6px]',
+          className: 'bg-purple-800 p-3 font-semibold rounded-t-[6px]',
         },
         body: {
           className: 'p-5 rounded-b-[6px]',
@@ -64,63 +64,71 @@ const ContactForm = ({
     >
       <Toaster />
       <Form
-        className='flex-auto flex flex-col items-stretch gap-4'
+        className='flex-auto flex flex-col items-stretch gap-12'
         onSubmit={onSubmit}
         error={error}
         formMethods={formMethods}
         {...props}
       >
-        <div className='flex flex-col'>
-          <Label name='name' errorClassName='error'>
-            Name
-          </Label>
-          <TextField
-            name='name'
-            validation={{
-              required: false,
-              pattern: {
-                value: /(?:[_a-zA-Z0-9]+)(?: [_a-zA-Z0-9]+)*/,
-                message: 'Please enter a valid name.',
-              },
-            }}
-            errorClassName='error'
-          />
-          <FieldError name='name' className='error' />
-        </div>
+        <div className='flex flex-col items-stretch gap-4'>
+          <div className='flex flex-col'>
+            <Label className='input-label' name='name' errorClassName='error'>
+              Name
+            </Label>
+            <TextField
+              className='input-field'
+              name='name'
+              validation={{
+                required: false,
+                pattern: {
+                  value: /(?:[_a-zA-Z0-9]+)(?: [_a-zA-Z0-9]+)*/,
+                  message: 'Please enter a valid name.',
+                },
+              }}
+              errorClassName='error'
+            />
+            <FieldError name='name' className='error' />
+          </div>
 
-        <div className='flex flex-col'>
-          <Label name='email' errorClassName='error'>
-            Email
-          </Label>
-          <TextField
-            name='email'
-            validation={{
-              required: true,
-              pattern: {
-                value: /^[._a-zA-Z0-9]+@[^.]+\..+$/,
-                message: 'Please enter a valid email address.',
-              },
-            }}
-            errorClassName='error'
-          />
-          <FieldError name='email' className='error' />
-        </div>
+          <div className='flex flex-col'>
+            <Label className='input-label' name='email' errorClassName='error'>
+              Email
+            </Label>
+            <TextField
+              className='input-field'
+              name='email'
+              validation={{
+                required: true,
+                pattern: {
+                  value: /^[._a-zA-Z0-9]+@[^.]+\..+$/,
+                  message: 'Please enter a valid email address.',
+                },
+              }}
+              errorClassName='error'
+            />
+            <FieldError name='email' className='error' />
+          </div>
 
-        <div className='flex flex-col'>
-          <Label name='message' errorClassName='error'>
-            Message
-          </Label>
-          <TextAreaField
-            className='flex-auto'
-            name='message'
-            validation={{ required: true }}
-            errorClassName='error'
-          />
-          <FieldError name='message' className='error' />
+          <div className='flex flex-col'>
+            <Label
+              className='input-label'
+              name='message'
+              errorClassName='error'
+            >
+              Message
+            </Label>
+            <TextAreaField
+              className='input-field flex-auto'
+              name='message'
+              validation={{ required: true }}
+              errorClassName='error'
+            />
+            <FieldError name='message' className='error' />
+          </div>
         </div>
 
         <Submit
-          className='bg-violet-600 self-stretch p-2 rounded-[8px]'
+          className='bg-violet-600 text-gray-900 p-2 rounded-[8px] rw-button'
           disabled={loading}
         >
           Submit
