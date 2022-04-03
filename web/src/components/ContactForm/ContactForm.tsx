@@ -73,7 +73,11 @@ const ContactForm = ({
       >
         <div className='flex flex-col items-stretch gap-4'>
           <div className='flex flex-col'>
-            <Label className='input-label' name='name' errorClassName='error'>
+            <Label
+              className='input-label'
+              name='name'
+              errorClassName='input-label input-label-error'
+            >
               Name
             </Label>
             <TextField
@@ -86,13 +90,17 @@ const ContactForm = ({
                   message: 'Please enter a valid name.',
                 },
               }}
-              errorClassName='error'
+              errorClassName='input-field input-field-error'
             />
-            <FieldError name='name' className='error' />
+            <FieldError name='name' className='input-error' />
           </div>
 
           <div className='flex flex-col'>
-            <Label className='input-label' name='email' errorClassName='error'>
+            <Label
+              className='input-label'
+              name='email'
+              errorClassName='input-label input-label-error'
+            >
               Email
             </Label>
             <TextField
@@ -105,16 +113,16 @@ const ContactForm = ({
                   message: 'Please enter a valid email address.',
                 },
               }}
-              errorClassName='error'
+              errorClassName='input-field input-field-error'
             />
-            <FieldError name='email' className='error' />
+            <FieldError name='email' className='input-error' />
           </div>
 
           <div className='flex flex-col'>
             <Label
               className='input-label'
               name='message'
-              errorClassName='error'
+              errorClassName='input-label input-label-error'
             >
               Message
             </Label>
@@ -122,9 +130,9 @@ const ContactForm = ({
               className='input-field flex-auto'
               name='message'
               validation={{ required: true }}
-              errorClassName='error'
+              errorClassName='input-field input-field-error flex-auto'
             />
-            <FieldError name='message' className='error' />
+            <FieldError name='message' className='input-error' />
           </div>
         </div>
 
