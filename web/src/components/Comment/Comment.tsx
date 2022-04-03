@@ -31,19 +31,19 @@ const Comment = ({
   return (
     <div
       className={[
-        'bg-gray-200 flex flex-col gap-4 p-4 rounded-sm',
+        'bg-purple-300 flex flex-col gap-4 rounded-md',
         className,
       ].join(' ')}
       {...props}
     >
-      <header className='flex justify-between'>
+      <header className='bg-violet-600 flex justify-between items-center p-4 rounded-t-md'>
         <h2 className='font-semibold'>{comment.name}</h2>
         <time className='text-xs italic' dateTime={comment.createdAt}>
           {formattedDate(comment.createdAt)}
         </time>
       </header>
-      <p className='text-sm'>{comment.body}</p>
-      <footer className='flex gap-4'>
+      <p className='text-sm p-4'>{comment.body}</p>
+      <footer className='bg-violet-400 flex gap-4 p-4 rounded-b-md'>
         {onLike && (
           <button
             className='text-xs'
