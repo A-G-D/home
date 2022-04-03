@@ -37,7 +37,7 @@ const LoginForm = ({
             'bg-purple-800 text-gray-900 p-3 text-sm font-semibold rounded-t-lg',
         },
         body: {
-          className: 'p-5 rounded-b-lg',
+          className: 'flex flex-col items-stretch gap-4 p-5 rounded-b-lg',
         },
       }}
       {...props}
@@ -51,14 +51,14 @@ const LoginForm = ({
             <Label
               name='username'
               className='input-label'
-              errorClassName='rw-label rw-label-error'
+              errorClassName='input-label input-label-error'
             >
               Username
             </Label>
             <TextField
               name='username'
               className='input-field'
-              errorClassName='rw-input rw-input-error'
+              errorClassName='input-field input-field-error'
               ref={usernameRef}
               validation={{
                 required: {
@@ -67,21 +67,21 @@ const LoginForm = ({
                 },
               }}
             />
-            <FieldError name='username' className='rw-field-error' />
+            <FieldError name='username' className='input-error' />
           </div>
 
           <div className='flex flex-col'>
             <Label
               name='password'
               className='input-label'
-              errorClassName='rw-label rw-label-error'
+              errorClassName='input-label input-label-error'
             >
               Password
             </Label>
             <PasswordField
               name='password'
               className='input-field'
-              errorClassName='rw-input rw-input-error'
+              errorClassName='input-field input-field-error'
               autoComplete='current-password'
               validation={{
                 required: {
@@ -90,25 +90,26 @@ const LoginForm = ({
                 },
               }}
             />
+            <FieldError name='password' className='input-error' />
           </div>
 
-          <Link to={routes.forgotPassword()} className='rw-forgot-link'>
+          <Link
+            to={routes.forgotPassword()}
+            className='self-end underline text-gray-500 hover:text-blue-700 text-xs'
+          >
             Forgot Password?
           </Link>
         </div>
 
-        <FieldError name='password' className='rw-field-error' />
-
-        <div className='rw-button-group'>
-          <Submit className='bg-violet-600 text-gray-900 rw-button'>
-            Login
-          </Submit>
-        </div>
+        <Submit className='self-center submit-button'>Login</Submit>
       </Form>
 
-      <div className='rw-login-link'>
+      <div className='self-center text-gray-700 text-sm'>
         <span>Don&apos;t have an account?</span>{' '}
-        <Link to={routes.signup()} className='rw-link'>
+        <Link
+          to={routes.signup()}
+          className='underline text-blue-500 hover:text-blue-600'
+        >
           Sign up!
         </Link>
       </div>

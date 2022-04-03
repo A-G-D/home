@@ -128,10 +128,7 @@ const ContactForm = ({
           </div>
         </div>
 
-        <Submit
-          className='bg-violet-600 text-gray-900 p-2 rounded-[8px] rw-button'
-          disabled={loading}
-        >
+        <Submit className='submit-button' disabled={loading}>
           Submit
         </Submit>
       </Form>

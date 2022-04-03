@@ -58,6 +58,47 @@
   @apply text-sm p-2 bg-white border border-gray-200 rounded outline-none focus:border-gray-400;
 }
 
+.submit-button {
+  @apply flex;
+  @apply justify-center;
+  @apply py-1 px-4;
+  @apply border-0;
+  @apply rounded;
+  @apply bg-violet-600 hover:bg-violet-900;
+  @apply text-gray-900 hover:text-gray-300;
+  @apply text-xs;
+  @apply font-semibold;
+  @apply uppercase;
+  @apply tracking-wide;
+  @apply leading-loose;
+  @apply no-underline;
+  @apply cursor-pointer;
+  @apply transition;
+  @apply duration-100;
+}
+
+.cell-error,
+.form-error-wrapper {
+  @apply p-4 bg-red-50 text-red-600 border border-red-100 rounded my-4;
+}
+
+.input-label-error {
+  @apply text-red-600;
+}
+
+.input-field-error {
+  @apply border-red-600 text-red-600;
+}
+
+.input-field-error:focus {
+  @apply border-red-600 outline-none;
+  box-shadow: 0 0 5px #c53030;
+}
+
+.input-error {
+  @apply font-semibold text-xs text-red-600 uppercase;
+}
+
 .logo {
   width: 64px;
   height: 64px;

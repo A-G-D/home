@@ -43,63 +43,64 @@ const SignupForm = ({
       {...props}
     >
       <div className='flex flex-col gap-4'>
-        <Form className='flex flex-col items-stretch gap-4' onSubmit={onSubmit}>
-          <div className='flex flex-col'>
-            <Label
-              name='username'
-              className='input-label'
-              errorClassName='rw-label rw-label-error'
-            >
-              Username
-            </Label>
-            <TextField
-              name='username'
-              className='input-field'
-              errorClassName='rw-input rw-input-error'
-              ref={usernameRef}
-              validation={{
-                required: {
-                  value: true,
-                  message: 'Username is required',
-                },
-              }}
-            />
-            <FieldError name='username' className='rw-field-error' />
+        <Form className='flex flex-col items-stretch gap-8' onSubmit={onSubmit}>
+          <div className='flex flex-col gap-4'>
+            <div className='flex flex-col'>
+              <Label
+                name='username'
+                className='input-label'
+                errorClassName='input-label input-label-error'
+              >
+                Username
+              </Label>
+              <TextField
+                name='username'
+                className='input-field'
+                errorClassName='input-field input-field-error'
+                ref={usernameRef}
+                validation={{
+                  required: {
+                    value: true,
+                    message: 'Username is required',
+                  },
+                }}
+              />
+              <FieldError name='username' className='input-error' />
+            </div>
+
+            <div className='flex flex-col'>
+              <Label
+                name='password'
+                className='input-label'
+                errorClassName='input-label input-label-error'
+              >
+                Password
+              </Label>
+              <PasswordField
+                name='password'
+                className='input-field'
+                errorClassName='input-field input-field-error'
+                autoComplete='current-password'
+                validation={{
+                  required: {
+                    value: true,
+                    message: 'Password is required',
+                  },
+                }}
+              />
+              <FieldError name='password' className='input-error' />
+            </div>
           </div>
 
-          <div className='flex flex-col'>
-            <Label
-              name='password'
-              className='input-label'
-              errorClassName='rw-label rw-label-error'
-            >
-              Password
-            </Label>
-            <PasswordField
-              name='password'
-              className='input-field'
-              errorClassName='rw-input rw-input-error'
-              autoComplete='current-password'
-              validation={{
-                required: {
-                  value: true,
-                  message: 'Password is required',
-                },
-              }}
-            />
-            <FieldError name='password' className='rw-field-error' />
-          </div>
-
-          <div className='rw-button-group'>
-            <Submit className='bg-violet-600 text-gray-900 rw-button'>
-              Sign Up
-            </Submit>
-          </div>
+          <Submit className='self-center submit-button'>Sign Up</Submit>
         </Form>
 
-        <div className='m-0 rw-login-link'>
+        <div className='self-center text-gray-700 text-sm'>
           <span>Already have an account?</span>{' '}
-          <Link to={routes.login()} className='rw-link'>
+          <Link
+            to={routes.login()}
+            className='underline text-blue-500 hover:text-blue-600'
+          >
             Log in!
           </Link>
         </div>
