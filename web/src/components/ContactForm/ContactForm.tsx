@@ -54,7 +54,8 @@ const ContactForm = ({
               What Can I Help You With?
             </Window.Header>
           ),
-          className: 'bg-purple-800 p-3 font-semibold rounded-t-[6px]',
+          className:
+            'bg-purple-800 text-gray-900 p-3 text-sm font-semibold rounded-t-[6px]',
         },
         body: {
           className: 'p-5 rounded-b-[6px]',
