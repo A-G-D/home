@@ -4,4 +4,4 @@ export const generated = () => {
   return <ContactForm />
 }
 
-export default { title: 'Components/ContactForm' }
+export default { title: 'Forms/ContactForm' }

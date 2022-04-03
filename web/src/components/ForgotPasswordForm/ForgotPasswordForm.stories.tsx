@@ -4,4 +4,4 @@ export const generated = () => {
   return <ForgotPasswordForm />
 }
 
-export default { title: 'Components/ForgotPasswordForm' }
+export default { title: 'Forms/ForgotPasswordForm' }

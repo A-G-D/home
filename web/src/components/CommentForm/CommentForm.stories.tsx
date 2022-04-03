@@ -18,4 +18,4 @@ export const generated = () => {
   return <CommentForm postId='1' />
 }
 
-export default { title: 'Components/CommentForm' }
+export default { title: 'Forms/CommentForm' }

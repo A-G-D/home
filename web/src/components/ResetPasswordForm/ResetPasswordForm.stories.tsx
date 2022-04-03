@@ -4,4 +4,4 @@ export const generated = () => {
   return <ResetPasswordForm enabled={true} />
 }
 
-export default { title: 'Components/ResetPasswordForm' }
+export default { title: 'Forms/ResetPasswordForm' }
