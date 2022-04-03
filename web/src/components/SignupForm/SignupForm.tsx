@@ -7,6 +7,7 @@ import {
   Submit,
   TextField,
 } from '@redwoodjs/forms'
+import Window from 'src/components/Window'
 
 export interface SignupFormPropTypes
   extends React.HTMLAttributes<HTMLDivElement> {
@@ -24,31 +25,36 @@ const SignupForm = ({
   ...props
 }: SignupFormPropTypes): JSX.Element => {
   return (
-    <div
-      className={['flex-col w-96 rounded-[8px] rw-segment', className].join(
-        ' '
-      )}
+    <Window
+      className={[
+        'bg-purple-300 flex flex-col rounded-lg w-96',
+        className,
+      ].join(' ')}
+      childrenAttributes={{
+        header: {
+          children: <Window.Header>Signup</Window.Header>,
+          className:
+            'bg-purple-800 text-gray-900 p-3 text-sm font-semibold rounded-t-lg',
+        },
+        body: {
+          className: 'p-5 rounded-b-lg',
+        },
+      }}
       {...props}
     >
-      <header className='bg-purple-800 rounded-t-[8px] flex-center rw-segment-header'>
-        <h2 className='text-gray-900 rw-heading rw-heading-secondary'>
-          Signup
-        </h2>
-      </header>
-
-      <div className='bg-purple-300 rounded-b-[8px] rw-segment-main'>
-        <div className='rw-form-wrapper'>
-          <Form onSubmit={onSubmit} className='rw-form-wrapper'>
+      <div className='flex flex-col gap-4'>
+        <Form className='flex flex-col items-stretch gap-4' onSubmit={onSubmit}>
+          <div className='flex flex-col'>
             <Label
               name='username'
-              className='rw-label'
+              className='input-label'
               errorClassName='rw-label rw-label-error'
             >
               Username
             </Label>
             <TextField
               name='username'
-              className='rw-input'
+              className='input-field'
               errorClassName='rw-input rw-input-error'
               ref={usernameRef}
               validation={{
@@ -59,17 +65,19 @@ const SignupForm = ({
               }}
             />
             <FieldError name='username' className='rw-field-error' />
+          </div>
 
+          <div className='flex flex-col'>
             <Label
               name='password'
-              className='rw-label'
+              className='input-label'
               errorClassName='rw-label rw-label-error'
             >
               Password
             </Label>
             <PasswordField
               name='password'
-              className='rw-input'
+              className='input-field'
               errorClassName='rw-input rw-input-error'
               autoComplete='current-password'
               validation={{
@@ -80,23 +88,23 @@ const SignupForm = ({
               }}
             />
             <FieldError name='password' className='rw-field-error' />
+          </div>
 
-            <div className='rw-button-group'>
-              <Submit className='bg-violet-600 text-gray-900 rw-button'>
-                Sign Up
-              </Submit>
-            </div>
-          </Form>
-        </div>
+          <div className='rw-button-group'>
+            <Submit className='bg-violet-600 text-gray-900 rw-button'>
+              Sign Up
+            </Submit>
+          </div>
+        </Form>
 
-        <div className='rw-login-link'>
+        <div className='m-0 rw-login-link'>
           <span>Already have an account?</span>{' '}
           <Link to={routes.login()} className='rw-link'>
             Log in!
           </Link>
         </div>
       </div>
-    </div>
+    </Window>
   )
 }
 

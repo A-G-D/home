@@ -65,7 +65,7 @@ const ContactForm = ({
     >
       <Toaster />
       <Form
-        className='flex-auto flex flex-col items-stretch gap-12'
+        className='flex-auto flex flex-col items-stretch gap-8'
         onSubmit={onSubmit}
         error={error}
         formMethods={formMethods}

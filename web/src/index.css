@@ -51,7 +51,7 @@
 }
 
 .input-label {
-  @apply text-gray-800 text-sm font-semibold;
+  @apply text-gray-600 text-sm font-semibold;
 }
 
 .input-field {
