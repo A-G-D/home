@@ -31,12 +31,17 @@ export const DELETE = gql`
 
 type CommentsDisplayPropTypes = React.HTMLAttributes<HTMLElement>
 
-const CommentsDisplay = ({ children, className }: CommentsDisplayPropTypes) => {
+const CommentsDisplay = ({
+  children,
+  className,
+  ...props
+}: CommentsDisplayPropTypes) => {
   return (
     <section
-      className={['flex flex-col items-stretch gap-5', className].join(' ')}
+      className={['flex flex-col items-stretch gap-8', className].join(' ')}
+      {...props}
     >
-      <h2 className='bg-purple-300 text-center text-md p-3 rounded-[6px]'>
+      <h2 className='bg-gray-200 text-center text-gray-700 text-md font-semibold p-3 rounded-md'>
         Comments
       </h2>
       <div className='flex flex-col items-stretch'>{children}</div>
@@ -90,7 +95,7 @@ export const Success = ({ comments }: CellSuccessProps<CommentsQuery>) => {
 
   return (
     <CommentsDisplay>
-      <ul className='flex flex-col gap-4'>
+      <ul className='flex flex-col gap-8'>
         {comments.map((comment) => {
           return (
             <li key={comment.id}>

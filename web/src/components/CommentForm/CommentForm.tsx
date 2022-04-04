@@ -1,5 +1,6 @@
 import Window from 'src/components/Window'
 import {
+  FieldError,
   Form,
   FormError,
   FormProps,
@@ -47,49 +48,61 @@ const CommentForm = ({
 
   return (
     <Window
-      className={['bg-gray-200 rounded-[6px] min-w-full', className].join(' ')}
+      className={['bg-purple-300 rounded-md min-w-full', className].join(' ')}
       childrenAttributes={{
         header: {
           children: <Window.Header>Leave a Comment</Window.Header>,
-          className: 'bg-purple-300 p-3 rounded-t-[6px]',
+          className:
+            'bg-purple-800 text-gray-900 text-sm font-semibold p-3 rounded-t-md',
         },
         body: {
-          className: 'p-5 rounded-b-[6px]',
+          className: 'p-5 rounded-b-md',
         },
       }}
       {...props}
     >
       <Toaster />
       <Form
-        className='flex flex-col items-stretch gap-4 w-full'
+        className='flex flex-col items-stretch gap-8 w-full'
         onSubmit={onSubmit}
+        error={error}
         formMethods={formMethods}
       >
-        <FormError
-          error={error}
-          titleClassName='font-semibold'
-          wrapperClassName='bg-red-100 text-red-900 text-sm p-3 rounded'
-        />
-        <div className='flex flex-col'>
-          <Label name='name' className=''>
-            Name
-          </Label>
-          <TextField name='name' className='' validation={{ required: true }} />
+        <div className='flex flex-col items-stretch gap-4'>
+          <div className='flex flex-col items-stretch'>
+            <Label
+              name='name'
+              className='input-label'
+              errorClassName='input-label input-label-error'
+            >
+              Name
+            </Label>
+            <TextField
+              name='name'
+              className='input-field'
+              errorClassName='input-field input-field-error'
+              validation={{ required: true }}
+            />
+            <FieldError name='name' className='input-error' />
+          </div>
+          <div className='flex flex-col'>
+            <Label
+              name='body'
+              className='input-label'
+              errorClassName='input-label input-label-error'
+            >
+              Comment
+            </Label>
+            <TextAreaField
+              name='body'
+              className='input-field'
+              errorClassName='input-field input-field-error'
+              validation={{ required: true }}
+            />
+            <FieldError name='body' className='input-error' />
+          </div>
         </div>
-        <div className='flex flex-col'>
-          <Label name='body' className=''>
-            Comment
-          </Label>
-          <TextAreaField
-            name='body'
-            className=''
-            validation={{ required: true }}
-          />
-        </div>
-        <Submit
-          disabled={loading}
-          className='bg-purple-300 self-stretch p-2 rounded-[8px]'
-        >
+        <Submit disabled={loading} className='submit-button'>
           Submit
         </Submit>
       </Form>

@@ -30,10 +30,9 @@ const Comment = ({
 }: CommentPropTypes): JSX.Element => {
   return (
     <div
-      className={[
-        'bg-purple-300 flex flex-col gap-4 rounded-md',
-        className,
-      ].join(' ')}
+      className={['bg-purple-300 flex flex-col rounded-md', className].join(
+        ' '
+      )}
       {...props}
     >
       <header className='bg-violet-600 flex justify-between items-center p-4 rounded-t-md'>
