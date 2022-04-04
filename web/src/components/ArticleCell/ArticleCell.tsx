@@ -1,7 +1,7 @@
 import type { ArticleQuery } from 'types/graphql'
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 
-import { formattedDate } from 'web/src/lib/utils'
+import { formattedDate } from 'src/lib/utils'
 
 import NotePage from 'src/components/NotePage/NotePage'
 
@@ -83,9 +83,10 @@ export const Failure = ({ error }: CellFailureProps) => (
 )
 
 export const Success = ({ article }: CellSuccessProps<ArticleQuery>) => {
+  const date = formattedDate(article.createdAt)
   const bodyHTML = article.body
     .replace('${title}', article.title)
-    .replace('${createdAt}', formattedDate(article.createdAt))
+    .replace('${createdAt}', date)
 
   return (
     <div className='flex flex-col gap-4'>

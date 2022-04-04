@@ -119,7 +119,7 @@ const CommentInfo = ({
   onReport,
   ...props
 }: CommentInfoPropTypes): JSX.Element => {
-  const dateTime = formattedDateTime(comment.createdAt)
+  const dateTime = formattedDateTime(comment.createdAt).dateTime
   return (
     <div
       className={['bg-violet-400 flex flex-col rounded-r-md', className].join(
@@ -129,7 +129,7 @@ const CommentInfo = ({
     >
       <header className='flex justify-between items-center p-4 rounded-t-md'>
         <time className='text-xs italic' dateTime={comment.createdAt}>
-          {dateTime.date + ' ' + dateTime.time}
+          {dateTime}
         </time>
         <Tippy
           className='shadow-md shadow-gray-900'

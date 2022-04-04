@@ -3,7 +3,7 @@ import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 import { Link, routes } from '@redwoodjs/router'
 import { MdOutlineArrowDropUp } from 'react-icons/md'
 
-import { formattedDate } from 'web/src/lib/utils'
+import { formattedDate } from 'src/lib/utils'
 
 import ArticleCell from 'src/components/ArticleCell'
 

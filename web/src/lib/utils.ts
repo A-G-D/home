@@ -1,9 +1,20 @@
-export const formattedDateTime = (datetime): { date: string; time: string } => {
+export const formattedDateTime = (
+  datetime
+): { date: string; time: string; dateTime: string } => {
   const parsedDate = new Date(datetime)
   const month = parsedDate.toLocaleString('default', { month: 'long' })
   const date = `${month} ${parsedDate.getDate()}, ${parsedDate.getFullYear()}`
   const time = `${parsedDate.getHours()}:${parsedDate.getMinutes()}:${parsedDate.getSeconds()}`
-  return { date, time }
+  const dateTime = `${date} ${time}`
+  return { date, time, dateTime }
+}
+
+export const formattedDate = (dateTime): string => {
+  return formattedDateTime(dateTime).date
+}
+
+export const formattedTime = (dateTime): string => {
+  return formattedDateTime(dateTime).time
 }
 
 export const getRootContainer = (): Element => {
