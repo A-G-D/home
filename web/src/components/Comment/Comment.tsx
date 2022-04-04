@@ -1,4 +1,4 @@
-import { formattedDate } from 'src/lib/utils'
+import { formattedDateTime } from 'src/lib/utils'
 
 interface CommentData {
   id: string
@@ -28,6 +28,7 @@ const Comment = ({
   onDelete,
   ...props
 }: CommentPropTypes): JSX.Element => {
+  const dateTime = formattedDateTime(comment.createdAt)
   return (
     <div
       className={['bg-purple-300 flex flex-col rounded-md', className].join(
@@ -38,7 +39,7 @@ const Comment = ({
       <header className='bg-violet-600 flex justify-between items-center p-4 rounded-t-md'>
         <h2 className='font-semibold'>{comment.name}</h2>
         <time className='text-xs italic' dateTime={comment.createdAt}>
-          {formattedDate(comment.createdAt)}
+          {dateTime.date + ' ' + dateTime.time}
         </time>
       </header>
       <p className='text-sm p-4'>{comment.body}</p>
