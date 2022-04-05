@@ -15,7 +15,7 @@ export const generated = () => {
     }
   })
 
-  return <CommentForm postId='1' />
+  return <CommentForm user={{ name: 'AGD' }} postId='1' />
 }
 
 export default { title: 'Forms/CommentForm' }

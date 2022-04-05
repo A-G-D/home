@@ -1,112 +1,64 @@
-import Window from 'src/components/Window'
 import {
   FieldError,
   Form,
-  FormError,
-  FormProps,
   Label,
   Submit,
   TextAreaField,
   TextField,
-  useForm,
+  UseFormReturn,
 } from '@redwoodjs/forms'
-import { useMutation } from '@redwoodjs/web'
-import { toast, Toaster } from '@redwoodjs/web/toast'
-import { QUERY as CommentsQuery } from 'src/components/CommentsCell'
+import { Toaster } from '@redwoodjs/web/toast'
+import Window, { WindowPropTypes } from 'src/components/Window'
+import UserInfo from 'src/components/UserInfo'
 
-const CREATE = gql`
-  mutation CreateCommentMutation($input: CreateCommentInput!) {
-    createComment(input: $input) {
-      id
-      name
-      body
-      createdAt
-    }
+interface CommentFormPropTypes extends WindowPropTypes {
+  user: {
+    name: string
+    picture?: string
   }
-`
-
-interface CommentFormPropTypes extends FormProps {
   postId: string
+  loading?: boolean
+  error?: any
+  formMethods?: UseFormReturn<any, any>
+  onSubmit?: (
+    values: Record<string, any>,
+    event?: React.BaseSyntheticEvent<object, any, any>
+  ) => void
 }
 
 const CommentForm = ({
   className,
+  user,
   postId,
+  loading,
+  error,
+  formMethods,
+  onSubmit,
   ...props
 }: CommentFormPropTypes): JSX.Element => {
-  const formMethods = useForm({ mode: 'onBlur' })
-  const [createComment, { loading, error }] = useMutation(CREATE, {
-    refetchQueries: [{ query: CommentsQuery, variables: { postId } }],
-    onCompleted: () => {
-      toast.success('Comment Submitted!')
-      formMethods.reset()
-    },
-  })
-  const onSubmit = (input) => {
-    createComment({ variables: { input: { postId, ...input } } })
-  }
-
   return (
-    <Window
-      className={['bg-purple-300 rounded-md min-w-full', className].join(' ')}
-      childrenAttributes={{
-        header: {
-          children: <Window.Header>Leave a Comment</Window.Header>,
-          className:
-            'bg-purple-800 text-gray-900 text-sm font-semibold p-3 rounded-t-md',
-        },
-        body: {
-          className: 'p-5 rounded-b-md',
-        },
-      }}
-      {...props}
-    >
+    <div className='flex rounded-md'>
       <Toaster />
+      <div className='bg-violet-600 flex flex-col items-center gap-4 p-4 rounded-l-md'>
+        <UserInfo username={user.name} picture={user.picture} />
+      </div>
       <Form
-        className='flex flex-col items-stretch gap-8 w-full'
+        className='bg-violet-400 flex-auto flex flex-col items-stretch gap-8 p-4 rounded-r-md'
         onSubmit={onSubmit}
         error={error}
         formMethods={formMethods}
       >
-        <div className='flex flex-col items-stretch gap-4'>
-          <div className='flex flex-col items-stretch'>
-            <Label
-              name='name'
-              className='input-label'
-              errorClassName='input-label input-label-error'
-            >
-              Name
-            </Label>
-            <TextField
-              name='name'
-              className='input-field'
-              errorClassName='input-field input-field-error'
-              validation={{ required: true }}
-            />
-            <FieldError name='name' className='input-error' />
-          </div>
-          <div className='flex flex-col'>
-            <Label
-              name='body'
-              className='input-label'
-              errorClassName='input-label input-label-error'
-            >
-              Comment
-            </Label>
-            <TextAreaField
-              name='body'
-              className='input-field'
-              errorClassName='input-field input-field-error'
-              validation={{ required: true }}
-            />
-            <FieldError name='body' className='input-error' />
-          </div>
-        </div>
+        <TextAreaField
+          name='body'
+          className='flex-auto input-field'
+          errorClassName='flex-auto input-field input-field-error'
+          validation={{ required: true }}
+        />
         <Submit disabled={loading} className='submit-button'>
-          Submit
+          Add Comment
         </Submit>
       </Form>
-    </Window>
+    </div>
   )
 }
 

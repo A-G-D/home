@@ -1,14 +1,14 @@
 import { render } from '@redwoodjs/testing/web'
 
-import CommentForm from './CommentForm'
+import UserInfo from './UserInfo'
 
 //   Improve this test with help from the Redwood Testing Doc:
 //    https://redwoodjs.com/docs/testing#testing-components
 
-describe('CommentForm', () => {
+describe('UserInfo', () => {
   it('renders successfully', () => {
     expect(() => {
-      render(<CommentForm user={{ name: 'AGD' }} postId='1' />)
+      render(<UserInfo />)
     }).not.toThrow()
   })
 })

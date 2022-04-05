@@ -1,14 +1,14 @@
 import { render } from '@redwoodjs/testing/web'
 
-import CommentForm from './CommentForm'
+import GuestCommentForm from './GuestCommentForm'
 
 //   Improve this test with help from the Redwood Testing Doc:
 //    https://redwoodjs.com/docs/testing#testing-components
 
-describe('CommentForm', () => {
+describe('AnonCommentForm', () => {
   it('renders successfully', () => {
     expect(() => {
-      render(<CommentForm user={{ name: 'AGD' }} postId='1' />)
+      render(<GuestCommentForm postId='1' />)
     }).not.toThrow()
   })
 })

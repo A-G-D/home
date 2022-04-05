@@ -41,7 +41,7 @@ const CommentsDisplay = ({
       className={['flex flex-col items-stretch gap-8', className].join(' ')}
       {...props}
     >
-      <h2 className='bg-gray-200 text-center text-gray-700 text-md font-semibold p-3 rounded-md'>
+      <h2 className='bg-violet-600 text-center text-gray-800 text-md font-semibold p-3 rounded-md'>
         Comments
       </h2>
       <div className='flex flex-col items-stretch'>{children}</div>
