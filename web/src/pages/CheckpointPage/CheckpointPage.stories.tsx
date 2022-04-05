@@ -9,11 +9,11 @@ export const Upgrade = () => {
   return <CheckpointPage status={SiteStatus.UPGRADE} />
 }
 
-export const MAINTENANCE = () => {
+export const Maintenance = () => {
   return <CheckpointPage status={SiteStatus.MAINTENANCE} />
 }
 
-export const DOWN = () => {
+export const Down = () => {
   return <CheckpointPage status={SiteStatus.DOWN} />
 }
 
