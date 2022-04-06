@@ -4,7 +4,7 @@ import { useAuth } from '@redwoodjs/auth'
 import { MetaTags } from '@redwoodjs/web'
 import { toast, Toaster } from '@redwoodjs/web/toast'
 import { useEffect } from 'react'
-import SignupForm from 'src/components/SignupForm'
+import SignupForm from 'src/forms/SignupForm'
 
 const SignupPage = () => {
   const { isAuthenticated, signUp } = useAuth()
@@ -38,10 +38,10 @@ const SignupPage = () => {
     <>
       <MetaTags title='Signup' />
 
-      <main className='rw-main flex-center'>
+      <div className='rw-main flex-center'>
         <Toaster toastOptions={{ className: 'rw-toast', duration: 6000 }} />
         <SignupForm onSubmit={onSubmit} usernameRef={usernameRef} />
-      </main>
+      </div>
     </>
   )
 }

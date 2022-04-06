@@ -1,4 +1,4 @@
-import { standard as standardCell } from '../ArticleCell/ArticleCell.mock'
+import { standard as standardCell } from 'src/components/ArticleCell/ArticleCell.mock'
 
 const standardArticle = standardCell().article
 

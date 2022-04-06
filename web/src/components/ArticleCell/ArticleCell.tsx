@@ -3,7 +3,7 @@ import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 
 import { formattedDate } from 'src/lib/utils'
 
-import NotePage from 'src/components/NotePage/NotePage'
+import NotePage from 'src/components/NotePage'
 
 export const QUERY = gql`
   query ArticleQuery($id: String!) {

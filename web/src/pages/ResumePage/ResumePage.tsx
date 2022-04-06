@@ -1,4 +1,3 @@
-import { Link, routes } from '@redwoodjs/router'
 import { MetaTags } from '@redwoodjs/web'
 import { getRootContainer } from 'src/lib/utils'
 import Window from 'web/src/components/Window/Window'

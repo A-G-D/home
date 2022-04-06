@@ -11,12 +11,6 @@ export const QUERY = gql`
       body
       createdAt
       postId
-      post {
-        id
-        title
-        body
-        createdAt
-      }
     }
   }
 `

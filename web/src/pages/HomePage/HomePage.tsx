@@ -1,8 +1,6 @@
 import { MetaTags } from '@redwoodjs/web'
-import { HTMLAttributes } from 'react'
-
 import { BiLinkExternal } from 'react-icons/bi'
-import Tippy, { useSingleton } from '@tippyjs/react'
+import Tippy from '@tippyjs/react'
 import AuthorName from 'src/components/AuthorName'
 
 import 'tippy.js/dist/tippy.css'
@@ -38,7 +36,7 @@ const AboutMe = () => {
   )
 }
 
-interface LinkImagePropTypes extends HTMLAttributes<HTMLLinkElement> {
+interface LinkImagePropTypes extends React.HTMLAttributes<HTMLLinkElement> {
   className?: string
   href?: string
   src: string
@@ -62,7 +60,7 @@ const LinkImage = React.forwardRef(
 
 const PuffUpElement = React.forwardRef(
   (
-    { children, className, ...props }: HTMLAttributes<HTMLElement>,
+    { children, className, ...props }: React.HTMLAttributes<HTMLElement>,
     ref: React.RefObject<HTMLDivElement>
   ): JSX.Element => {
     return (

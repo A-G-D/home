@@ -35,7 +35,7 @@ describe('ArticlesCell', () => {
 
   it('renders Success successfully', async () => {
     expect(() => {
-      render(<Success articles={standard().articles} />)
+      render(<Success posts={standard().posts} />)
     }).not.toThrow()
   })
 })

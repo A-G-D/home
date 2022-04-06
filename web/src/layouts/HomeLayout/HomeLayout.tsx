@@ -12,7 +12,7 @@ import React from 'react'
 import Modal from 'react-modal'
 import Tippy from '@tippyjs/react'
 import AuthorName from 'src/components/AuthorName'
-import ContactForm from 'src/components/ContactForm'
+import ContactForm from 'src/forms/ContactForm'
 
 import 'tippy.js/animations/shift-away.css'
 import './HomeLayout.scss'

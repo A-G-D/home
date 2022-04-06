@@ -14,7 +14,11 @@ export const failure = () => {
 }
 
 export const success = () => {
-  return Success ? <Success {...standard()} /> : null
+  return Success ? (
+    <Success
+      comments={standard().comments.filter((v, i) => v.postId === '1001')}
+    />
+  ) : null
 }
 
 export default { title: 'Cells/CommentsCell' }

@@ -46,3 +46,8 @@ model Comment {
   postId    String
   createdAt DateTime  @default(now())
 }
+
+model Settings {
+  id        Int       @id @default(autoincrement())
+  status    Int       @default(0)
+}

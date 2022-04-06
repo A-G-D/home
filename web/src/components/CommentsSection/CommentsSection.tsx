@@ -3,9 +3,9 @@ import { toast } from '@redwoodjs/web/toast'
 import { useForm } from '@redwoodjs/forms'
 import { useAuth } from '@redwoodjs/auth'
 import { QUERY as CommentsQuery } from 'src/components/CommentsCell'
-import GuestCommentForm from 'src/components/GuestCommentForm'
+import GuestCommentForm from 'src/forms/GuestCommentForm'
 import CommentsCell from 'src/components/CommentsCell'
-import CommentForm from 'src/components/CommentForm'
+import CommentForm from 'src/forms/CommentForm'
 
 const CREATE = gql`
   mutation CreateCommentMutation($input: CreateCommentInput!) {

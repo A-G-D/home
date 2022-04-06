@@ -1,4 +1,3 @@
-import { Link, routes } from '@redwoodjs/router'
 import { MetaTags } from '@redwoodjs/web'
 import { profile } from 'src/constants/links'
 import { SiteStatus } from 'src/constants/constants'
@@ -90,7 +89,9 @@ const Status = ({ status }): JSX.Element => {
   return <DownStatus />
 }
 
-const CheckpointPage = ({ status }) => {
+const CheckpointPage = () => {
+  const status = SiteStatus.CONSTRUCTION
+
   return (
     <>
       <MetaTags title='Checkpoint' description='Checkpoint' />

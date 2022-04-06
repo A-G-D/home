@@ -14,8 +14,9 @@ import HomeLayout from 'src/layouts/HomeLayout'
 
 const SITE_STATUS = SiteStatus.DOWN
 
+const checkpointRedirect = { ...(SITE_STATUS !== SiteStatus.UP && { unauthenticated: 'checkpoint', private: true }) }
+
 const Routes = () => {
-  const checkpointRedirect = { ...(SITE_STATUS !== SiteStatus.UP && { unauthenticated: 'checkpoint', private: true }) }
   return (
     <Router>
       <Route path='/login' page={LoginPage} name='login' />
@@ -39,7 +40,7 @@ const Routes = () => {
         </Set>
         <Route path='/resume' page={ResumePage} name='resume' />
       </Set>
-      <Route path='/checkpoint/{status:Int}' page={CheckpointPage} name='checkpoint' />
+      <Route path='/checkpoint' page={CheckpointPage} name='checkpoint' />
       <Route notfound page={NotFoundPage} />
     </Router>
   )
