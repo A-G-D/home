@@ -1,4 +1,4 @@
-import { Link, NavLink, routes } from '@redwoodjs/router'
+import { Link, NavLink, Route, routes } from '@redwoodjs/router'
 import { BsGithub, BsLinkedin, BsTwitter, BsInstagram } from 'react-icons/bs'
 import { MdOutlineKeyboardArrowDown } from 'react-icons/md'
 import { SiGmail } from 'react-icons/si'
@@ -227,13 +227,13 @@ const UserRibbon = ({ currentUser, onLogout }) => {
   )
 }
 
-const Header = ({ isAuthenticated, currentUser, logOut }) => {
+const Header = ({ isAuthenticated, currentUser, onLogout }) => {
   return (
     <header className='sticky top-0 w-full bg-violet-600/80 px-6 py-3 flex flex-row justify-between z-10'>
       <Logo />
       <Links />
       {isAuthenticated && (
-        <UserRibbon currentUser={currentUser} onLogout={logOut} />
+        <UserRibbon currentUser={currentUser} onLogout={onLogout} />
       )}
     </header>
   )
@@ -268,8 +268,9 @@ const Footer = () => {
   )
 }
 
-const HomeLayout = ({ children }: HomeLayoutProps) => {
+const HomeLayout = ({ children }: HomeLayoutProps): JSX.Element => {
   const { isAuthenticated, currentUser, logOut } = useAuth()
+  const onLogout = logOut
 
   return (
     <Background>
@@ -277,7 +278,7 @@ const HomeLayout = ({ children }: HomeLayoutProps) => {
         <Header
           isAuthenticated={isAuthenticated}
           currentUser={currentUser}
-          logOut={logOut}
+          onLogout={onLogout}
         />
         <main className='bg-gray-200/80 flex-auto flex flex-col'>
           {children}

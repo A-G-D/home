@@ -8,15 +8,17 @@
 // 'src/pages/Admin/BooksPage/BooksPage.js' -> AdminBooksPage
 
 import { Private, Router, Route, Set } from '@redwoodjs/router'
-import { SiteStatus } from 'src/constants/constants'
+import { SiteStatus, useSettings } from 'src/constants/constants'
 import PostsLayout from 'src/layouts/PostsLayout'
 import HomeLayout from 'src/layouts/HomeLayout'
 
-const SITE_STATUS = SiteStatus.DOWN
-
-const checkpointRedirect = { ...(SITE_STATUS !== SiteStatus.UP && { unauthenticated: 'checkpoint', private: true }) }
-
 const Routes = () => {
+  const statusRef = React.useRef<number>(useSettings().settings?.status)
+
+  if (statusRef == null) return <></>
+
+  const checkpointRedirect = { ...(statusRef.current !== SiteStatus.UP && { unauthenticated: 'checkpoint', private: true }) }
+
   return (
     <Router>
       <Route path='/login' page={LoginPage} name='login' />

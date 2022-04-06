@@ -1,6 +1,6 @@
 import { MetaTags } from '@redwoodjs/web'
 import { profile } from 'src/constants/links'
-import { SiteStatus } from 'src/constants/constants'
+import { SiteStatus, useSettings } from 'src/constants/constants'
 
 const ConstructionStatus = () => {
   return (
@@ -90,13 +90,15 @@ const Status = ({ status }): JSX.Element => {
 }
 
 const CheckpointPage = () => {
-  const status = SiteStatus.CONSTRUCTION
+  const { settings } = useSettings()
+
+  if (!settings) return <></>
 
   return (
     <>
       <MetaTags title='Checkpoint' description='Checkpoint' />
 
-      <Status status={status} />
+      <Status status={settings.status} />
     </>
   )
 }
