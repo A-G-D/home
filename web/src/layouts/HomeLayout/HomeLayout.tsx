@@ -5,7 +5,7 @@ import { SiGmail } from 'react-icons/si'
 
 import { useForm } from '@redwoodjs/forms'
 import { useMutation } from '@redwoodjs/web'
-import { toast } from '@redwoodjs/web/toast'
+import { toast, Toaster } from '@redwoodjs/web/toast'
 import { useAuth } from '@redwoodjs/auth'
 
 import React from 'react'
@@ -235,6 +235,7 @@ const Header = ({ isAuthenticated, currentUser, onLogout }) => {
       {isAuthenticated && (
         <UserRibbon currentUser={currentUser} onLogout={onLogout} />
       )}
+      <Toaster />
     </header>
   )
 }
@@ -270,7 +271,16 @@ const Footer = () => {
 
 const HomeLayout = ({ children }: HomeLayoutProps): JSX.Element => {
   const { isAuthenticated, currentUser, logOut } = useAuth()
-  const onLogout = logOut
+  const onLogout = async () => {
+    const response = await logOut()
+    if (response.message) {
+      toast(response.message)
+    } else if (response.error) {
+      toast.error(response.error)
+    } else {
+      toast.success('Logged Out!')
+    }
+  }
 
   return (
     <Background>

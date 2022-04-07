@@ -1,6 +1,7 @@
 import { MetaTags } from '@redwoodjs/web'
 import { profile } from 'src/constants/links'
-import { SiteStatus, useSettings } from 'src/constants/constants'
+import { SiteStatus } from 'src/constants/constants'
+import { useSettings } from 'src/lib/hooks'
 
 const ConstructionStatus = () => {
   return (

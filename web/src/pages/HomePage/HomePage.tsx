@@ -1,10 +1,12 @@
 import { MetaTags } from '@redwoodjs/web'
 import { BiLinkExternal } from 'react-icons/bi'
 import Tippy from '@tippyjs/react'
+import PuffUpElement from 'src/components/PuffUpElement'
 import AuthorName from 'src/components/AuthorName'
 
 import 'tippy.js/dist/tippy.css'
 import './HomePage.scss'
+import { getDevIcon } from 'src/lib/utils'
 
 const AboutMe = () => {
   return (
@@ -58,30 +60,6 @@ const LinkImage = React.forwardRef(
   }
 )
 
-const PuffUpElement = React.forwardRef(
-  (
-    { children, className, ...props }: React.HTMLAttributes<HTMLElement>,
-    ref: React.RefObject<HTMLDivElement>
-  ): JSX.Element => {
-    return (
-      <div
-        ref={ref}
-        className={['flex justify-center items-center', className].join(' ')}
-        {...props}
-      >
-        {React.Children.map(children, (child: React.ReactElement) =>
-          React.cloneElement(child, {
-            className: [
-              'hover:w-full hover:h-full transition-all',
-              child.props.className,
-            ].join(' '),
-          })
-        )}
-      </div>
-    )
-  }
-)
-
 interface TechTipPropTypes {
   children?: React.ReactNode
   href?: string
@@ -100,6 +78,48 @@ const TechTip = ({ children, href }: TechTipPropTypes) => {
   )
 }
 
+const TechStackItem = ({
+  containerClassName,
+  contentClassName,
+  iconPath,
+  src,
+  alt,
+  tooltip,
+  tooltipOffset = 16,
+}: {
+  containerClassName: string
+  contentClassName: string
+  iconPath?: string
+  src?: string
+  alt: string
+  tooltip: React.ReactNode
+  tooltipOffset?: number
+}): JSX.Element => {
+  const ref = React.useRef()
+  return (
+    <>
+      <PuffUpElement className={containerClassName}>
+        <LinkImage
+          ref={ref}
+          className={contentClassName}
+          src={iconPath ? getDevIcon(iconPath) : src}
+          alt={alt}
+        />
+      </PuffUpElement>
+      <Tippy
+        reference={ref}
+        duration={500}
+        placement='top'
+        offset={[0, tooltipOffset]}
+        arrow={false}
+        hideOnClick={false}
+        content={tooltip}
+        interactive={true}
+      />
+    </>
+  )
+}
+
 const TechStack = () => {
   return (
     <section className='bg-gray-200 px-8 py-8 flex flex-col gap-12 rounded-[8px]'>
@@ -107,241 +127,207 @@ const TechStack = () => {
       <div className='flex flex-col gap-12'>
         <ul className='flex flex-row flex-wrap justify-center gap-4'>
           <li>
-            <Tippy
-              duration={500}
-              placement='top'
-              arrow={false}
-              hideOnClick={false}
-              content={<TechTip>HTML</TechTip>}
-            >
-              <PuffUpElement className='w-[96px] h-[96px]'>
-                <LinkImage
-                  className='w-[64px] h-[64px]'
-                  src='https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/HTML5_logo_and_wordmark.svg/130px-HTML5_logo_and_wordmark.svg.png'
-                  alt='HTML5'
-                />
-              </PuffUpElement>
-            </Tippy>
+            <TechStackItem
+              containerClassName='w-[96px] h-[96px]'
+              contentClassName='w-[64px] h-[64px]'
+              iconPath='html5/html5-original.svg'
+              alt='HTML5'
+              tooltip={<TechTip>HTML</TechTip>}
+              tooltipOffset={32}
+            />
           </li>
           <li>
-            <Tippy
-              duration={500}
-              placement='top'
-              arrow={false}
-              hideOnClick={false}
-              content={<TechTip>CSS</TechTip>}
-            >
-              <PuffUpElement className='w-[96px] h-[96px]'>
-                <LinkImage
-                  className='w-[64px] h-[64px]'
-                  src='https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/CSS3_logo_and_wordmark.svg/120px-CSS3_logo_and_wordmark.svg.png'
-                  alt='CSS3'
-                />
-              </PuffUpElement>
-            </Tippy>
+            <TechStackItem
+              containerClassName='w-[96px] h-[96px]'
+              contentClassName='w-[64px] h-[64px]'
+              iconPath='css3/css3-original.svg'
+              alt='CSS3'
+              tooltip={<TechTip>CSS</TechTip>}
+              tooltipOffset={32}
+            />
           </li>
           <li>
-            <Tippy
-              duration={500}
-              placement='top'
-              arrow={false}
-              hideOnClick={false}
-              content={<TechTip>Javascript</TechTip>}
-            >
-              <PuffUpElement className='w-[96px] h-[96px]'>
-                <LinkImage
-                  className='w-[64px] h-[64px]'
-                  src='https://raw.githubusercontent.com/voodootikigod/logo.js/master/js.png'
-                  alt='Javascript'
-                />
-              </PuffUpElement>
-            </Tippy>
+            <TechStackItem
+              containerClassName='w-[96px] h-[96px]'
+              contentClassName='w-[64px] h-[64px]'
+              iconPath='javascript/javascript-original.svg'
+              alt='JavaScript'
+              tooltip={<TechTip>JavaScript</TechTip>}
+              tooltipOffset={32}
+            />
           </li>
           <li>
-            <Tippy
-              duration={500}
-              placement='top'
-              arrow={false}
-              hideOnClick={false}
-              content={<TechTip>Typescript</TechTip>}
-            >
-              <PuffUpElement className='w-[96px] h-[96px]'>
-                <LinkImage
-                  className='w-[64px] h-[64px]'
-                  src='https://github.com/microsoft/TypeScript-Website/blob/v2/packages/typescriptlang-org/static/icons/ts-logo-512.png?raw=true'
-                  alt='Typescript'
-                />
-              </PuffUpElement>
-            </Tippy>
+            <TechStackItem
+              containerClassName='w-[96px] h-[96px]'
+              contentClassName='w-[64px] h-[64px]'
+              iconPath='typescript/typescript-original.svg'
+              alt='TypeScript'
+              tooltip={<TechTip>TypeScript</TechTip>}
+              tooltipOffset={32}
+            />
           </li>
           <li>
-            <Tippy
-              duration={500}
-              placement='top'
-              arrow={false}
-              hideOnClick={false}
-              content={<TechTip>Git</TechTip>}
-            >
-              <PuffUpElement className='w-[96px] h-[96px]'>
-                <LinkImage
-                  className='w-[64px] h-[64px]'
-                  src='https://avatars.githubusercontent.com/u/18133?s=200&v=4'
-                  alt='Git'
-                />
-              </PuffUpElement>
-            </Tippy>
+            <TechStackItem
+              containerClassName='w-[96px] h-[96px]'
+              contentClassName='w-[64px] h-[64px]'
+              iconPath='git/git-original.svg'
+              alt='Git'
+              tooltip={<TechTip>Git</TechTip>}
+              tooltipOffset={32}
+            />
           </li>
         </ul>
         <ul className='flex flex-row flex-wrap justify-center gap-4'>
           <li>
-            <Tippy
-              duration={500}
-              placement='top'
-              arrow={false}
-              hideOnClick={false}
-              content={<TechTip href='https://reactjs.org'>ReactJS</TechTip>}
-              interactive={true}
-            >
-              <PuffUpElement className='w-[48px] h-[48px]'>
-                <LinkImage
-                  className='w-[32px] h-[32px]'
-                  src='https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/220px-React-icon.svg.png'
-                  alt='ReactJS'
-                />
-              </PuffUpElement>
-            </Tippy>
+            <TechStackItem
+              containerClassName='w-[48px] h-[48px]'
+              contentClassName='w-[32px] h-[32px]'
+              iconPath='react/react-original.svg'
+              alt='ReactJS'
+              tooltip={<TechTip href='https://reactjs.org'>ReactJS</TechTip>}
+            />
           </li>
           <li>
-            <Tippy
-              duration={500}
-              placement='top'
-              arrow={false}
-              hideOnClick={false}
-              content={
-                <TechTip href='https://storybook.js.org'>StorybookJS</TechTip>
-              }
-              interactive={true}
-            >
-              <PuffUpElement className='w-[48px] h-[48px]'>
-                <LinkImage
-                  className='w-[32px] h-[32px]'
-                  src='https://avatars.githubusercontent.com/u/22632046?s=200&v=4'
-                  alt='StorybookJS'
-                />
-              </PuffUpElement>
-            </Tippy>
-          </li>
-          <li>
-            <Tippy
-              duration={500}
-              placement='top'
-              arrow={false}
-              hideOnClick={false}
-              content={<TechTip href='https://jestjs.io'>Jest</TechTip>}
-              interactive={true}
-            >
-              <PuffUpElement className='w-[48px] h-[48px]'>
-                <LinkImage
-                  className='w-[32px] h-[32px]'
-                  src='https://github.com/facebook/jest/blob/main/website/static/img/favicon/favicon-32x32.png?raw=true'
-                  alt='Jest'
-                />
-              </PuffUpElement>
-            </Tippy>
-          </li>
-          <li>
-            <Tippy
-              duration={500}
-              placement='top'
-              arrow={false}
-              hideOnClick={false}
-              content={
-                <TechTip href='https://redwoodjs.com'>RedwoodJS</TechTip>
-              }
-              interactive={true}
-            >
-              <PuffUpElement className='w-[48px] h-[48px]'>
-                <LinkImage
-                  className='w-[32px] h-[32px]'
-                  src='https://avatars.githubusercontent.com/u/45050444?s=200&v=4'
-                  alt='RedwoodJS'
-                />
-              </PuffUpElement>
-            </Tippy>
-          </li>
-          <li>
-            <Tippy
-              duration={500}
-              placement='top'
-              arrow={false}
-              hideOnClick={false}
-              content={<TechTip href='https://sass-lang.com'>Sass</TechTip>}
-              interactive={true}
-            >
-              <PuffUpElement className='w-[48px] h-[48px]'>
-                <LinkImage
-                  className='w-[32px] h-[32px]'
-                  src='https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Sass_Logo_Color.svg/220px-Sass_Logo_Color.svg.png'
-                  alt='Sass'
-                />
-              </PuffUpElement>
-            </Tippy>
-          </li>
-          <li>
-            <Tippy
-              duration={500}
-              placement='top'
-              arrow={false}
-              hideOnClick={false}
-              content={<TechTip href='https://lesscss.org'>Less</TechTip>}
-              interactive={true}
-            >
-              <PuffUpElement className='w-[48px] h-[48px]'>
-                <LinkImage
-                  className='w-[32px] h-[32px]'
-                  src='https://lesscss.org/public/img/less_logo.png'
-                  alt='Less'
-                />
-              </PuffUpElement>
-            </Tippy>
-          </li>
-          <li>
-            <Tippy
-              duration={500}
-              placement='top'
-              arrow={false}
-              hideOnClick={false}
-              content={
+            <TechStackItem
+              containerClassName='w-[48px] h-[48px]'
+              contentClassName='w-[32px] h-[32px]'
+              iconPath='tailwindcss/tailwindcss-plain.svg'
+              alt='Tailwind CSS'
+              tooltip={
                 <TechTip href='https://tailwindcss.com'>Tailwind CSS</TechTip>
               }
-              interactive={true}
-            >
-              <PuffUpElement className='w-[48px] h-[48px]'>
-                <LinkImage
-                  className='w-[32px] h-[32px]'
-                  src='https://avatars.githubusercontent.com/u/67109815?s=200&v=4'
-                  alt='Tailwind CSS'
-                />
-              </PuffUpElement>
-            </Tippy>
+            />
           </li>
           <li>
-            <Tippy
-              duration={500}
-              placement='top'
-              arrow={false}
-              hideOnClick={false}
-              content={<TechTip href='https://github.com'>GitHub</TechTip>}
-              interactive={true}
-            >
-              <PuffUpElement className='w-[48px] h-[48px]'>
-                <LinkImage
-                  className='w-[32px] h-[32px]'
-                  src='https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png'
-                  alt='GitHub'
-                />
-              </PuffUpElement>
-            </Tippy>
+            <TechStackItem
+              containerClassName='w-[48px] h-[48px]'
+              contentClassName='w-[32px] h-[32px]'
+              iconPath='sass/sass-original.svg'
+              alt='Sass'
+              tooltip={<TechTip href='https://sass-lang.com'>Sass</TechTip>}
+            />
+          </li>
+          <li>
+            <TechStackItem
+              containerClassName='w-[48px] h-[48px]'
+              contentClassName='w-[32px] h-[32px]'
+              iconPath='less/less-plain-wordmark.svg'
+              alt='Less'
+              tooltip={<TechTip href='https://lesscss.org'>Less</TechTip>}
+            />
+          </li>
+          <li>
+            <TechStackItem
+              containerClassName='w-[48px] h-[48px]'
+              contentClassName='w-[32px] h-[32px]'
+              iconPath='storybook/storybook-original.svg'
+              alt='StorybookJS'
+              tooltip={
+                <TechTip href='https://storybook.js.org'>StorybookJS</TechTip>
+              }
+            />
+          </li>
+          <li>
+            <TechStackItem
+              containerClassName='w-[48px] h-[48px]'
+              contentClassName='w-[32px] h-[32px]'
+              iconPath='jest/jest-plain.svg'
+              alt='Jest'
+              tooltip={<TechTip href='https://jestjs.io'>Jest</TechTip>}
+            />
+          </li>
+          <li>
+            <TechStackItem
+              containerClassName='w-[48px] h-[48px]'
+              contentClassName='w-[32px] h-[32px]'
+              iconPath='webpack/webpack-original.svg'
+              alt='Webpack'
+              tooltip={<TechTip href='https://webpack.js.org'>Webpack</TechTip>}
+            />
+          </li>
+          <li>
+            <TechStackItem
+              containerClassName='w-[48px] h-[48px]'
+              contentClassName='w-[32px] h-[32px]'
+              src='https://avatars.githubusercontent.com/u/45050444?s=200&v=4'
+              alt='RedwoodJS'
+              tooltip={
+                <TechTip href='https://redwoodjs.com'>RedwoodJS</TechTip>
+              }
+            />
+          </li>
+          <li>
+            <TechStackItem
+              containerClassName='w-[48px] h-[48px]'
+              contentClassName='w-[32px] h-[32px]'
+              iconPath='github/github-original.svg'
+              alt='GitHub'
+              tooltip={<TechTip href='https://github.com'>GitHub</TechTip>}
+            />
+          </li>
+          <li>
+            <TechStackItem
+              containerClassName='w-[48px] h-[48px]'
+              contentClassName='w-[32px] h-[32px]'
+              iconPath='python/python-original.svg'
+              alt='Python'
+              tooltip={<TechTip href='https://www.python.org'>Python</TechTip>}
+            />
+          </li>
+          <li>
+            <TechStackItem
+              containerClassName='w-[48px] h-[48px]'
+              contentClassName='w-[32px] h-[32px]'
+              iconPath='jupyter/jupyter-original-wordmark.svg'
+              alt='Jupyter'
+              tooltip={<TechTip href='https://jupyter.org'>Jupyter</TechTip>}
+            />
+          </li>
+          <li>
+            <TechStackItem
+              containerClassName='w-[48px] h-[48px]'
+              contentClassName='w-[32px] h-[32px]'
+              iconPath='cplusplus/cplusplus-original.svg'
+              alt='C++'
+              tooltip={
+                <TechTip href='https://en.cppreference.com'>C++</TechTip>
+              }
+            />
+          </li>
+          <li>
+            <TechStackItem
+              containerClassName='w-[48px] h-[48px]'
+              contentClassName='w-[32px] h-[32px]'
+              iconPath='csharp/csharp-original.svg'
+              alt='C#'
+              tooltip={
+                <TechTip href='https://docs.microsoft.com/en-us/dotnet/csharp'>
+                  C#
+                </TechTip>
+              }
+            />
+          </li>
+          <li>
+            <TechStackItem
+              containerClassName='w-[48px] h-[48px]'
+              contentClassName='w-[32px] h-[32px]'
+              iconPath='lua/lua-original.svg'
+              alt='Lua'
+              tooltip={<TechTip href='https://www.lua.org'>Lua</TechTip>}
+            />
+          </li>
+          <li>
+            <TechStackItem
+              containerClassName='w-[48px] h-[48px]'
+              contentClassName='w-[32px] h-[32px]'
+              iconPath='bash/bash-original.svg'
+              alt='Bash'
+              tooltip={
+                <TechTip href='https://www.gnu.org/software/bash/manual/html_node/index.html'>
+                  Bash
+                </TechTip>
+              }
+            />
           </li>
         </ul>
       </div>

@@ -20,3 +20,7 @@ export const formattedTime = (dateTime): string => {
 export const getRootContainer = (): Element => {
   return document.getElementById('redwood-app')
 }
+
+export const getDevIcon = (path: string): string => {
+  return `https://github.com/devicons/devicon/raw/master/icons/${path}`
+}
