@@ -24,3 +24,19 @@ export const getRootContainer = (): Element => {
 export const getDevIcon = (path: string): string => {
   return `https://github.com/devicons/devicon/raw/master/icons/${path}`
 }
+
+export const Library = {
+  Documents: {
+    get: (path: string): string =>
+      `https://a_g_d.keybase.pub/Documents/${path}`,
+  },
+  Music: {
+    get: (path: string): string => `https://a_g_d.keybase.pub/Music/${path}`,
+  },
+  Pictures: {
+    get: (path: string): string => `https://a_g_d.keybase.pub/Pictures/${path}`,
+  },
+  Videos: {
+    get: (path: string): string => `https://a_g_d.keybase.pub/Videos/${path}`,
+  },
+}
