@@ -121,55 +121,74 @@ const SocialLinks = () => {
   )
 }
 
-const Projects = () => {
+const Portfolio = () => {
   return (
-    <ul className='bg-indigo-900 flex flex-col rounded-[4px] py-1'>
-      <li className='flex'>
-        <a
-          className='hover:bg-violet-600 flex-auto px-4 py-2'
-          href='https://a-g-d.github.io/digital-canvas/'
-        >
-          Digital Canvas
-        </a>
-      </li>
-      <li className='flex'>
-        <a
-          className='hover:bg-violet-600 flex-auto px-4 py-2'
-          href='htpps://modular-ui-react.github.io/modular-ui-react'
-        >
-          Modular-UI React Framework
-        </a>
-      </li>
-    </ul>
+    <div className='bg-purple-700 flex flex-col rounded-[4px]'>
+      <div className='text-gray-300 font-medium px-2 py-2'>Exercises</div>
+      <ul className='bg-indigo-900 flex flex-col py-1'>
+        <li className='flex'>
+          <a
+            className='hover:bg-violet-600 text-gray-300 hover:text-white text-sm font-medium flex-auto px-4 py-2'
+            href='https://a-g-d.github.io/TOP-etch-a-sketch/'
+          >
+            Pixel Art Creator
+          </a>
+        </li>
+        <li className='flex'>
+          <a
+            className='hover:bg-violet-600 text-gray-300 hover:text-white text-sm font-medium flex-auto px-4 py-2'
+            href='htpps://a-g-d.github.io/TOP-rock-paper-scissors/'
+          >
+            Rock, Paper, Scissors
+          </a>
+        </li>
+        <li className='flex'>
+          <a
+            className='hover:bg-violet-600 text-gray-300 hover:text-white text-sm font-medium flex-auto px-4 py-2'
+            href='htpps://a-g-d.github.io/TOP-landing-page/'
+          >
+            Static Landing Page
+          </a>
+        </li>
+      </ul>
+      <div className='text-gray-300 px-2 py-2'>Projects</div>
+      <ul className='bg-indigo-900 flex flex-col py-1'>
+        <li className='flex'>
+          <div className='text-gray-300 text-sm font-medium flex-auto px-4 py-2'>
+            {'<No Projects Listed Yet>'}
+          </div>
+        </li>
+      </ul>
+    </div>
   )
 }
 
 const Links = () => {
   const activeNavStyle = 'border-b-indigo-900 text-fuchsia-900'
   const navStyle =
-    'hover:border-b-indigo-700 hover:text-fuchsia-900 border-y-4 border-transparent flex items-center gap-2 px-[8px] py-[4px] font-bold'
+    'hover:border-b-indigo-700 hover:text-fuchsia-900 border-y-4 border-transparent text-gray-800 flex items-center gap-2 px-[8px] py-[4px] font-bold'
+
+  const portfolioDropdownRef = React.useRef()
 
   return (
     <nav className='flex items-center'>
       <ul className='flex justify-evenly items-center gap-x-3'>
         <li>
-          <Tippy
-            content={<Projects />}
-            placement='bottom'
-            interactive={true}
-            arrow={false}
-            animation='shift-away'
-            duration={200}
-            maxWidth={360}
-          >
+          <div className='flex items-center'>
             <NavLink
               className={navStyle}
               activeClassName={activeNavStyle}
               to={routes.projects()}
             >
-              Projects <MdOutlineKeyboardArrowDown />
+              Portfolio
             </NavLink>
-          </Tippy>
+            <span
+              ref={portfolioDropdownRef}
+              className='bg-purple-700 hover:bg-violet-800 rounded-md'
+            >
+              <MdOutlineKeyboardArrowDown />
+            </span>
+          </div>
         </li>
         <li>
           <NavLink
@@ -192,6 +211,16 @@ const Links = () => {
           </NavLink>
         </li>
       </ul>
+      <Tippy
+        reference={portfolioDropdownRef}
+        content={<Portfolio />}
+        placement='bottom'
+        interactive={true}
+        arrow={false}
+        animation='shift-away'
+        duration={200}
+        maxWidth={360}
+      />
     </nav>
   )
 }
