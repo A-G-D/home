@@ -229,7 +229,10 @@ const UserRibbon = ({ currentUser, onLogout }) => {
 
 const Header = ({ isAuthenticated, currentUser, onLogout }) => {
   return (
-    <header className='sticky top-0 w-full bg-violet-600/80 px-6 py-3 flex flex-row justify-between z-10'>
+    <header
+      id='home-layout-header'
+      className='sticky top-0 w-full bg-violet-600/80 px-6 py-3 flex flex-row justify-between z-10'
+    >
       <Logo />
       <Links />
       {isAuthenticated && (

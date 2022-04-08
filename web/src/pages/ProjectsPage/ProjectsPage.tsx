@@ -75,9 +75,17 @@ const ProjectItem = ({
 }
 
 const Exercises = () => {
+  const layoutHeader: HTMLElement = document.querySelector(
+    '#home-layout-header'
+  )
+  const headerHeight = layoutHeader ? layoutHeader.offsetHeight : 0
+
   return (
     <div className='bg-gray-200 py-6 flex flex-col gap-12 items-stretch rounded-[8px]'>
-      <div className='bg-gray-200/80 py-2 sticky top-0 flex flex-col gap-4'>
+      <div
+        className='bg-gray-200/80 py-2 sticky flex flex-col gap-4'
+        style={{ top: headerHeight }}
+      >
         <h2 className='text-center font-semibold'>Exercises</h2>
 
         <p className='text-center text-sm italic'>
@@ -174,9 +182,17 @@ const Exercises = () => {
 }
 
 const Projects = () => {
+  const layoutHeader: HTMLElement = document.querySelector(
+    '#home-layout-header'
+  )
+  const headerHeight = layoutHeader ? layoutHeader.offsetHeight : 0
+
   return (
     <div className='bg-gray-200 py-8 flex flex-col gap-12 items-stretch rounded-[8px]'>
-      <div className='sticky top-0 flex flex-col gap-4'>
+      <div
+        className='bg-gray-200/80 sticky flex flex-col gap-4'
+        style={{ top: headerHeight }}
+      >
         <h2 className='text-center font-semibold'>Projects</h2>
 
         <p className='text-center text-sm italic'>
