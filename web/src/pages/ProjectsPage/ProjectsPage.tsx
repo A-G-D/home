@@ -32,28 +32,41 @@ const ProjectItem = ({
   return (
     <div
       className={[
-        'bg-violet-400 flex justify-between items-stretch gap-4',
+        'from-violet-400 flex justify-between items-stretch gap-4',
         imgLeft ? 'flex-row-reverse' : 'flex-row',
+        imgLeft ? 'bg-gradient-to-l' : 'bg-gradient-to-r',
         className,
       ].join(' ')}
       {...props}
     >
       <div className='p-8 w-[50%]'>
-        <h2 className='text-center'>{projectTitle}</h2>
+        <h2 className='text-center font-medium'>{projectTitle}</h2>
         <div className='p-4 text-sm'>{children}</div>
       </div>
-      <div className='bg-violet-600 flex flex-col gap-4 p-8'>
+      <div className='transition bg-violet-600 hover:bg-violet-400 flex flex-col gap-4 p-8'>
         <img
-          className='object-cover min-w-64 min-h-64 w-64 h-64 rounded-md'
+          className='object-cover min-w-64 min-h-64 max-w-64 max-h-64 w-64 h-64 rounded-md'
           src={imgSrc}
           alt='Project Screenshot'
         />
         <div>
           <div>
-            Repo: <a href={repo.url}>{repo.name}</a>
+            <span className='text-sm font-semibold'>Repo:</span>{' '}
+            <a
+              className='text-gray-700 hover:text-gray-900 text-sm underline'
+              href={repo.url}
+            >
+              {repo.name}
+            </a>
           </div>
           <div>
-            Site: <a href={site.url}>{site.name}</a>
+            <span className='text-sm font-semibold'>Site:</span>{' '}
+            <a
+              className='text-gray-700 hover:text-gray-900 text-sm underline'
+              href={site.url}
+            >
+              {site.name}
+            </a>
           </div>
         </div>
       </div>
@@ -63,8 +76,8 @@ const ProjectItem = ({
 
 const Exercises = () => {
   return (
-    <div className='bg-gray-200 py-8 flex flex-col gap-24 items-stretch rounded-[8px]'>
-      <div className='flex flex-col gap-4'>
+    <div className='bg-gray-200 py-6 flex flex-col gap-12 items-stretch rounded-[8px]'>
+      <div className='bg-gray-200/80 py-2 sticky top-0 flex flex-col gap-4'>
         <h2 className='text-center font-semibold'>Exercises</h2>
 
         <p className='text-center text-sm italic'>
@@ -72,7 +85,7 @@ const Exercises = () => {
         </p>
       </div>
 
-      <ul className='flex flex-col gap-24'>
+      <ul className='flex flex-col gap-24 py-12'>
         <li>
           <ProjectItem
             projectTitle='Pixel Art Creator'
@@ -86,8 +99,22 @@ const Exercises = () => {
               url: 'https://a-g-d.github.io/TOP-etch-a-sketch',
             }}
           >
-            A pixel art creator webapp with a simply interface. Made purely with
-            HTML, CSS, and vanilla JS.
+            <p className='text-justify'>
+              A pixel art creator webapp with a simply interface. Made purely
+              with HTML, CSS, and vanilla JS.
+            </p>
+            <p className='font-medium mt-4'>Features:</p>
+            <ul className='mt-2 ml-8 list-disc'>
+              <li>Preserve canvas content after resizing canvas dimensions</li>
+              <li>Different brush colors and opacity</li>
+              <li>Color stacking based on opacity</li>
+              <li>Different background colors</li>
+              <li>
+                Option to choose between a static solid background color or an
+                animated background
+              </li>
+              <li>Save canvas locally as an SVG</li>
+            </ul>
           </ProjectItem>
         </li>
 
@@ -107,14 +134,19 @@ const Exercises = () => {
               url: 'https://a-g-d.github.io/TOP-rock-paper-scissors/',
             }}
           >
-            A simple rock, paper, scissors game webapp made with HTML, CSS, and
-            vanilla JS.
+            <p className='text-justify'>
+              A simple rock, paper, scissors webapp made with HTML, CSS, and
+              vanilla JS.
+            </p>
+            <ul className='mt-4 ml-8 list-disc'>
+              <li>Random opponent name thru the use of an external API</li>
+            </ul>
           </ProjectItem>
         </li>
 
         <li>
           <ProjectItem
-            projectTitle='Landing Page'
+            projectTitle='Static Landing Page'
             imgSrc={getScreenshot('a-g-d.github.io_TOP-landing-page.png')}
             repo={{
               name: 'Landing Page',
@@ -125,7 +157,15 @@ const Exercises = () => {
               url: 'https://a-g-d.github.io/TOP-landing-page',
             }}
           >
-            A static website landing page. Made with HTML, CSS, and vanilla JS.
+            <p className='text-justify'>
+              A static website landing page. Made with HTML, CSS, and vanilla
+              JS.
+            </p>
+            <ul className='mt-4 ml-8 list-disc'>
+              <li>
+                Responsive web design, tested on both desktop and mobile devices
+              </li>
+            </ul>
           </ProjectItem>
         </li>
       </ul>
@@ -135,8 +175,8 @@ const Exercises = () => {
 
 const Projects = () => {
   return (
-    <div className='bg-gray-200 py-8 flex flex-col gap-24 items-stretch rounded-[8px]'>
-      <div className='flex flex-col gap-4'>
+    <div className='bg-gray-200 py-8 flex flex-col gap-12 items-stretch rounded-[8px]'>
+      <div className='sticky top-0 flex flex-col gap-4'>
         <h2 className='text-center font-semibold'>Projects</h2>
 
         <p className='text-center text-sm italic'>
@@ -145,8 +185,12 @@ const Projects = () => {
         </p>
       </div>
 
-      <ul>
-        <li></li>
+      <ul className='flex flex-col gap-24 py-12'>
+        <li>
+          <div className='bg-gradient-to-b from-violet-400 text-center text-xl font-semibold py-12'>
+            No Projects to Show Yet
+          </div>
+        </li>
       </ul>
     </div>
   )
