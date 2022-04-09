@@ -122,13 +122,15 @@ const SocialLinks = () => {
 }
 
 const Portfolio = () => {
+  const itemClassName =
+    'hover:bg-violet-600 text-gray-300 hover:text-white text-sm font-medium flex-auto px-4 py-2'
   return (
     <div className='bg-purple-700 flex flex-col rounded-[4px]'>
       <div className='text-gray-300 font-medium px-2 py-2'>Exercises</div>
       <ul className='bg-indigo-900 flex flex-col py-1'>
         <li className='flex'>
           <a
-            className='hover:bg-violet-600 text-gray-300 hover:text-white text-sm font-medium flex-auto px-4 py-2'
+            className={itemClassName}
             href='https://a-g-d.github.io/TOP-etch-a-sketch/'
           >
             Pixel Art Creator
@@ -136,7 +138,7 @@ const Portfolio = () => {
         </li>
         <li className='flex'>
           <a
-            className='hover:bg-violet-600 text-gray-300 hover:text-white text-sm font-medium flex-auto px-4 py-2'
+            className={itemClassName}
             href='htpps://a-g-d.github.io/TOP-rock-paper-scissors/'
           >
             Rock, Paper, Scissors
@@ -144,7 +146,7 @@ const Portfolio = () => {
         </li>
         <li className='flex'>
           <a
-            className='hover:bg-violet-600 text-gray-300 hover:text-white text-sm font-medium flex-auto px-4 py-2'
+            className={itemClassName}
             href='htpps://a-g-d.github.io/TOP-landing-page/'
           >
             Static Landing Page
@@ -155,7 +157,7 @@ const Portfolio = () => {
       <ul className='bg-indigo-900 flex flex-col py-1'>
         <li className='flex'>
           <div className='text-gray-300 text-sm font-medium flex-auto px-4 py-2'>
-            {'<No Projects Listed Yet>'}
+            {'(No Projects Listed Yet)'}
           </div>
         </li>
       </ul>
@@ -184,7 +186,7 @@ const Links = () => {
             </NavLink>
             <span
               ref={portfolioDropdownRef}
-              className='bg-purple-700 hover:bg-violet-800 rounded-md'
+              className='bg-violet-800 hover:bg-purple-700 rounded-md'
             >
               <MdOutlineKeyboardArrowDown />
             </span>
