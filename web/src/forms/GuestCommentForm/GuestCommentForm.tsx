@@ -32,12 +32,12 @@ const GuestCommentForm = ({
 }: GuestCommentFormPropTypes): JSX.Element => {
   return (
     <Window
-      className={['bg-purple-300 rounded-md min-w-full', className].join(' ')}
+      className={['bg-violet-400 rounded-md min-w-full', className].join(' ')}
       childrenAttributes={{
         header: {
           children: <Window.Header>Leave a Comment</Window.Header>,
           className:
-            'bg-purple-800 text-gray-900 text-sm font-semibold p-3 rounded-t-md',
+            'bg-violet-600 text-gray-900 text-sm font-semibold p-3 rounded-t-md',
         },
         body: {
           className: 'p-5 rounded-b-md',
