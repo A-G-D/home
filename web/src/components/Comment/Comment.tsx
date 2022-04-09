@@ -137,7 +137,7 @@ const CommentInfo = ({
           duration={200}
           maxWidth={360}
         >
-          <button>
+          <button className='hover:bg-violet-500 p-1 rounded-full'>
             <IoEllipsisHorizontal />
           </button>
         </Tippy>
