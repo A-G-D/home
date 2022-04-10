@@ -1,12 +1,18 @@
 import { MetaTags } from '@redwoodjs/web'
 import { BiLinkExternal } from 'react-icons/bi'
+import { MdPlayArrow } from 'react-icons/md'
 import Tippy from '@tippyjs/react'
 import PuffUpElement from 'src/components/PuffUpElement'
 import AuthorName from 'src/components/AuthorName'
 
 import 'tippy.js/dist/tippy.css'
 import './HomePage.scss'
-import { getDevIcon } from 'src/lib/utils'
+import { getDevIcon, Library } from 'src/lib/utils'
+import Slideshow from 'src/components/Slideshow/Slideshow'
+
+const getScreenshot = (path: string): string => {
+  return Library.Pictures.get(`screenshots/${path}`)
+}
 
 const AboutMe = () => {
   return (
@@ -335,6 +341,153 @@ const TechStack = () => {
   )
 }
 
+const OverlaidElement = ({
+  children,
+  className,
+  overlay,
+  ...props
+}: {
+  children?: React.ReactNode
+  className?: string
+  overlay: JSX.Element
+}) => {
+  const [shown, setShown] = React.useState(false)
+  const onMouseEnter = () => {
+    setShown(true)
+  }
+  const onMouseLeave = () => {
+    setShown(false)
+  }
+  return (
+    <div
+      className={['relative object-cover p-4', className].join(' ')}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+      {...props}
+    >
+      {children}
+      <div
+        className={[
+          'transition-all duration-300 absolute top-0 bottom-0 left-0 right-0 p-4',
+          shown ? 'bg-violet-400/50' : 'text-transparent invisible',
+        ].join(' ')}
+      >
+        {overlay}
+      </div>
+    </div>
+  )
+}
+
+const PortfolioSlideshow = () => {
+  const itemsCount = 3
+  const [activeIndex, setActiveIndex] = React.useState(0)
+  const onPrev = () => {
+    setActiveIndex((index) => Math.max(index - 1, 0))
+  }
+  const onNext = () => {
+    setActiveIndex((index) => Math.min(index + 1, itemsCount - 1))
+  }
+  return (
+    <div className='flex gap-2 items-center w-full'>
+      <div className='text-4xl'>
+        <MdPlayArrow
+          className='rotate-180 fill-gray-600 hover:fill-gray-800 hover:cursor-pointer'
+          onClick={onPrev}
+        />
+      </div>
+      <Slideshow
+        className='border-gray-400 border-2 flex-auto items-center'
+        activeIndex={activeIndex}
+      >
+        <OverlaidElement
+          overlay={
+            <>
+              <p className='text-center font-medium'>Pixel Art Creator</p>
+              <p className='text-justify'>
+                A pixel art creator webapp with a simply interface. Made purely
+                with HTML, CSS, and vanilla JS.
+              </p>
+              <p className='font-medium mt-4'>Features:</p>
+              <ul className='mt-2 ml-8 list-disc'>
+                <li>
+                  Preserve canvas content after resizing canvas dimensions
+                </li>
+                <li>Different brush colors and opacity</li>
+                <li>Color stacking based on opacity</li>
+                <li>Different background colors</li>
+                <li>
+                  Option to choose between a static solid background color or an
+                  animated background
+                </li>
+                <li>Save canvas locally as an SVG</li>
+              </ul>
+            </>
+          }
+        >
+          <img
+            src={getScreenshot('a-g-d.github.io_TOP-etch-a-sketch.png')}
+            alt='Pixel Art Creator Screenshot'
+          />
+        </OverlaidElement>
+        <OverlaidElement
+          overlay={
+            <>
+              <p className='text-justify'>
+                A simple rock, paper, scissors webapp made with HTML, CSS, and
+                vanilla JS.
+              </p>
+              <ul className='mt-4 ml-8 list-disc'>
+                <li>Random opponent name thru the use of an external API</li>
+              </ul>
+            </>
+          }
+        >
+          <img
+            src={getScreenshot('a-g-d.github.io_TOP-rock-paper-scissors.png')}
+            alt='Rock, Paper, Scissors Screenshot'
+          />
+        </OverlaidElement>
+        <OverlaidElement
+          overlay={
+            <>
+              <p className='text-justify'>
+                A static website landing page. Made with HTML, CSS, and vanilla
+                JS.
+              </p>
+              <ul className='mt-4 ml-8 list-disc'>
+                <li>
+                  Responsive web design, tested on both desktop and mobile
+                  devices
+                </li>
+              </ul>
+            </>
+          }
+        >
+          <img
+            src={getScreenshot('a-g-d.github.io_TOP-landing-page.png')}
+            alt='Landing Page Screenshot'
+          />
+        </OverlaidElement>
+      </Slideshow>
+      <div className='text-4xl'>
+        <MdPlayArrow
+          className='fill-gray-600 hover:fill-gray-800 hover:cursor-pointer'
+          onClick={onNext}
+        />
+      </div>
+    </div>
+  )
+}
+
+const Portfolio = () => {
+  return (
+    <section className='bg-gray-200 px-8 py-8 flex flex-col gap-12 items-center rounded-[8px]'>
+      <h2 className='text-center font-semibold'>Portfolio</h2>
+      <PortfolioSlideshow />
+    </section>
+  )
+}
+
 const ContactMe = () => {
   const logo: HTMLElement = document.querySelector('#agd-logo')
 
@@ -358,6 +511,7 @@ const Body = () => {
     <div className='px-6 py-24 flex-auto flex flex-col gap-24'>
       <AboutMe />
       <TechStack />
+      <Portfolio />
       <ContactMe />
     </div>
   )
