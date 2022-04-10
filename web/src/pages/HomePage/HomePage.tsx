@@ -9,6 +9,7 @@ import 'tippy.js/dist/tippy.css'
 import './HomePage.scss'
 import { getDevIcon, Library } from 'src/lib/utils'
 import Slideshow from 'src/components/Slideshow/Slideshow'
+import { useResizeObserver } from 'src/lib/hooks'
 
 const getScreenshot = (path: string): string => {
   return Library.Pictures.get(`screenshots/${path}`)
@@ -352,6 +353,13 @@ const OverlaidElement = ({
   overlay: JSX.Element
 }) => {
   const [shown, setShown] = React.useState(false)
+  const [borderHorizontal, setBorderHorizontal] = React.useState(0)
+  const [borderVertical, setBorderVertical] = React.useState(0)
+  const ref = useResizeObserver<HTMLDivElement>((entries) => {
+    const element = entries[0].target
+    setBorderHorizontal(element.clientWidth / 2)
+    setBorderVertical(element.clientHeight / 2)
+  })
   const onMouseEnter = () => {
     setShown(true)
   }
@@ -360,7 +368,8 @@ const OverlaidElement = ({
   }
   return (
     <div
-      className={['relative object-cover p-4', className].join(' ')}
+      ref={ref}
+      className={['relative object-cover', className].join(' ')}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
       {...props}
@@ -368,8 +377,19 @@ const OverlaidElement = ({
       {children}
       <div
         className={[
+          'transition-all duration-400 border-violet-400/80 absolute top-0 bottom-0 left-0 right-0',
+        ].join(' ')}
+        style={{
+          borderTopWidth: shown ? borderVertical : 0,
+          borderBottomWidth: shown ? borderVertical : 0,
+          borderLeftWidth: shown ? borderHorizontal : 0,
+          borderRightWidth: shown ? borderHorizontal : 0,
+        }}
+      />
+      <div
+        className={[
           'transition-all duration-300 absolute top-0 bottom-0 left-0 right-0 p-4',
-          shown ? 'bg-violet-400/50' : 'text-transparent invisible',
+          shown ? '' : 'text-transparent invisible',
         ].join(' ')}
       >
         {overlay}
@@ -391,19 +411,19 @@ const PortfolioSlideshow = () => {
     <div className='flex gap-2 items-center w-full'>
       <div className='text-4xl'>
         <MdPlayArrow
-          className='rotate-180 fill-gray-600 hover:fill-gray-800 hover:cursor-pointer'
+          className='rotate-180 fill-violet-400 hover:fill-violet-800 hover:cursor-pointer'
           onClick={onPrev}
         />
       </div>
       <Slideshow
-        className='border-gray-400 border-2 flex-auto items-center'
+        className='border-violet-800 border-2 flex-auto items-center'
         activeIndex={activeIndex}
       >
         <OverlaidElement
           overlay={
             <>
               <p className='text-center font-medium'>Pixel Art Creator</p>
-              <p className='text-justify'>
+              <p className='text-justify mt-4'>
                 A pixel art creator webapp with a simply interface. Made purely
                 with HTML, CSS, and vanilla JS.
               </p>
@@ -432,7 +452,8 @@ const PortfolioSlideshow = () => {
         <OverlaidElement
           overlay={
             <>
-              <p className='text-justify'>
+              <p className='text-center font-medium'>Rock, Paper, Scissors</p>
+              <p className='text-justify mt-4'>
                 A simple rock, paper, scissors webapp made with HTML, CSS, and
                 vanilla JS.
               </p>
@@ -450,7 +471,10 @@ const PortfolioSlideshow = () => {
         <OverlaidElement
           overlay={
             <>
-              <p className='text-justify'>
+              <p className='text-center font-medium'>
+                Static Landing Page Sample
+              </p>
+              <p className='text-justify mt-4'>
                 A static website landing page. Made with HTML, CSS, and vanilla
                 JS.
               </p>
@@ -471,7 +495,7 @@ const PortfolioSlideshow = () => {
       </Slideshow>
       <div className='text-4xl'>
         <MdPlayArrow
-          className='fill-gray-600 hover:fill-gray-800 hover:cursor-pointer'
+          className='fill-violet-400 hover:fill-violet-800 hover:cursor-pointer'
           onClick={onNext}
         />
       </div>
