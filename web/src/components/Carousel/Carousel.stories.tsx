@@ -11,14 +11,17 @@ export const Default = Template.bind({})
 Default.args = {
   children: [
     <img
+      className='duration-1000'
       src={getScreenshot('a-g-d.github.io_TOP-etch-a-sketch.png')}
       alt='Slide Item 1'
     />,
     <img
+      className='duration-1000'
       src={getScreenshot('a-g-d.github.io_TOP-rock-paper-scissors.png')}
       alt='Slide Item 2'
     />,
     <img
+      className='duration-1000'
       src={getScreenshot('a-g-d.github.io_TOP-landing-page.png')}
       alt='Slide Item 3'
     />,

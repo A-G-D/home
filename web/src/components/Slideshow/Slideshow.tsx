@@ -1,6 +1,5 @@
 import React from 'react'
 import { MdPlayArrow } from 'react-icons/md'
-import { usePrev } from 'src/lib/hooks'
 import { toArray } from 'src/lib/utils'
 import Carousel from 'src/components/Carousel'
 
@@ -17,6 +16,7 @@ export interface SlideshowPropTypes
   children?: React.ReactElement | React.ReactElement[]
   carouselClassName?: string
   initialIndex?: number
+  slideDuration?: number
   cyclic?: boolean
 }
 
@@ -25,32 +25,20 @@ const Slideshow = ({
   className,
   carouselClassName,
   initialIndex = 0,
+  slideDuration = 0,
   cyclic = false,
   ...props
 }: SlideshowPropTypes): JSX.Element => {
   const [activeIndex, setActiveIndex] = React.useState(initialIndex)
-  const prevIndex = usePrev(activeIndex, 0)
   const indexRef = React.useRef(0)
   const [items, setItems] = React.useState(
     toArray<React.ReactElement>(children)
   )
 
   const carouselRef = React.useRef<HTMLDivElement>()
+  const timerRef = React.useRef<NodeJS.Timer>()
 
   indexRef.current = activeIndex
-
-  React.useEffect(() => {
-    if (carouselRef.current != null) {
-      for (let i = 0; i < carouselRef.current.children.length; ++i) {
-        const child = carouselRef.current.children[i] as HTMLElement
-        child.addEventListener('transitionend', () => {
-          const width = carouselRef.current.clientWidth
-          const factor = getTranslationFactor(items.length, i, indexRef.current)
-          child.style.transform = `translateX(${factor * width}px)`
-        })
-      }
-    }
-  }, [])
 
   const onPrev = () => {
     setActiveIndex((index) => (index - 1 + items.length) % items.length)
@@ -59,15 +47,69 @@ const Slideshow = ({
     setActiveIndex((index) => (index + 1) % items.length)
   }
 
+  const resetSlideDuration = () => {
+    if (slideDuration < 150) return
+
+    clearInterval(timerRef.current)
+    timerRef.current = setInterval(() => {
+      onNext()
+    }, slideDuration)
+  }
+
+  const onPrevClick = () => {
+    onPrev()
+    resetSlideDuration()
+  }
+  const onNextClick = () => {
+    onNext()
+    resetSlideDuration()
+  }
+
+  React.useEffect(() => {
+    if (carouselRef.current != null) {
+      const carouselItems = Array.from(carouselRef.current.children)
+      const callbacks = []
+      for (let i = 0; i < carouselItems.length; ++i) {
+        const item = carouselItems[i] as HTMLElement
+        const callback = () => {
+          const width = carouselRef.current.clientWidth
+          const factor = getTranslationFactor(items.length, i, indexRef.current)
+          item.style.transform = `translateX(${factor * width}px)`
+        }
+        item.addEventListener('transitionend', callback)
+        callbacks.push(callback)
+      }
+
+      return () => {
+        for (let i = 0; i < carouselItems.length; ++i) {
+          const item = carouselItems[i] as HTMLElement
+          item.removeEventListener('transitionend', callbacks[i])
+        }
+      }
+    }
+  }, [])
+
+  React.useEffect(() => {
+    if (slideDuration < 150) return
+
+    timerRef.current = setInterval(() => {
+      onNext()
+    }, slideDuration)
+
+    return () => {
+      clearInterval(timerRef.current)
+    }
+  }, [slideDuration])
+
   return (
     <div
-      className={['Carousel relative flex items-center', className].join(' ')}
+      className={['Slideshow relative flex items-center', className].join(' ')}
       {...props}
     >
       <div className='text-4xl'>
         <MdPlayArrow
           className='rotate-180 fill-violet-400 hover:fill-violet-800 hover:cursor-pointer'
-          onClick={onPrev}
+          onClick={onPrevClick}
         />
       </div>
       <Carousel
@@ -80,7 +122,7 @@ const Slideshow = ({
       <div className='text-4xl'>
         <MdPlayArrow
           className='fill-violet-400 hover:fill-violet-800 hover:cursor-pointer'
-          onClick={onNext}
+          onClick={onNextClick}
         />
       </div>
       <div className='absolute bottom-0 left-0 right-0 flex flex-center gap-4 h-16'>

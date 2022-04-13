@@ -382,7 +382,7 @@ const OverlaidElement = ({
       {children}
       <div
         className={[
-          'transition-all duration-400 border-violet-400/80 absolute top-0 bottom-0 left-0 right-0',
+          'transition-all duration-[300ms] border-violet-400/80 absolute top-0 bottom-0 left-0 right-0',
         ].join(' ')}
         style={{
           borderTopWidth: shown ? borderVertical : 0,
@@ -393,7 +393,7 @@ const OverlaidElement = ({
       />
       <div
         className={[
-          'transition-all duration-300 absolute top-0 bottom-0 left-0 right-0 p-4',
+          'transition-all duration-[600ms] absolute top-0 bottom-0 left-0 right-0 p-4',
           shown ? '' : 'text-transparent invisible',
         ].join(' ')}
       >
@@ -404,42 +404,18 @@ const OverlaidElement = ({
 }
 
 const PortfolioSlideshow = () => {
-  const slideshowInterval = 3
-  const itemsCount = 3
-  const timerRef = React.useRef<NodeJS.Timer>()
+  const slideDuration = 5000
   const [activeIndex, setActiveIndex] = React.useState(0)
-
-  const onPrev = () => {
-    setActiveIndex((index) => Math.max(index - 1, 0))
-    clearInterval(timerRef.current)
-    timerRef.current = setInterval(() => {
-      setActiveIndex((index) => Math.min(index - 1, 0))
-    }, slideshowInterval * 1000)
-  }
-  const onNext = () => {
-    setActiveIndex((index) => Math.min(index + 1, itemsCount - 1))
-    clearInterval(timerRef.current)
-    timerRef.current = setInterval(() => {
-      setActiveIndex((index) => Math.min(index + 1, itemsCount - 1))
-    }, slideshowInterval * 1000)
-  }
-
-  React.useEffect(() => {
-    timerRef.current = setInterval(() => {
-      setActiveIndex((index) => Math.min(index + 1, itemsCount - 1))
-    }, slideshowInterval * 1000)
-    return () => {
-      clearInterval(timerRef.current)
-    }
-  })
 
   return (
     <div className='flex gap-2 items-center w-full'>
       <Slideshow
         className='bg-violet-400/80 border-violet-800 border-2 flex-auto'
         initialIndex={activeIndex}
+        slideDuration={slideDuration}
       >
         <OverlaidElement
+          className='duration-1000'
           overlay={
             <>
               <p className='text-center font-medium'>Pixel Art Creator</p>
@@ -470,6 +446,7 @@ const PortfolioSlideshow = () => {
           />
         </OverlaidElement>
         <OverlaidElement
+          className='duration-1000'
           overlay={
             <>
               <p className='text-center font-medium'>Rock, Paper, Scissors</p>
@@ -489,6 +466,7 @@ const PortfolioSlideshow = () => {
           />
         </OverlaidElement>
         <OverlaidElement
+          className='duration-1000'
           overlay={
             <>
               <p className='text-center font-medium'>
