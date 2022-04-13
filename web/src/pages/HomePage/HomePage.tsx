@@ -10,6 +10,7 @@ import './HomePage.scss'
 import { getDevIcon, Library } from 'src/lib/utils'
 import { useResizeObserver } from 'src/lib/hooks'
 import Slideshow from 'src/components/Slideshow'
+import { Link, routes } from '@redwoodjs/router'
 
 const getScreenshot = (path: string): string => {
   return Library.Pictures.get(`screenshots/${path}`)
@@ -382,7 +383,7 @@ const OverlaidElement = ({
       {children}
       <div
         className={[
-          'transition-all duration-[300ms] border-violet-400/80 absolute top-0 bottom-0 left-0 right-0',
+          'transition-all duration-[300ms] border-violet-400/80 absolute-fit',
         ].join(' ')}
         style={{
           borderTopWidth: shown ? borderVertical : 0,
@@ -393,7 +394,7 @@ const OverlaidElement = ({
       />
       <div
         className={[
-          'transition-all duration-[600ms] absolute top-0 bottom-0 left-0 right-0 p-4',
+          'transition-all duration-[600ms] absolute-fit p-4',
           shown ? '' : 'text-transparent invisible',
         ].join(' ')}
       >
@@ -500,6 +501,12 @@ const Portfolio = () => {
     <section className='bg-gray-200 px-8 py-8 flex flex-col gap-12 items-center rounded-[8px]'>
       <h2 className='text-center font-semibold'>Portfolio</h2>
       <PortfolioSlideshow />
+      <Link
+        className='text-gray-700 hover:text-gray-800 text-xl font-semibold hover:underline'
+        to={routes.projects()}
+      >
+        Go To Portfolio
+      </Link>
     </section>
   )
 }
