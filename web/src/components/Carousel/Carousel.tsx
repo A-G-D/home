@@ -52,7 +52,7 @@ const Carousel = React.forwardRef(
       <div
         ref={ref}
         className={[
-          'Carousel flex items-center overflow-hidden',
+          'Carousel flex items-stretch overflow-hidden',
           className,
         ].join(' ')}
         style={{ gap }}
@@ -61,7 +61,7 @@ const Carousel = React.forwardRef(
         {items.map((child, i) => {
           return updateElement(child, {
             className:
-              'relative transition-[left] min-w-full min-h-full max-w-full max-h-full w-full h-full',
+              'relative top-0 bottom-0 transition-[left] min-w-full  max-w-full w-full',
             style: { left: -activeIndex * width },
           })
         })}
