@@ -59,7 +59,11 @@
 }
 
 .absolute-fit {
-  @apply top-0 bottom-0 left-0 right-0;
+  @apply absolute top-0 bottom-0 left-0 right-0;
+}
+
+.relative-fit {
+  @apply relative top-0 bottom-0 left-0 right-0;
 }
 
 .submit-button {
