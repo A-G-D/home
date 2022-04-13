@@ -23,16 +23,47 @@ export const useRerender = () => {
   }
 }
 
+export const usePrev = <T>(value: T, initialValue?: T): T => {
+  const ref = useRef<T>(initialValue)
+  useEffect(() => {
+    ref.current = value
+  }, [value])
+  return ref.current
+}
+
 export const useResizeObserver = <T extends Element>(
-  onResizeHandler: ResizeObserverCallback,
+  { callback }: { callback: ResizeObserverCallback },
+  ref: MutableRefObject<T>,
   deps: React.DependencyList = []
 ) => {
-  const ref = useRef<T>()
   useEffect(() => {
-    const innerElement = ref.current as Element
-    const resizeObserver = new ResizeObserver(onResizeHandler)
-    resizeObserver.observe(innerElement)
-    return () => resizeObserver.unobserve(innerElement)
+    const element = ref.current
+    const resizeObserver = new ResizeObserver(callback)
+    resizeObserver.observe(element)
+    return () => resizeObserver.unobserve(element)
+  }, deps)
+  return ref
+}
+
+export const useEvent = <T extends Element>(
+  {
+    type,
+    listener,
+    options,
+  }: {
+    type: keyof HTMLElementEventMap
+    listener: (this: Element, ev: Event) => any
+    options?: boolean | EventListenerOptions
+  },
+  ref: MutableRefObject<T>,
+  deps: React.DependencyList = []
+) => {
+  useEffect(() => {
+    const element = ref.current
+    element.addEventListener(type, listener, options)
+    return () => {
+      element.removeEventListener(type, listener, options)
+    }
   }, deps)
   return ref
 }

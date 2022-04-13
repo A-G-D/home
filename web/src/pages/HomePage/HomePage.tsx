@@ -8,8 +8,8 @@ import AuthorName from 'src/components/AuthorName'
 import 'tippy.js/dist/tippy.css'
 import './HomePage.scss'
 import { getDevIcon, Library } from 'src/lib/utils'
-import Slideshow from 'src/components/Slideshow/Slideshow'
 import { useResizeObserver } from 'src/lib/hooks'
+import Slideshow from 'src/components/Slideshow'
 
 const getScreenshot = (path: string): string => {
   return Library.Pictures.get(`screenshots/${path}`)
@@ -355,11 +355,16 @@ const OverlaidElement = ({
   const [shown, setShown] = React.useState(false)
   const [borderHorizontal, setBorderHorizontal] = React.useState(0)
   const [borderVertical, setBorderVertical] = React.useState(0)
-  const ref = useResizeObserver<HTMLDivElement>((entries) => {
-    const element = entries[0].target
-    setBorderHorizontal(element.clientWidth / 2)
-    setBorderVertical(element.clientHeight / 2)
-  })
+  const ref = useResizeObserver<HTMLDivElement>(
+    {
+      callback: (entries) => {
+        const element = entries[0].target
+        setBorderHorizontal(element.clientWidth / 2)
+        setBorderVertical(element.clientHeight / 2)
+      },
+    },
+    React.useRef()
+  )
   const onMouseEnter = () => {
     setShown(true)
   }
@@ -399,25 +404,40 @@ const OverlaidElement = ({
 }
 
 const PortfolioSlideshow = () => {
+  const slideshowInterval = 3
   const itemsCount = 3
+  const timerRef = React.useRef<NodeJS.Timer>()
   const [activeIndex, setActiveIndex] = React.useState(0)
+
   const onPrev = () => {
     setActiveIndex((index) => Math.max(index - 1, 0))
+    clearInterval(timerRef.current)
+    timerRef.current = setInterval(() => {
+      setActiveIndex((index) => Math.min(index - 1, 0))
+    }, slideshowInterval * 1000)
   }
   const onNext = () => {
     setActiveIndex((index) => Math.min(index + 1, itemsCount - 1))
+    clearInterval(timerRef.current)
+    timerRef.current = setInterval(() => {
+      setActiveIndex((index) => Math.min(index + 1, itemsCount - 1))
+    }, slideshowInterval * 1000)
   }
+
+  React.useEffect(() => {
+    timerRef.current = setInterval(() => {
+      setActiveIndex((index) => Math.min(index + 1, itemsCount - 1))
+    }, slideshowInterval * 1000)
+    return () => {
+      clearInterval(timerRef.current)
+    }
+  })
+
   return (
     <div className='flex gap-2 items-center w-full'>
-      <div className='text-4xl'>
-        <MdPlayArrow
-          className='rotate-180 fill-violet-400 hover:fill-violet-800 hover:cursor-pointer'
-          onClick={onPrev}
-        />
-      </div>
       <Slideshow
-        className='border-violet-800 border-2 flex-auto items-center'
-        activeIndex={activeIndex}
+        className='bg-violet-400/80 border-violet-800 border-2 flex-auto'
+        initialIndex={activeIndex}
       >
         <OverlaidElement
           overlay={
@@ -493,12 +513,6 @@ const PortfolioSlideshow = () => {
           />
         </OverlaidElement>
       </Slideshow>
-      <div className='text-4xl'>
-        <MdPlayArrow
-          className='fill-violet-400 hover:fill-violet-800 hover:cursor-pointer'
-          onClick={onNext}
-        />
-      </div>
     </div>
   )
 }

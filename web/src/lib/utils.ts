@@ -25,8 +25,36 @@ export const getDevIcon = (path: string): string => {
   return `https://github.com/devicons/devicon/raw/master/icons/${path}`
 }
 
-export const toArray = (value: any): Array<any> => {
+export const toArray = <T = any>(value: any): T[] => {
   return value == null ? [] : Array.isArray(value) ? value : [value]
+}
+
+export const rotateLeft = <T = any>(a: T[], delta: number): void => {
+  a.push(...a.splice(0, delta))
+}
+
+export const rotateRight = <T = any>(a: T[], delta: number): void => {
+  a.splice(0, 0, ...a.splice(a.length - delta))
+}
+
+/**
+ * @delta - number of items to rotate, if < 0, rotate left, else rotate right
+ */
+export const rotate = <T = any>(a: T[], delta: number): void => {
+  if (delta === 0) return
+  if (delta < 0) {
+    rotateLeft(a, -delta)
+  } else {
+    rotateRight(a, delta)
+  }
+}
+
+export const clamp = (
+  value: number,
+  min: number = 0,
+  max: number = 1
+): number => {
+  return Math.min(Math.max(value, min), max)
 }
 
 export const updateElement = (element: React.ReactElement, props) => {
