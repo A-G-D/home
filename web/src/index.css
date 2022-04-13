@@ -42,6 +42,14 @@
   @apply underline text-sky-600;
 }
 
+.input-label {
+  @apply text-gray-600 text-sm font-semibold;
+}
+
+.input-field {
+  @apply text-sm p-2 bg-white border border-gray-200 rounded outline-none focus:border-gray-400;
+}
+
 .flex-center {
   @apply flex justify-center items-center;
 }
@@ -50,12 +58,8 @@
   @apply animate-spin border-blue-600 border-t-2 border-r-2 border-b-2 h-5 w-5 rounded-full;
 }
 
-.input-label {
-  @apply text-gray-600 text-sm font-semibold;
-}
-
-.input-field {
-  @apply text-sm p-2 bg-white border border-gray-200 rounded outline-none focus:border-gray-400;
+.absolute-fit {
+  @apply top-0 bottom-0 left-0 right-0;
 }
 
 .submit-button {
