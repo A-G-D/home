@@ -416,7 +416,7 @@ const PortfolioSlideshow = () => {
         slideDuration={slideDuration}
       >
         <OverlaidElement
-          className='duration-1000 flex items-center'
+          className='duration-1000 flex flex-center'
           overlay={
             <>
               <p className='text-center font-medium'>Pixel Art Creator</p>
@@ -447,7 +447,7 @@ const PortfolioSlideshow = () => {
           />
         </OverlaidElement>
         <OverlaidElement
-          className='duration-1000 flex items-center'
+          className='duration-1000 flex flex-center'
           overlay={
             <>
               <p className='text-center font-medium'>Rock, Paper, Scissors</p>
@@ -467,7 +467,7 @@ const PortfolioSlideshow = () => {
           />
         </OverlaidElement>
         <OverlaidElement
-          className='duration-1000 flex items-center'
+          className='duration-1000 flex flex-center'
           overlay={
             <>
               <p className='text-center font-medium'>
