@@ -168,7 +168,7 @@ const Portfolio = () => {
 const Links = () => {
   const activeNavStyle = 'border-b-indigo-900 text-fuchsia-900'
   const navStyle =
-    'hover:border-b-indigo-700 hover:text-fuchsia-900 border-y-4 border-transparent text-gray-800 flex items-center gap-2 px-[8px] py-[4px] font-bold'
+    'hover:border-b-indigo-700 hover:text-fuchsia-900 border-y-4 border-transparent text-white flex items-center gap-2 px-[8px] py-[4px] font-bold'
 
   const portfolioDropdownRef = React.useRef()
 
@@ -280,7 +280,7 @@ const Footer = () => {
       <div className='text-sm italic'>
         The background shader pattern is an edited fork from{' '}
         <a
-          className='text-pink-600 font-bold'
+          className='text-link font-bold'
           href='https://www.shadertoy.com/view/WldSRn'
         >
           this source
@@ -293,7 +293,7 @@ const Footer = () => {
         </div>
         <div>
           Made with{' '}
-          <a className='text-red-600 font-bold' href='https://redwoodjs.com'>
+          <a className='text-link font-bold' href='https://redwoodjs.com'>
             RedwoodJS
           </a>
           .
