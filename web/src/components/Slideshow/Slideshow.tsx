@@ -18,6 +18,10 @@ export interface SlideshowPropTypes
   initialIndex?: number
   slideDuration?: number
   cyclic?: boolean
+  controls?: {
+    leftControl?: JSX.Element
+    rightControl?: JSX.Element
+  }
 }
 
 const Slideshow = ({
@@ -27,6 +31,7 @@ const Slideshow = ({
   initialIndex = 0,
   slideDuration = 0,
   cyclic = false,
+  controls = {},
   ...props
 }: SlideshowPropTypes): JSX.Element => {
   const [activeIndex, setActiveIndex] = React.useState(initialIndex)
@@ -106,12 +111,14 @@ const Slideshow = ({
       className={['Slideshow relative flex items-center', className].join(' ')}
       {...props}
     >
-      <div className='text-4xl'>
-        <MdPlayArrow
-          className='rotate-180 fill-violet-400 hover:fill-violet-800 hover:cursor-pointer'
-          onClick={onPrevClick}
-        />
-      </div>
+      {controls?.leftControl ?? (
+        <div className='text-4xl'>
+          <MdPlayArrow
+            className='rotate-180 fill-violet-400 hover:fill-violet-800 hover:cursor-pointer'
+            onClick={onPrevClick}
+          />
+        </div>
+      )}
       <Carousel
         ref={carouselRef}
         className={carouselClassName}
@@ -119,12 +126,14 @@ const Slideshow = ({
       >
         {children}
       </Carousel>
-      <div className='text-4xl'>
-        <MdPlayArrow
-          className='fill-violet-400 hover:fill-violet-800 hover:cursor-pointer'
-          onClick={onNextClick}
-        />
-      </div>
+      {controls?.rightControl ?? (
+        <div className='text-4xl'>
+          <MdPlayArrow
+            className='fill-violet-400 hover:fill-violet-800 hover:cursor-pointer'
+            onClick={onNextClick}
+          />
+        </div>
+      )}
       <div className='absolute bottom-0 left-0 right-0 flex flex-center gap-4 h-16'>
         {React.Children.map(children, (child, index) => {
           return (
