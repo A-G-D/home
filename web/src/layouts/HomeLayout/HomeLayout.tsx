@@ -125,7 +125,7 @@ const Portfolio = () => {
   const itemClassName =
     'hover:bg-violet-600 text-gray-300 hover:text-white text-sm font-medium flex-auto px-4 py-2'
   return (
-    <div className='bg-purple-700 flex flex-col rounded-[4px]'>
+    <div className='bg-purple-700 flex flex-col py-[4px] rounded-[4px]'>
       <div className='text-gray-300 font-medium px-2 py-2'>Exercises</div>
       <ul className='bg-indigo-900 flex flex-col py-1'>
         <li className='flex'>
