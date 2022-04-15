@@ -111,7 +111,9 @@ const Slideshow = ({
       className={['Slideshow relative flex items-center', className].join(' ')}
       {...props}
     >
-      {controls?.leftControl ?? (
+      {controls?.leftControl ? (
+        React.cloneElement(controls?.leftControl, { onClick: onPrevClick })
+      ) : (
         <div className='text-4xl'>
           <MdPlayArrow
             className='rotate-180 fill-violet-400 hover:fill-violet-800 hover:cursor-pointer'
@@ -126,7 +128,9 @@ const Slideshow = ({
       >
         {children}
       </Carousel>
-      {controls?.rightControl ?? (
+      {controls?.rightControl ? (
+        React.cloneElement(controls?.rightControl, { onClick: onNextClick })
+      ) : (
         <div className='text-4xl'>
           <MdPlayArrow
             className='fill-violet-400 hover:fill-violet-800 hover:cursor-pointer'

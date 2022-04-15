@@ -1,13 +1,17 @@
 import { MetaTags } from '@redwoodjs/web'
 import { BiLinkExternal } from 'react-icons/bi'
-import { MdPlayArrow } from 'react-icons/md'
+import {
+  MdDoubleArrow,
+  MdPlayArrow,
+  MdKeyboardArrowRight,
+} from 'react-icons/md'
 import Tippy from '@tippyjs/react'
 import PuffUpElement from 'src/components/PuffUpElement'
 import AuthorName from 'src/components/AuthorName'
 
 import 'tippy.js/dist/tippy.css'
 import './HomePage.scss'
-import { getDevIcon, Library } from 'src/lib/utils'
+import { getDevIcon, Library, updateElement } from 'src/lib/utils'
 import { useResizeObserver } from 'src/lib/hooks'
 import Slideshow from 'src/components/Slideshow'
 import { Link, routes } from '@redwoodjs/router'
@@ -375,15 +379,24 @@ const OverlaidElement = ({
   return (
     <div
       ref={ref}
-      className={['relative object-cover', className].join(' ')}
+      className={['relative object-cover overflow-hidden p-4', className].join(
+        ' '
+      )}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
       {...props}
     >
-      {children}
       <div
         className={[
-          'transition-all duration-[300ms] border-violet-400/80 absolute-fit',
+          'transition-all duration-[300ms]',
+          shown ? 'blur-sm' : 'blur-none',
+        ].join(' ')}
+      >
+        {children}
+      </div>
+      <div
+        className={[
+          'transition-all duration-[300ms] border-violet-300/80 absolute-fit',
         ].join(' ')}
         style={{
           borderTopWidth: shown ? borderVertical : 0,
@@ -406,14 +419,26 @@ const OverlaidElement = ({
 
 const PortfolioSlideshow = () => {
   const slideDuration = 5000
-  const [activeIndex, setActiveIndex] = React.useState(0)
+  const initialIndex = 0
 
   return (
     <div className='flex gap-2 items-center w-full'>
       <Slideshow
-        className='bg-violet-400/80 border-violet-800 border-2 flex-auto'
-        initialIndex={activeIndex}
+        className='bg-violet-300/80 border-violet-800 border-2 flex-auto gap-2 px-2'
+        initialIndex={initialIndex}
         slideDuration={slideDuration}
+        controls={{
+          leftControl: (
+            <div className='text-4xl'>
+              <MdKeyboardArrowRight className='rotate-180 hover:bg-violet-400 fill-violet-400 hover:fill-violet-800 hover:cursor-pointer rounded-full' />
+            </div>
+          ),
+          rightControl: (
+            <div className='text-4xl'>
+              <MdKeyboardArrowRight className='hover:bg-violet-400 fill-violet-400 hover:fill-violet-800 hover:cursor-pointer rounded-full' />
+            </div>
+          ),
+        }}
       >
         <OverlaidElement
           className='duration-1000 flex flex-center'
@@ -442,6 +467,7 @@ const PortfolioSlideshow = () => {
           }
         >
           <img
+            className='aspect-auto h-full'
             src={getScreenshot('a-g-d.github.io_TOP-etch-a-sketch.png')}
             alt='Pixel Art Creator Screenshot'
           />
@@ -462,6 +488,7 @@ const PortfolioSlideshow = () => {
           }
         >
           <img
+            className='aspect-auto h-full'
             src={getScreenshot('a-g-d.github.io_TOP-rock-paper-scissors.png')}
             alt='Rock, Paper, Scissors Screenshot'
           />
@@ -487,6 +514,7 @@ const PortfolioSlideshow = () => {
           }
         >
           <img
+            className='aspect-auto h-full'
             src={getScreenshot('a-g-d.github.io_TOP-landing-page.png')}
             alt='Landing Page Screenshot'
           />
@@ -502,10 +530,10 @@ const Portfolio = () => {
       <h2 className='text-center font-semibold'>Portfolio</h2>
       <PortfolioSlideshow />
       <Link
-        className='text-gray-700 hover:text-gray-800 text-xl font-semibold hover:underline'
+        className='flex items-center gap-2 text-link text-xl font-semibold'
         to={routes.projects()}
       >
-        Go To Portfolio
+        Go To Portfolio <MdDoubleArrow />
       </Link>
     </section>
   )
@@ -518,7 +546,7 @@ const ContactMe = () => {
     <section className='bg-gray-200 px-8 py-8 flex flex-col gap-12 items-center rounded-[8px]'>
       <h2 className='text-center font-semibold'>Want to Work Together?</h2>
       <button
-        className='bg-green-500 border-blue-800 border-2 shadow-lg text-xl rounded-full max-w-max px-4 py-3'
+        className='bg-violet-500 hover:bg-violet-400 border-blue-800 border-2 shadow-lg text-violet-900 hover:text-violet-700 text-xl font-medium rounded-full max-w-max px-4 py-3'
         onClick={() => {
           logo.focus()
         }}
