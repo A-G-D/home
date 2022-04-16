@@ -19,7 +19,7 @@ const PuffUpElement = React.forwardRef(
         {React.Children.map(children as JSXNode, (child: React.ReactElement) =>
           React.cloneElement(child, {
             className: [
-              'hover:w-full hover:h-full transition-all',
+              'transition-all hover:w-full hover:h-full',
               child.props.className,
             ].join(' '),
           })
