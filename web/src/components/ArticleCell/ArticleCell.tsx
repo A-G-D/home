@@ -42,7 +42,7 @@ const ArticlePaper = ({
           lineDividerThickness: 1,
           fontSize: 16,
           bodyClassName: 'flex flex-col gap-8',
-          bodyStyles: { fontFamily: 'Raw Print Formal' },
+          bodyStyles: {},
         }}
         dangerouslySetInnerHTML={!!bodyHTML ? { __html: bodyHTML } : undefined}
       />

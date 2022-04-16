@@ -26,6 +26,10 @@
   font-family: 'Montserrat', sans-serif;
 }
 
+.text-handwritten {
+  font-family: 'Raw Print Format';
+}
+
 .flex-center {
   @apply flex justify-center items-center;
 }
