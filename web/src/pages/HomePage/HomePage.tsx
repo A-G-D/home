@@ -1,10 +1,7 @@
 import { MetaTags } from '@redwoodjs/web'
+import { Link, routes } from '@redwoodjs/router'
 import { BiLinkExternal } from 'react-icons/bi'
-import {
-  MdDoubleArrow,
-  MdPlayArrow,
-  MdKeyboardArrowRight,
-} from 'react-icons/md'
+import { MdDoubleArrow, MdKeyboardArrowRight } from 'react-icons/md'
 import Tippy from '@tippyjs/react'
 import PuffUpElement from 'src/components/PuffUpElement'
 import AuthorName from 'src/components/AuthorName'
@@ -14,7 +11,30 @@ import './HomePage.scss'
 import { getDevIcon, Library, updateElement } from 'src/lib/utils'
 import { useResizeObserver } from 'src/lib/hooks'
 import Slideshow from 'src/components/Slideshow'
-import { Link, routes } from '@redwoodjs/router'
+
+import {
+  Html5,
+  Css3,
+  Javascript,
+  Typescript,
+  Git,
+  ReactJS,
+  Tailwindcss,
+  Sass,
+  Less,
+  Storybook,
+  Jest,
+  Webpack,
+  Redwood,
+  Github,
+  Python,
+  Jupyter,
+  Cplusplus,
+  Csharp,
+  Lua,
+  Bash,
+  Screenshot,
+} from './assets/assets'
 
 const getScreenshot = (path: string): string => {
   return Library.Pictures.get(`screenshots/${path}`)
@@ -53,21 +73,30 @@ const AboutMe = () => {
 interface LinkImagePropTypes extends React.HTMLAttributes<HTMLLinkElement> {
   className?: string
   href?: string
-  src: string
+  src?: string
+  svg?: JSX.Element
   alt: string
 }
 
 const LinkImage = React.forwardRef(
   (
-    { className, href, src, alt }: LinkImagePropTypes,
+    { className, href, src, svg, alt }: LinkImagePropTypes,
     ref: React.RefObject<HTMLAnchorElement & HTMLImageElement>
   ): JSX.Element => {
-    return (
-      (!!href && (
-        <a ref={ref} className={className} href={href}>
+    return !!href ? (
+      <a ref={ref} className={className} href={href}>
+        {!!src ? (
           <img src={src} alt={alt} />
-        </a>
-      )) || <img ref={ref} className={className} src={src} alt={alt} />
+        ) : (
+          React.cloneElement(svg, { className: 'h-full w-full' })
+        )}
+      </a>
+    ) : !!src ? (
+      <img ref={ref} className={className} src={src} alt={alt} />
+    ) : (
+      <div ref={ref} className={className}>
+        {React.cloneElement(svg, { className: 'h-full w-full' })}
+      </div>
     )
   }
 )
@@ -95,6 +124,7 @@ const TechStackItem = ({
   contentClassName,
   iconPath,
   src,
+  svg,
   alt,
   tooltip,
   tooltipOffset = 16,
@@ -103,6 +133,7 @@ const TechStackItem = ({
   contentClassName: string
   iconPath?: string
   src?: string
+  svg?: JSX.Element
   alt: string
   tooltip: React.ReactNode
   tooltipOffset?: number
@@ -115,6 +146,7 @@ const TechStackItem = ({
           ref={ref}
           className={contentClassName}
           src={iconPath ? getDevIcon(iconPath) : src}
+          svg={svg}
           alt={alt}
         />
       </PuffUpElement>
@@ -142,7 +174,7 @@ const TechStack = () => {
             <TechStackItem
               containerClassName='w-[96px] h-[96px]'
               contentClassName='w-[64px] h-[64px]'
-              iconPath='html5/html5-original.svg'
+              svg={<Html5 />}
               alt='HTML5'
               tooltip={<TechTip>HTML</TechTip>}
               tooltipOffset={32}
@@ -152,7 +184,7 @@ const TechStack = () => {
             <TechStackItem
               containerClassName='w-[96px] h-[96px]'
               contentClassName='w-[64px] h-[64px]'
-              iconPath='css3/css3-original.svg'
+              svg={<Css3 />}
               alt='CSS3'
               tooltip={<TechTip>CSS</TechTip>}
               tooltipOffset={32}
@@ -162,7 +194,7 @@ const TechStack = () => {
             <TechStackItem
               containerClassName='w-[96px] h-[96px]'
               contentClassName='w-[64px] h-[64px]'
-              iconPath='javascript/javascript-original.svg'
+              svg={<Javascript />}
               alt='JavaScript'
               tooltip={<TechTip>JavaScript</TechTip>}
               tooltipOffset={32}
@@ -172,7 +204,7 @@ const TechStack = () => {
             <TechStackItem
               containerClassName='w-[96px] h-[96px]'
               contentClassName='w-[64px] h-[64px]'
-              iconPath='typescript/typescript-original.svg'
+              svg={<Typescript />}
               alt='TypeScript'
               tooltip={<TechTip>TypeScript</TechTip>}
               tooltipOffset={32}
@@ -182,7 +214,7 @@ const TechStack = () => {
             <TechStackItem
               containerClassName='w-[96px] h-[96px]'
               contentClassName='w-[64px] h-[64px]'
-              iconPath='git/git-original.svg'
+              svg={<Git />}
               alt='Git'
               tooltip={<TechTip>Git</TechTip>}
               tooltipOffset={32}
@@ -194,7 +226,7 @@ const TechStack = () => {
             <TechStackItem
               containerClassName='w-[48px] h-[48px]'
               contentClassName='w-[32px] h-[32px]'
-              iconPath='react/react-original.svg'
+              svg={<ReactJS />}
               alt='ReactJS'
               tooltip={<TechTip href='https://reactjs.org'>ReactJS</TechTip>}
             />
@@ -203,7 +235,7 @@ const TechStack = () => {
             <TechStackItem
               containerClassName='w-[48px] h-[48px]'
               contentClassName='w-[32px] h-[32px]'
-              iconPath='tailwindcss/tailwindcss-plain.svg'
+              svg={<Tailwindcss />}
               alt='Tailwind CSS'
               tooltip={
                 <TechTip href='https://tailwindcss.com'>Tailwind CSS</TechTip>
@@ -214,7 +246,7 @@ const TechStack = () => {
             <TechStackItem
               containerClassName='w-[48px] h-[48px]'
               contentClassName='w-[32px] h-[32px]'
-              iconPath='sass/sass-original.svg'
+              svg={<Sass />}
               alt='Sass'
               tooltip={<TechTip href='https://sass-lang.com'>Sass</TechTip>}
             />
@@ -223,7 +255,7 @@ const TechStack = () => {
             <TechStackItem
               containerClassName='w-[48px] h-[48px]'
               contentClassName='w-[32px] h-[32px]'
-              iconPath='less/less-plain-wordmark.svg'
+              svg={<Less />}
               alt='Less'
               tooltip={<TechTip href='https://lesscss.org'>Less</TechTip>}
             />
@@ -232,7 +264,7 @@ const TechStack = () => {
             <TechStackItem
               containerClassName='w-[48px] h-[48px]'
               contentClassName='w-[32px] h-[32px]'
-              iconPath='storybook/storybook-original.svg'
+              svg={<Storybook />}
               alt='StorybookJS'
               tooltip={
                 <TechTip href='https://storybook.js.org'>StorybookJS</TechTip>
@@ -243,7 +275,7 @@ const TechStack = () => {
             <TechStackItem
               containerClassName='w-[48px] h-[48px]'
               contentClassName='w-[32px] h-[32px]'
-              iconPath='jest/jest-plain.svg'
+              svg={<Jest />}
               alt='Jest'
               tooltip={<TechTip href='https://jestjs.io'>Jest</TechTip>}
             />
@@ -252,7 +284,7 @@ const TechStack = () => {
             <TechStackItem
               containerClassName='w-[48px] h-[48px]'
               contentClassName='w-[32px] h-[32px]'
-              iconPath='webpack/webpack-original.svg'
+              svg={<Webpack />}
               alt='Webpack'
               tooltip={<TechTip href='https://webpack.js.org'>Webpack</TechTip>}
             />
@@ -261,7 +293,7 @@ const TechStack = () => {
             <TechStackItem
               containerClassName='w-[48px] h-[48px]'
               contentClassName='w-[32px] h-[32px]'
-              src='https://avatars.githubusercontent.com/u/45050444?s=200&v=4'
+              src={Redwood}
               alt='RedwoodJS'
               tooltip={
                 <TechTip href='https://redwoodjs.com'>RedwoodJS</TechTip>
@@ -272,7 +304,7 @@ const TechStack = () => {
             <TechStackItem
               containerClassName='w-[48px] h-[48px]'
               contentClassName='w-[32px] h-[32px]'
-              iconPath='github/github-original.svg'
+              svg={<Github />}
               alt='GitHub'
               tooltip={<TechTip href='https://github.com'>GitHub</TechTip>}
             />
@@ -281,7 +313,7 @@ const TechStack = () => {
             <TechStackItem
               containerClassName='w-[48px] h-[48px]'
               contentClassName='w-[32px] h-[32px]'
-              iconPath='python/python-original.svg'
+              svg={<Python />}
               alt='Python'
               tooltip={<TechTip href='https://www.python.org'>Python</TechTip>}
             />
@@ -290,7 +322,7 @@ const TechStack = () => {
             <TechStackItem
               containerClassName='w-[48px] h-[48px]'
               contentClassName='w-[32px] h-[32px]'
-              iconPath='jupyter/jupyter-original-wordmark.svg'
+              svg={<Jupyter />}
               alt='Jupyter'
               tooltip={<TechTip href='https://jupyter.org'>Jupyter</TechTip>}
             />
@@ -299,7 +331,7 @@ const TechStack = () => {
             <TechStackItem
               containerClassName='w-[48px] h-[48px]'
               contentClassName='w-[32px] h-[32px]'
-              iconPath='cplusplus/cplusplus-original.svg'
+              svg={<Cplusplus />}
               alt='C++'
               tooltip={
                 <TechTip href='https://en.cppreference.com'>C++</TechTip>
@@ -310,7 +342,7 @@ const TechStack = () => {
             <TechStackItem
               containerClassName='w-[48px] h-[48px]'
               contentClassName='w-[32px] h-[32px]'
-              iconPath='csharp/csharp-original.svg'
+              svg={<Csharp />}
               alt='C#'
               tooltip={
                 <TechTip href='https://docs.microsoft.com/en-us/dotnet/csharp'>
@@ -323,7 +355,7 @@ const TechStack = () => {
             <TechStackItem
               containerClassName='w-[48px] h-[48px]'
               contentClassName='w-[32px] h-[32px]'
-              iconPath='lua/lua-original.svg'
+              svg={<Lua />}
               alt='Lua'
               tooltip={<TechTip href='https://www.lua.org'>Lua</TechTip>}
             />
@@ -332,7 +364,7 @@ const TechStack = () => {
             <TechStackItem
               containerClassName='w-[48px] h-[48px]'
               contentClassName='w-[32px] h-[32px]'
-              iconPath='bash/bash-original.svg'
+              svg={<Bash />}
               alt='Bash'
               tooltip={
                 <TechTip href='https://www.gnu.org/software/bash/manual/html_node/index.html'>
@@ -468,7 +500,7 @@ const PortfolioSlideshow = () => {
         >
           <img
             className='aspect-auto h-full'
-            src={getScreenshot('a-g-d.github.io_TOP-etch-a-sketch.png')}
+            src={Screenshot.EtchASketch}
             alt='Pixel Art Creator Screenshot'
           />
         </OverlaidElement>
@@ -489,7 +521,7 @@ const PortfolioSlideshow = () => {
         >
           <img
             className='aspect-auto h-full'
-            src={getScreenshot('a-g-d.github.io_TOP-rock-paper-scissors.png')}
+            src={Screenshot.RockPaperScissors}
             alt='Rock, Paper, Scissors Screenshot'
           />
         </OverlaidElement>
@@ -515,7 +547,7 @@ const PortfolioSlideshow = () => {
         >
           <img
             className='aspect-auto h-full'
-            src={getScreenshot('a-g-d.github.io_TOP-landing-page.png')}
+            src={Screenshot.LandingPage}
             alt='Landing Page Screenshot'
           />
         </OverlaidElement>
