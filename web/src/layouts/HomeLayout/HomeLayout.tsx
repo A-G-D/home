@@ -17,7 +17,7 @@ import ContactForm from 'src/forms/ContactForm'
 import 'tippy.js/animations/shift-away.css'
 import './HomeLayout.scss'
 
-import logo from './assets/a-g-d_logo.png'
+import { AGDLogo } from 'src/assets'
 
 type HomeLayoutProps = {
   children?: React.ReactNode
@@ -239,7 +239,7 @@ const Logo = () => {
       <Link to={routes.home()}>
         <img
           className='logo min-h-[64px] min-w-[64px]'
-          src={logo}
+          src={AGDLogo}
           alt='AGD Logo'
         />
       </Link>
