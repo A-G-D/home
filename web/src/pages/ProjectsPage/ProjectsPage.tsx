@@ -98,7 +98,6 @@ const Exercises = () => {
         <li>
           <ProjectItem
             projectTitle='Pixel Art Creator'
-            // imgSrc={getScreenshot('a-g-d.github.io_TOP-etch-a-sketch.png')}
             imgSrc={Screenshot.EtchASketch}
             repo={{
               name: 'Etch-A-Sketch',
@@ -132,9 +131,6 @@ const Exercises = () => {
           <ProjectItem
             projectTitle='Rock, Paper, Scissors'
             imgLeft={true}
-            // imgSrc={getScreenshot(
-            //   'a-g-d.github.io_TOP-rock-paper-scissors.png'
-            // )}
             imgSrc={Screenshot.RockPaperScissors}
             repo={{
               name: 'Rock, Paper, Scissors',
@@ -158,7 +154,6 @@ const Exercises = () => {
         <li>
           <ProjectItem
             projectTitle='Static Landing Page'
-            // imgSrc={getScreenshot('a-g-d.github.io_TOP-landing-page.png')}
             imgSrc={Screenshot.LandingPage}
             repo={{
               name: 'Landing Page',
