@@ -88,14 +88,14 @@ const LinkImage = React.forwardRef(
         {!!src ? (
           <img src={src} alt={alt} />
         ) : (
-          React.cloneElement(svg, { className: 'h-full w-full' })
+          updateElement(svg, { className: 'h-full w-full' })
         )}
       </a>
     ) : !!src ? (
       <img ref={ref} className={className} src={src} alt={alt} />
     ) : (
       <div ref={ref} className={className}>
-        {React.cloneElement(svg, { className: 'h-full w-full' })}
+        {updateElement(svg, { className: 'h-full w-full' })}
       </div>
     )
   }
@@ -165,6 +165,10 @@ const TechStackItem = ({
 }
 
 const TechStack = () => {
+  const largeItemShadow =
+    'transition-all drop-shadow-[0_0_4px_rgba(0,0,0,0.5)] hover:drop-shadow-[0_0_8px_rgba(0,0,0,0.8)]'
+  const smallItemShadow =
+    'transition-all drop-shadow-[0_0_2px_rgba(0,0,0,0.5)] hover:drop-shadow-[0_0_4px_rgba(0,0,0,0.8)]'
   return (
     <section className='bg-gray-200 px-8 py-8 flex flex-col gap-12 rounded-[8px]'>
       <h2 className='text-center font-semibold'>Technologies</h2>
@@ -174,7 +178,7 @@ const TechStack = () => {
             <TechStackItem
               containerClassName='w-[96px] h-[96px]'
               contentClassName='w-[64px] h-[64px]'
-              svg={<Html5 />}
+              svg={<Html5 className={largeItemShadow} />}
               alt='HTML5'
               tooltip={<TechTip>HTML</TechTip>}
               tooltipOffset={32}
@@ -184,7 +188,7 @@ const TechStack = () => {
             <TechStackItem
               containerClassName='w-[96px] h-[96px]'
               contentClassName='w-[64px] h-[64px]'
-              svg={<Css3 />}
+              svg={<Css3 className={largeItemShadow} />}
               alt='CSS3'
               tooltip={<TechTip>CSS</TechTip>}
               tooltipOffset={32}
@@ -194,7 +198,7 @@ const TechStack = () => {
             <TechStackItem
               containerClassName='w-[96px] h-[96px]'
               contentClassName='w-[64px] h-[64px]'
-              svg={<Javascript />}
+              svg={<Javascript className={largeItemShadow} />}
               alt='JavaScript'
               tooltip={<TechTip>JavaScript</TechTip>}
               tooltipOffset={32}
@@ -204,7 +208,7 @@ const TechStack = () => {
             <TechStackItem
               containerClassName='w-[96px] h-[96px]'
               contentClassName='w-[64px] h-[64px]'
-              svg={<Typescript />}
+              svg={<Typescript className={largeItemShadow} />}
               alt='TypeScript'
               tooltip={<TechTip>TypeScript</TechTip>}
               tooltipOffset={32}
@@ -214,7 +218,7 @@ const TechStack = () => {
             <TechStackItem
               containerClassName='w-[96px] h-[96px]'
               contentClassName='w-[64px] h-[64px]'
-              svg={<Git />}
+              svg={<Git className={largeItemShadow} />}
               alt='Git'
               tooltip={<TechTip>Git</TechTip>}
               tooltipOffset={32}
@@ -226,7 +230,7 @@ const TechStack = () => {
             <TechStackItem
               containerClassName='w-[48px] h-[48px]'
               contentClassName='w-[32px] h-[32px]'
-              svg={<ReactJS />}
+              svg={<ReactJS className={smallItemShadow} />}
               alt='ReactJS'
               tooltip={<TechTip href='https://reactjs.org'>ReactJS</TechTip>}
             />
@@ -235,7 +239,7 @@ const TechStack = () => {
             <TechStackItem
               containerClassName='w-[48px] h-[48px]'
               contentClassName='w-[32px] h-[32px]'
-              svg={<Tailwindcss />}
+              svg={<Tailwindcss className={smallItemShadow} />}
               alt='Tailwind CSS'
               tooltip={
                 <TechTip href='https://tailwindcss.com'>Tailwind CSS</TechTip>
@@ -246,7 +250,7 @@ const TechStack = () => {
             <TechStackItem
               containerClassName='w-[48px] h-[48px]'
               contentClassName='w-[32px] h-[32px]'
-              svg={<Sass />}
+              svg={<Sass className={smallItemShadow} />}
               alt='Sass'
               tooltip={<TechTip href='https://sass-lang.com'>Sass</TechTip>}
             />
@@ -255,7 +259,7 @@ const TechStack = () => {
             <TechStackItem
               containerClassName='w-[48px] h-[48px]'
               contentClassName='w-[32px] h-[32px]'
-              svg={<Less />}
+              svg={<Less className={smallItemShadow} />}
               alt='Less'
               tooltip={<TechTip href='https://lesscss.org'>Less</TechTip>}
             />
@@ -264,7 +268,7 @@ const TechStack = () => {
             <TechStackItem
               containerClassName='w-[48px] h-[48px]'
               contentClassName='w-[32px] h-[32px]'
-              svg={<Storybook />}
+              svg={<Storybook className={smallItemShadow} />}
               alt='StorybookJS'
               tooltip={
                 <TechTip href='https://storybook.js.org'>StorybookJS</TechTip>
@@ -275,7 +279,7 @@ const TechStack = () => {
             <TechStackItem
               containerClassName='w-[48px] h-[48px]'
               contentClassName='w-[32px] h-[32px]'
-              svg={<Jest />}
+              svg={<Jest className={smallItemShadow} />}
               alt='Jest'
               tooltip={<TechTip href='https://jestjs.io'>Jest</TechTip>}
             />
@@ -284,7 +288,7 @@ const TechStack = () => {
             <TechStackItem
               containerClassName='w-[48px] h-[48px]'
               contentClassName='w-[32px] h-[32px]'
-              svg={<Webpack />}
+              svg={<Webpack className={smallItemShadow} />}
               alt='Webpack'
               tooltip={<TechTip href='https://webpack.js.org'>Webpack</TechTip>}
             />
@@ -292,7 +296,9 @@ const TechStack = () => {
           <li>
             <TechStackItem
               containerClassName='w-[48px] h-[48px]'
-              contentClassName='w-[32px] h-[32px]'
+              contentClassName={[smallItemShadow, 'w-[32px] h-[32px]'].join(
+                ' '
+              )}
               src={Redwood}
               alt='RedwoodJS'
               tooltip={
@@ -304,7 +310,7 @@ const TechStack = () => {
             <TechStackItem
               containerClassName='w-[48px] h-[48px]'
               contentClassName='w-[32px] h-[32px]'
-              svg={<Github />}
+              svg={<Github className={smallItemShadow} />}
               alt='GitHub'
               tooltip={<TechTip href='https://github.com'>GitHub</TechTip>}
             />
@@ -313,7 +319,7 @@ const TechStack = () => {
             <TechStackItem
               containerClassName='w-[48px] h-[48px]'
               contentClassName='w-[32px] h-[32px]'
-              svg={<Python />}
+              svg={<Python className={smallItemShadow} />}
               alt='Python'
               tooltip={<TechTip href='https://www.python.org'>Python</TechTip>}
             />
@@ -322,7 +328,7 @@ const TechStack = () => {
             <TechStackItem
               containerClassName='w-[48px] h-[48px]'
               contentClassName='w-[32px] h-[32px]'
-              svg={<Jupyter />}
+              svg={<Jupyter className={smallItemShadow} />}
               alt='Jupyter'
               tooltip={<TechTip href='https://jupyter.org'>Jupyter</TechTip>}
             />
@@ -331,7 +337,7 @@ const TechStack = () => {
             <TechStackItem
               containerClassName='w-[48px] h-[48px]'
               contentClassName='w-[32px] h-[32px]'
-              svg={<Cplusplus />}
+              svg={<Cplusplus className={smallItemShadow} />}
               alt='C++'
               tooltip={
                 <TechTip href='https://en.cppreference.com'>C++</TechTip>
@@ -342,7 +348,7 @@ const TechStack = () => {
             <TechStackItem
               containerClassName='w-[48px] h-[48px]'
               contentClassName='w-[32px] h-[32px]'
-              svg={<Csharp />}
+              svg={<Csharp className={smallItemShadow} />}
               alt='C#'
               tooltip={
                 <TechTip href='https://docs.microsoft.com/en-us/dotnet/csharp'>
@@ -355,7 +361,7 @@ const TechStack = () => {
             <TechStackItem
               containerClassName='w-[48px] h-[48px]'
               contentClassName='w-[32px] h-[32px]'
-              svg={<Lua />}
+              svg={<Lua className={smallItemShadow} />}
               alt='Lua'
               tooltip={<TechTip href='https://www.lua.org'>Lua</TechTip>}
             />
@@ -364,7 +370,7 @@ const TechStack = () => {
             <TechStackItem
               containerClassName='w-[48px] h-[48px]'
               contentClassName='w-[32px] h-[32px]'
-              svg={<Bash />}
+              svg={<Bash className={smallItemShadow} />}
               alt='Bash'
               tooltip={
                 <TechTip href='https://www.gnu.org/software/bash/manual/html_node/index.html'>
@@ -456,7 +462,7 @@ const PortfolioSlideshow = () => {
   return (
     <div className='flex gap-2 items-center w-full'>
       <Slideshow
-        className='bg-violet-300/80 border-violet-800 border-2 flex-auto gap-2 px-2'
+        className='bg-violet-300/80 border-violet-800 border-2 shadow-[0_0_8px_4px] shadow-gray-700 flex-auto gap-2 px-2'
         initialIndex={initialIndex}
         slideDuration={slideDuration}
         controls={{
