@@ -1,5 +1,6 @@
 import { MetaTags } from '@redwoodjs/web'
 import { Library } from 'src/lib/utils'
+import { Screenshot } from 'assets/assets'
 
 const getScreenshot = (path: string): string => {
   return Library.Pictures.get(`screenshots/${path}`)
@@ -97,7 +98,8 @@ const Exercises = () => {
         <li>
           <ProjectItem
             projectTitle='Pixel Art Creator'
-            imgSrc={getScreenshot('a-g-d.github.io_TOP-etch-a-sketch.png')}
+            // imgSrc={getScreenshot('a-g-d.github.io_TOP-etch-a-sketch.png')}
+            imgSrc={Screenshot.EtchASketch}
             repo={{
               name: 'Etch-A-Sketch',
               url: 'https://github.com/A-G-D/TOP-etch-a-sketch',
@@ -130,9 +132,10 @@ const Exercises = () => {
           <ProjectItem
             projectTitle='Rock, Paper, Scissors'
             imgLeft={true}
-            imgSrc={getScreenshot(
-              'a-g-d.github.io_TOP-rock-paper-scissors.png'
-            )}
+            // imgSrc={getScreenshot(
+            //   'a-g-d.github.io_TOP-rock-paper-scissors.png'
+            // )}
+            imgSrc={Screenshot.RockPaperScissors}
             repo={{
               name: 'Rock, Paper, Scissors',
               url: 'https://github.com/A-G-D/TOP-rock-paper-scissors/',
@@ -155,7 +158,8 @@ const Exercises = () => {
         <li>
           <ProjectItem
             projectTitle='Static Landing Page'
-            imgSrc={getScreenshot('a-g-d.github.io_TOP-landing-page.png')}
+            // imgSrc={getScreenshot('a-g-d.github.io_TOP-landing-page.png')}
+            imgSrc={Screenshot.LandingPage}
             repo={{
               name: 'Landing Page',
               url: 'https://github.com/A-G-D/TOP-landing-page',

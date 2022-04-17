@@ -34,7 +34,7 @@ import {
   Lua,
   Bash,
   Screenshot,
-} from './assets/assets'
+} from 'assets/assets'
 
 const getScreenshot = (path: string): string => {
   return Library.Pictures.get(`screenshots/${path}`)
