@@ -1,4 +1,4 @@
-import { Link, NavLink, Route, routes } from '@redwoodjs/router'
+import { Link, NavLink, Route, routes, useMatch } from '@redwoodjs/router'
 import { BsGithub, BsLinkedin, BsTwitter, BsInstagram } from 'react-icons/bs'
 import { MdOutlineKeyboardArrowDown } from 'react-icons/md'
 import { SiGmail } from 'react-icons/si'
@@ -169,23 +169,29 @@ const Portfolio = () => {
 
 const Links = () => {
   const activeNavStyle = 'border-b-indigo-900 text-fuchsia-900'
+  const inactiveNavStyle = 'text-white'
   const navStyle =
-    'hover:border-b-indigo-700 hover:text-fuchsia-900 border-y-4 border-transparent text-white flex items-center gap-2 px-[8px] py-[4px] font-bold'
+    'hover:border-b-indigo-700 hover:text-fuchsia-900 border-y-4 border-transparent flex items-center gap-2 px-[8px] py-[4px] font-bold'
 
   const portfolioDropdownRef = React.useRef()
+  const portfolioMatchInfo = useMatch(routes.projects())
+  const blogMatchInfo = useMatch(routes.blog())
+  const resumeMatchInfo = useMatch(routes.resume())
 
   return (
     <nav className='flex items-center'>
       <ul className='flex justify-evenly items-center gap-x-3'>
         <li>
           <div className='flex items-center'>
-            <NavLink
-              className={navStyle}
-              activeClassName={activeNavStyle}
+            <Link
+              className={[
+                navStyle,
+                portfolioMatchInfo.match ? activeNavStyle : inactiveNavStyle,
+              ].join(' ')}
               to={routes.projects()}
             >
               Portfolio
-            </NavLink>
+            </Link>
             <span
               ref={portfolioDropdownRef}
               className='bg-violet-800 hover:bg-purple-700 rounded-md'
@@ -195,24 +201,28 @@ const Links = () => {
           </div>
         </li>
         <li>
-          <NavLink
-            className={navStyle}
-            activeClassName={activeNavStyle}
+          <Link
+            className={[
+              navStyle,
+              blogMatchInfo.match ? activeNavStyle : inactiveNavStyle,
+            ].join(' ')}
             to={routes.blog()}
           >
             Blog
-          </NavLink>
+          </Link>
         </li>
         <li>
-          <NavLink
-            className={navStyle}
-            activeClassName={activeNavStyle}
+          <Link
+            className={[
+              navStyle,
+              resumeMatchInfo.match ? activeNavStyle : inactiveNavStyle,
+            ].join(' ')}
             to={routes.resume()}
             target='_blank'
             rel='noopener noreferrer'
           >
             Resume
-          </NavLink>
+          </Link>
         </li>
       </ul>
       <Tippy
