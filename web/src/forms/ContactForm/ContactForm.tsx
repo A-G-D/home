@@ -12,7 +12,7 @@ import {
   FormProps,
 } from '@redwoodjs/forms'
 import { Toaster } from '@redwoodjs/web/toast'
-import Window from 'src/components/Window'
+import Window from 'src/components/base/Window'
 
 export interface ContactFormPropTypes extends FormProps {
   formMethods?: UseFormReturn<FieldValues, any>

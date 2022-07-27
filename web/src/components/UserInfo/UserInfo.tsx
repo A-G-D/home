@@ -1,16 +1,16 @@
 import { TiUser } from 'react-icons/ti'
 
-interface UserInfoPropTypes extends React.HTMLAttributes<HTMLDivElement> {
+export interface UserInfoPropTypes extends React.HTMLAttributes<HTMLDivElement> {
   username: string
   picture?: string
 }
 
-const UserInfo = ({
+const UserInfo: React.FC<UserInfoPropTypes> = ({
   className,
   username,
   picture,
   ...props
-}: UserInfoPropTypes): JSX.Element => {
+}) => {
   return (
     <div
       className={['flex flex-col items-center gap-4 w-fit', className].join(

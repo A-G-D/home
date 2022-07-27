@@ -7,7 +7,7 @@ import {
   TextField,
 } from '@redwoodjs/forms'
 import { Link, routes } from '@redwoodjs/router'
-import Window from 'src/components/Window'
+import Window from 'src/components/base/Window'
 
 export interface LoginFormPropTypes
   extends React.HTMLAttributes<HTMLDivElement> {

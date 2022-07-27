@@ -7,7 +7,7 @@ import {
   Submit,
   TextField,
 } from '@redwoodjs/forms'
-import Window from 'src/components/Window'
+import Window from 'src/components/base/Window'
 
 export interface SignupFormPropTypes
   extends React.HTMLAttributes<HTMLDivElement> {

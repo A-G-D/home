@@ -8,7 +8,7 @@ import {
   UseFormReturn,
 } from '@redwoodjs/forms'
 import { Toaster } from '@redwoodjs/web/toast'
-import Window, { WindowPropTypes } from 'src/components/Window'
+import Window, { WindowPropTypes } from 'src/components/base/Window'
 
 interface GuestCommentFormPropTypes extends WindowPropTypes {
   postId: string

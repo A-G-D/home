@@ -1,5 +1,5 @@
 import { FieldError, Form, Label, Submit, TextField } from '@redwoodjs/forms'
-import Window from 'src/components/Window'
+import Window from 'src/components/base/Window'
 
 export interface ForgotPasswordFormPropTypes
   extends React.HTMLAttributes<HTMLDivElement> {

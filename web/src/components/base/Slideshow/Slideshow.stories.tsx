@@ -1,5 +1,5 @@
 import Slideshow from './Slideshow'
-import * as CarouselStories from 'src/components/Carousel/Carousel.stories'
+import * as CarouselStories from 'src/components/base/Carousel/Carousel.stories'
 
 const Template = (args) => <Slideshow {...args} />
 

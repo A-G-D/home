@@ -1,5 +1,5 @@
 import { useQuery } from '@redwoodjs/web'
-import { useEffect, useState, useRef, MutableRefObject } from 'react'
+import { useEffect, useState, useRef, MutableRefObject, useCallback } from 'react'
 
 export const useSettings = () => {
   const QUERY = gql`
@@ -67,3 +67,11 @@ export const useEvent = <T extends Element>(
   }, deps)
   return ref
 }
+
+type Listener<T> = (...args: any[]) => T;
+
+export const useListener = <T = void>(listener: Listener<T>) => {
+  const listenerRef = useRef<Listener<T>>(listener);
+  listenerRef.current = listener;
+  return useCallback((...args: any[]) => listenerRef.current?.(...args), []);
+};

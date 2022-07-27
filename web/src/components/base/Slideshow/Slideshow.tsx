@@ -1,7 +1,7 @@
 import React from 'react'
 import { MdPlayArrow } from 'react-icons/md'
 import { toArray } from 'src/lib/utils'
-import Carousel from 'src/components/Carousel'
+import Carousel from 'src/components/base/Carousel'
 
 const getTranslationFactor = (itemCount, index, activeIndex) => {
   const mid = Math.floor(itemCount / 2)
