@@ -142,6 +142,7 @@ const Slideshow = ({
         {React.Children.map(children, (child, index) => {
           return (
             <div
+              key={child.key}
               className={[
                 'w-4 h-4 rounded-full',
                 index === activeIndex ? 'bg-violet-600' : 'bg-violet-200/50',

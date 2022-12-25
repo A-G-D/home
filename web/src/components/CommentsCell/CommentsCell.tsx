@@ -2,6 +2,7 @@ import type { CommentsQuery } from 'types/graphql'
 import { CellSuccessProps, CellFailureProps, useMutation } from '@redwoodjs/web'
 import Comment from 'src/components/base/Comment'
 import { useAuth } from '@redwoodjs/auth'
+import { FC } from 'react'
 
 export const QUERY = gql`
   query CommentsQuery($postId: String!) {
@@ -23,13 +24,13 @@ export const DELETE = gql`
   }
 `
 
-type CommentsDisplayPropTypes = React.HTMLAttributes<HTMLElement>
+type CommentsDisplayProps = React.HTMLAttributes<HTMLElement>
 
-const CommentsDisplay = ({
+const CommentsDisplay: FC<CommentsDisplayProps> = ({
   children,
   className,
   ...props
-}: CommentsDisplayPropTypes) => {
+}) => {
   return (
     <section
       className={['flex flex-col items-stretch gap-8', className].join(' ')}
@@ -79,8 +80,8 @@ export const Success = ({ comments }: CellSuccessProps<CommentsQuery>) => {
 
   const isModerator = hasRole('admin') || hasRole('moderator')
 
-  const onLike = (e, comment) => { }
-  const onReply = (e, comment) => { }
+  const onLike = (e, comment) => {}
+  const onReply = (e, comment) => {}
   const onDelete = (e, comment) => {
     if (confirm('Confirm Delete Reply')) {
       deleteComment({ variables: { id: comment.id } })

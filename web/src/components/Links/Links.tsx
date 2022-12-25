@@ -1,15 +1,16 @@
 import { Link, routes, useMatch } from '@redwoodjs/router'
 import Tippy from '@tippyjs/react'
+import classNames from 'classnames'
 import { MdOutlineKeyboardArrowDown } from 'react-icons/md'
 import PortfolioMenu from 'src/components/PortfolioMenu'
 
 import 'tippy.js/animations/shift-away.css'
 
 const Links = () => {
-  const activeNavStyle = 'border-b-indigo-900 text-fuchsia-900'
+  const activeNavStyle = 'border-b-primary-900 text-primary-900'
   const inactiveNavStyle = 'text-white'
   const navStyle =
-    'hover:border-b-indigo-700 hover:text-fuchsia-900 border-y-4 border-transparent flex items-center gap-2 px-[8px] py-[4px] font-bold'
+    'hover:border-b-primary-800 hover:text-primary-900 border-y-4 border-transparent flex items-center gap-2 px-[8px] py-[4px] font-bold'
 
   const portfolioDropdownRef = React.useRef()
   const portfolioMatchInfo = useMatch(routes.projects())
@@ -22,28 +23,28 @@ const Links = () => {
         <li>
           <div className='flex items-center'>
             <Link
-              className={[
+              className={classNames(
                 navStyle,
-                portfolioMatchInfo.match ? activeNavStyle : inactiveNavStyle,
-              ].join(' ')}
+                portfolioMatchInfo.match ? activeNavStyle : inactiveNavStyle
+              )}
               to={routes.projects()}
             >
               Portfolio
             </Link>
             <span
               ref={portfolioDropdownRef}
-              className='bg-violet-800 hover:bg-purple-700 rounded-md'
+              className='bg-primary-700 hover:bg-primary-600 rounded-md p-[2px]'
             >
-              <MdOutlineKeyboardArrowDown />
+              <MdOutlineKeyboardArrowDown className='text-white' />
             </span>
           </div>
         </li>
         <li>
           <Link
-            className={[
+            className={classNames(
               navStyle,
-              blogMatchInfo.match ? activeNavStyle : inactiveNavStyle,
-            ].join(' ')}
+              blogMatchInfo.match ? activeNavStyle : inactiveNavStyle
+            )}
             to={routes.blog()}
           >
             Blog
@@ -51,10 +52,10 @@ const Links = () => {
         </li>
         <li>
           <Link
-            className={[
+            className={classNames(
               navStyle,
-              resumeMatchInfo.match ? activeNavStyle : inactiveNavStyle,
-            ].join(' ')}
+              resumeMatchInfo.match ? activeNavStyle : inactiveNavStyle
+            )}
             to={routes.resume()}
             target='_blank'
             rel='noopener noreferrer'

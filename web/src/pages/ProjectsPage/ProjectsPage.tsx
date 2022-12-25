@@ -33,7 +33,7 @@ const ProjectItem = ({
   return (
     <div
       className={[
-        'from-violet-400 flex justify-between items-stretch gap-4',
+        'from-primary-400 flex justify-between items-stretch gap-4',
         imgLeft ? 'flex-row-reverse' : 'flex-row',
         imgLeft ? 'bg-gradient-to-l' : 'bg-gradient-to-r',
         className,
@@ -44,7 +44,7 @@ const ProjectItem = ({
         <h2 className='text-center font-medium'>{projectTitle}</h2>
         <div className='p-4 text-sm'>{children}</div>
       </div>
-      <div className='transition bg-violet-600 hover:bg-violet-400 flex flex-col gap-4 p-8'>
+      <div className='transition bg-primary-400 hover:bg-primary-200 flex flex-col gap-4 p-8'>
         <img
           className='object-cover min-w-64 min-h-64 max-w-64 max-h-64 w-64 h-64 rounded-md'
           src={imgSrc}
@@ -202,7 +202,7 @@ const Projects = () => {
 
       <ul className='flex flex-col gap-24 py-12'>
         <li>
-          <div className='bg-gradient-to-b from-violet-400 text-center text-xl font-semibold py-12'>
+          <div className='bg-gradient-to-b from-primary-400 text-center text-xl font-semibold py-12'>
             No Projects to Show Yet
           </div>
         </li>

@@ -13,12 +13,13 @@ import {
 } from '@redwoodjs/forms'
 import { Toaster } from '@redwoodjs/web/toast'
 import Window from 'src/components/base/Window'
+import classNames from 'classnames'
 
 export interface ContactFormPropTypes extends FormProps {
   formMethods?: UseFormReturn<FieldValues, any>
   error?: any
   loading?: boolean
-  onClose?: React.MouseEventHandler<SVGElement>
+  onClose?: React.MouseEventHandler<HTMLButtonElement>
   onSubmit?: (
     values: Record<string, any>,
     event?: React.BaseSyntheticEvent<object, any, any>
@@ -36,26 +37,28 @@ const ContactForm = ({
 }: ContactFormPropTypes): JSX.Element => {
   return (
     <Window
-      className={[
-        'bg-purple-300 flex-auto flex flex-col rounded-[8px] max-w-full w-[720px] h-[50%]',
-        className,
-      ].join(' ')}
+      className={classNames(
+        'bg-primary-200 flex-auto flex flex-col rounded-[8px] max-w-full w-[720px] h-[50%]',
+        className
+      )}
       childrenAttributes={{
         header: {
           children: (
             <Window.Header
               controlBar={
-                <RiCloseFill
-                  className='hover:cursor-pointer hover:bg-black/40 rounded-full'
+                <button
+                  className='p-1 hover:bg-black/30 rounded-full'
                   onClick={onClose}
-                />
+                >
+                  <RiCloseFill />
+                </button>
               }
             >
               What Can I Help You With?
             </Window.Header>
           ),
           className:
-            'bg-purple-800 text-gray-900 p-3 text-sm font-semibold rounded-t-[6px]',
+            'bg-primary-500 text-gray-900 p-3 text-sm font-semibold rounded-t-[6px]',
         },
         body: {
           className: 'p-5 rounded-b-[6px]',

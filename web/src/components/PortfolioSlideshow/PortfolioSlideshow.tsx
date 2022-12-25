@@ -10,33 +10,38 @@ const PortfolioSlideshow = () => {
   return (
     <div className='flex gap-2 items-center w-full'>
       <Slideshow
-        className='bg-violet-300/80 border-violet-800 border-2 shadow-[0_0_8px_4px] shadow-gray-700 flex-auto gap-2 px-2'
+        className='bg-primary-300/80 border-primary-800 border-2 shadow-[0_0_8px_4px] shadow-gray-700 flex-auto gap-2 px-2'
         initialIndex={initialIndex}
         slideDuration={slideDuration}
         controls={{
           leftControl: (
             <div className='text-4xl'>
-              <MdKeyboardArrowRight className='rotate-180 hover:bg-violet-400 fill-violet-400 hover:fill-violet-800 hover:cursor-pointer rounded-full' />
+              <MdKeyboardArrowRight className='rotate-180 hover:bg-primary-400 fill-primary-400 hover:fill-primary-800 hover:cursor-pointer rounded-full' />
             </div>
           ),
           rightControl: (
             <div className='text-4xl'>
-              <MdKeyboardArrowRight className='hover:bg-violet-400 fill-violet-400 hover:fill-violet-800 hover:cursor-pointer rounded-full' />
+              <MdKeyboardArrowRight className='hover:bg-primary-400 fill-primary-400 hover:fill-primary-800 hover:cursor-pointer rounded-full' />
             </div>
           ),
         }}
       >
         <OverlaidElement
+          key='pixel-art-creator'
           className='duration-1000 flex flex-center'
           overlay={
             <>
-              <p key="name" className='text-center font-medium'>Pixel Art Creator</p>
-              <p key="caption" className='text-justify mt-4'>
+              <p key='name' className='text-center font-medium'>
+                Pixel Art Creator
+              </p>
+              <p key='caption' className='text-justify mt-4'>
                 A pixel art creator webapp with a simply interface. Made purely
                 with HTML, CSS, and vanilla JS.
               </p>
-              <p key="description-0" className='font-medium mt-4'>Features:</p>
-              <ul key="description-1" className='mt-2 ml-8 list-disc'>
+              <p key='description-0' className='font-medium mt-4'>
+                Features:
+              </p>
+              <ul key='description-1' className='mt-2 ml-8 list-disc'>
                 <li>
                   Preserve canvas content after resizing canvas dimensions
                 </li>
@@ -59,15 +64,18 @@ const PortfolioSlideshow = () => {
           />
         </OverlaidElement>
         <OverlaidElement
+          key='rock-paper-scissors'
           className='duration-1000 flex flex-center'
           overlay={
             <>
-              <p key="name" className='text-center font-medium'>Rock, Paper, Scissors</p>
-              <p key="caption" className='text-justify mt-4'>
+              <p key='name' className='text-center font-medium'>
+                Rock, Paper, Scissors
+              </p>
+              <p key='caption' className='text-justify mt-4'>
                 A simple rock, paper, scissors webapp made with HTML, CSS, and
                 vanilla JS.
               </p>
-              <ul key="description-0" className='mt-4 ml-8 list-disc'>
+              <ul key='description-0' className='mt-4 ml-8 list-disc'>
                 <li>Random opponent name thru the use of an external API</li>
               </ul>
             </>
@@ -80,17 +88,18 @@ const PortfolioSlideshow = () => {
           />
         </OverlaidElement>
         <OverlaidElement
+          key='static-landing-page-sample'
           className='duration-1000 flex flex-center'
           overlay={
             <>
-              <p key="name" className='text-center font-medium'>
+              <p key='name' className='text-center font-medium'>
                 Static Landing Page Sample
               </p>
-              <p key="caption" className='text-justify mt-4'>
+              <p key='caption' className='text-justify mt-4'>
                 A static website landing page. Made with HTML, CSS, and vanilla
                 JS.
               </p>
-              <ul key="description-0" className='mt-4 ml-8 list-disc'>
+              <ul key='description-0' className='mt-4 ml-8 list-disc'>
                 <li>
                   Responsive web design, tested on both desktop and mobile
                   devices

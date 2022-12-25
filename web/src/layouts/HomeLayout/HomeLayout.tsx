@@ -1,26 +1,16 @@
 import { toast, Toaster } from '@redwoodjs/web/toast'
 import { useAuth } from '@redwoodjs/auth'
 
-import React from 'react'
+import React, { FC } from 'react'
 import AuthorName from 'src/components/AuthorName'
 import Links from 'src/components/Links'
 import Logo from 'src/components/Logo'
+import Background from 'src/components/Background'
 
 import './HomeLayout.scss'
 
 type HomeLayoutProps = {
   children?: React.ReactNode
-}
-
-const Background = ({ children }) => {
-  return (
-    <div
-      id='background'
-      className='bg-cover bg-no-repeat h-full flex-auto flex flex-row justify-center overflow-auto'
-    >
-      {children}
-    </div>
-  )
 }
 
 const UserRibbon = ({ currentUser, onLogout }) => {
@@ -39,7 +29,7 @@ const Header = ({ isAuthenticated, currentUser, onLogout }) => {
   return (
     <header
       id='home-layout-header'
-      className='sticky top-0 w-full bg-violet-600/80 px-6 py-3 flex flex-row justify-between z-10'
+      className='sticky top-0 w-full bg-primary-600/80 px-6 py-3 flex flex-row justify-between z-10'
     >
       <Logo />
       <Links />
@@ -53,7 +43,7 @@ const Header = ({ isAuthenticated, currentUser, onLogout }) => {
 
 const Footer = () => {
   return (
-    <footer className='bg-violet-600/80 px-6 py-6 flex flex-col gap-4 items-center'>
+    <footer className='bg-primary-600/80 px-6 py-6 flex flex-col gap-4 items-center'>
       <div className='text-sm italic'>
         The background shader pattern is an edited fork from{' '}
         <a
@@ -80,7 +70,7 @@ const Footer = () => {
   )
 }
 
-const HomeLayout = ({ children }: HomeLayoutProps): JSX.Element => {
+const HomeLayout: FC<HomeLayoutProps> = ({ children }) => {
   const { isAuthenticated, currentUser, logOut } = useAuth()
   const onLogout = async () => {
     const response = await logOut()
@@ -94,8 +84,8 @@ const HomeLayout = ({ children }: HomeLayoutProps): JSX.Element => {
   }
 
   return (
-    <Background>
-      <div className='flex flex-col h-fit min-h-full w-[720px] max-w-[720px]'>
+    <Background className='h-fit min-h-full' resolutionFactor={1 / 2}>
+      <div className='flex-auto self-center flex flex-col h-fit min-h-full max-w-[720px] w-full'>
         <Header
           isAuthenticated={isAuthenticated}
           currentUser={currentUser}

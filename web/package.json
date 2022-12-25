@@ -18,6 +18,8 @@
     "@redwoodjs/router": "^2.0.0",
     "@redwoodjs/web": "^2.0.0",
     "@tippyjs/react": "^4.2.6",
+    "classnames": "^2.3.2",
+    "glslCanvas": "^0.2.6",
     "prop-types": "15.8.1",
     "react": "17.0.2",
     "react-dom": "17.0.2",

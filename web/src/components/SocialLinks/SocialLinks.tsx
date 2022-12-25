@@ -1,6 +1,6 @@
-import { BsGithub, BsInstagram, BsLinkedin, BsTwitter } from "react-icons/bs"
-import { SiGmail } from "react-icons/si"
-import ContactFormModal from "src/components/ContactFormModal"
+import { BsGithub, BsInstagram, BsLinkedin, BsTwitter } from 'react-icons/bs'
+import { SiGmail } from 'react-icons/si'
+import ContactFormModal from 'src/components/ContactFormModal'
 
 const SocialLinks = () => {
   const logo: HTMLElement = document.querySelector('#agd-logo')
@@ -19,26 +19,29 @@ const SocialLinks = () => {
     <ul className='flex flex-row justify-evenly items-center gap-x-3'>
       <li>
         <a href='https://github.com/A-G-D/'>
-          <BsGithub />
+          <BsGithub className='fill-primary-700' />
         </a>
       </li>
       <li>
         <a href='https://www.linkedin.com/in/aloever-dulay-249226159'>
-          <BsLinkedin />
+          <BsLinkedin className='fill-primary-700' />
         </a>
       </li>
       <li>
         <a href='https://twitter.com/__A_G_D__'>
-          <BsTwitter />
+          <BsTwitter className='fill-primary-700' />
         </a>
       </li>
       <li>
         <a href='https://www.instagram.com/agd.91939'>
-          <BsInstagram />
+          <BsInstagram className='fill-primary-700' />
         </a>
       </li>
       <li>
-        <SiGmail className='hover:cursor-pointer' onClick={openContactModal} />
+        <SiGmail
+          className='fill-primary-700 hover:cursor-pointer'
+          onClick={openContactModal}
+        />
       </li>
       <ContactFormModal isOpen={contactModalOpen} onClose={closeContactModal} />
     </ul>

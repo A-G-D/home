@@ -27,6 +27,8 @@ import {
   Bash,
 } from 'src/assets'
 
+import 'tippy.js/animations/scale.css'
+
 interface TechTipPropTypes {
   children?: React.ReactNode
   href?: string
@@ -37,7 +39,7 @@ const TechTip = ({ children, href }: TechTipPropTypes) => {
     <div className='flex gap-1 px-2 py-1 rounded-[4px]'>
       {children}
       {href && (
-        <a href={href}>
+        <a href={href} target='_blank'>
           <BiLinkExternal />
         </a>
       )}
@@ -54,6 +56,7 @@ const TechStackItem = ({
   alt,
   tooltip,
   tooltipOffset = 16,
+  tooltipInteractive,
 }: {
   containerClassName: string
   contentClassName: string
@@ -63,6 +66,7 @@ const TechStackItem = ({
   alt: string
   tooltip: React.ReactNode
   tooltipOffset?: number
+  tooltipInteractive?: boolean
 }): JSX.Element => {
   const ref = React.useRef()
   return (
@@ -78,13 +82,14 @@ const TechStackItem = ({
       </PuffUpElement>
       <Tippy
         reference={ref}
-        duration={500}
+        duration={200}
         placement='top'
         offset={[0, tooltipOffset]}
         arrow={false}
+        animation='scale'
         hideOnClick={false}
         content={tooltip}
-        interactive={true}
+        interactive={tooltipInteractive}
       />
     </>
   )
@@ -159,6 +164,7 @@ const TechStack = () => {
               svg={<ReactJS className={smallItemShadow} />}
               alt='ReactJS'
               tooltip={<TechTip href='https://reactjs.org'>ReactJS</TechTip>}
+              tooltipInteractive
             />
           </li>
           <li>
@@ -170,6 +176,7 @@ const TechStack = () => {
               tooltip={
                 <TechTip href='https://tailwindcss.com'>Tailwind CSS</TechTip>
               }
+              tooltipInteractive
             />
           </li>
           <li>
@@ -179,6 +186,7 @@ const TechStack = () => {
               svg={<Sass className={smallItemShadow} />}
               alt='Sass'
               tooltip={<TechTip href='https://sass-lang.com'>Sass</TechTip>}
+              tooltipInteractive
             />
           </li>
           <li>
@@ -188,6 +196,7 @@ const TechStack = () => {
               svg={<Less className={smallItemShadow} />}
               alt='Less'
               tooltip={<TechTip href='https://lesscss.org'>Less</TechTip>}
+              tooltipInteractive
             />
           </li>
           <li>
@@ -199,6 +208,7 @@ const TechStack = () => {
               tooltip={
                 <TechTip href='https://storybook.js.org'>StorybookJS</TechTip>
               }
+              tooltipInteractive
             />
           </li>
           <li>
@@ -208,6 +218,7 @@ const TechStack = () => {
               svg={<Jest className={smallItemShadow} />}
               alt='Jest'
               tooltip={<TechTip href='https://jestjs.io'>Jest</TechTip>}
+              tooltipInteractive
             />
           </li>
           <li>
@@ -217,6 +228,7 @@ const TechStack = () => {
               svg={<Webpack className={smallItemShadow} />}
               alt='Webpack'
               tooltip={<TechTip href='https://webpack.js.org'>Webpack</TechTip>}
+              tooltipInteractive
             />
           </li>
           <li>
@@ -230,6 +242,7 @@ const TechStack = () => {
               tooltip={
                 <TechTip href='https://redwoodjs.com'>RedwoodJS</TechTip>
               }
+              tooltipInteractive
             />
           </li>
           <li>
@@ -239,6 +252,7 @@ const TechStack = () => {
               svg={<Github className={smallItemShadow} />}
               alt='GitHub'
               tooltip={<TechTip href='https://github.com'>GitHub</TechTip>}
+              tooltipInteractive
             />
           </li>
           <li>
@@ -248,6 +262,7 @@ const TechStack = () => {
               svg={<Python className={smallItemShadow} />}
               alt='Python'
               tooltip={<TechTip href='https://www.python.org'>Python</TechTip>}
+              tooltipInteractive
             />
           </li>
           <li>
@@ -257,6 +272,7 @@ const TechStack = () => {
               svg={<Jupyter className={smallItemShadow} />}
               alt='Jupyter'
               tooltip={<TechTip href='https://jupyter.org'>Jupyter</TechTip>}
+              tooltipInteractive
             />
           </li>
           <li>
@@ -268,6 +284,7 @@ const TechStack = () => {
               tooltip={
                 <TechTip href='https://en.cppreference.com'>C++</TechTip>
               }
+              tooltipInteractive
             />
           </li>
           <li>
@@ -281,6 +298,7 @@ const TechStack = () => {
                   C#
                 </TechTip>
               }
+              tooltipInteractive
             />
           </li>
           <li>
@@ -290,6 +308,7 @@ const TechStack = () => {
               svg={<Lua className={smallItemShadow} />}
               alt='Lua'
               tooltip={<TechTip href='https://www.lua.org'>Lua</TechTip>}
+              tooltipInteractive
             />
           </li>
           <li>
@@ -303,6 +322,7 @@ const TechStack = () => {
                   Bash
                 </TechTip>
               }
+              tooltipInteractive
             />
           </li>
         </ul>

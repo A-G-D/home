@@ -8,7 +8,7 @@ const AuthorName = ({
 }: AuthorNamePropTypes): JSX.Element => {
   return (
     <span
-      className={["font-['Raw_Print_Formal'] font-black", className].join(' ')}
+      className={['font-handwritten font-black', className].join(' ')}
       {...props}
     >
       Aloever Dulay
