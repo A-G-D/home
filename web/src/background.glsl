@@ -1,129 +1,103 @@
+/*
+* This shader is a fork of: https://www.shadertoy.com/view/WldSRn
+*/
 precision highp float;
 
-uniform float iResolutionFactor;
-uniform vec2  iResolution;
-uniform float iTime;
-uniform vec2  iMouse;
+uniform float u_resolutionFactor;
+uniform vec2  u_resolution;
+uniform float u_time;
+uniform vec2  u_mouse;
 
 float sdSphere(vec3 pos, float size)
 {
-    return length(pos) - size;
+  return length(pos) - size;
 }
 
 float sdBox(vec3 pos, vec3 size)
 {
-    pos = abs(pos) - vec3(size);
-    return max(max(pos.x, pos.y), pos.z);
-}
-
-float sdOctahedron(vec3 p, float s)
-{
-    p = abs(p);
-    float m = p.x+p.y+p.z-s;
-    vec3 q;
-         if( 3.0*p.x < m ) q = p.xyz;
-    else if( 3.0*p.y < m ) q = p.yzx;
-    else if( 3.0*p.z < m ) q = p.zxy;
-    else return m*0.57735027;
-
-    float k = clamp(0.5*(q.z-q.y+s),0.0,s);
-    return length(vec3(q.x,q.y-s+k,q.z-k));
+  pos = abs(pos) - vec3(size);
+  return max(max(pos.x, pos.y), pos.z);
 }
 
 float sdPlane(vec3 pos)
 {
-    return pos.y;
+  return pos.y;
 }
 
 mat2 rotate(float a)
 {
-    float s = sin(a);
-    float c = cos(a);
-    return mat2(c, s, -s, c);
+  float s = sin(a);
+  float c = cos(a);
+  return mat2(c, s, -s, c);
 }
 
 vec3 repeat(vec3 pos, vec3 span)
 {
-    return abs(mod(pos, span)) - span * 0.5;
+  return abs(mod(pos, span)) - span * 0.5;
 }
 
 float getDistance(vec3 pos, vec2 uv)
 {
-    vec3 originalPos = pos;
+  vec3 originalPos = pos;
 
-    for(int i = 0; i < 3; i++)
-    {
-        pos = abs(pos) - 4.5;
-        pos.xz *= rotate(1.0);
-        pos.yz *= rotate(1.0);
-    }
+  for(int i = 0; i < 3; i++)
+  {
+    pos = abs(pos) - 4.5;
+    pos.xz *= rotate(1.0);
+    pos.yz *= rotate(1.0);
+  }
 
-    pos = repeat(pos, vec3(4.0));
+  pos = repeat(pos, vec3(4.0));
 
-    float d0 = abs(originalPos.x) - 0.1;
-    float d1 = sdBox(pos, vec3(0.8));
+  pos.xy *= rotate(abs(u_time));
+  float d0 = abs(originalPos.x) - 0.1;
+  float d1 = sdBox(pos, vec3(0.8));
 
-    pos.xy *= rotate(mix(1.0, 2.0, abs(sin(iTime))));
-    float size = mix(1.1, 1.3, (abs(uv.y) * abs(uv.x)));
-    float d2 = sdSphere(pos, size);
-    float dd2 = sdOctahedron(pos, 1.8);
-    float ddd2 = mix(d2, dd2, abs(sin(iTime)));
+  float size = 1.4;
+  float d2 = sdSphere(pos, size);
+  float dd2 = mix(d1, d2, 0.05 + abs(0.95 * sin(0.5 * u_time)));
 
-    return max(max(d1, -ddd2), -d0);
+  return max(max(d1, -dd2), -d0);
 }
 
 void mainImage( out vec4 fragColor, in vec2 fragCoord )
 {
-    vec2 p = (fragCoord.xy * 2.0 - iResolution.xy) / min(iResolution.x, iResolution.y);
-    vec2 mouse = iMouse.xy - 0.5*iResolution.xy;
+  vec2 p = (fragCoord.xy * 2.0 - u_resolution.xy) / min(u_resolution.x, u_resolution.y);
+  vec2 mouse = u_mouse.xy - 0.5*u_resolution.xy;
 
-    // camera
-    // vec3 cameraOrigin = vec3(0.0, 0.0, -10.0 + iTime * 4.0);
-    // vec3 cameraTarget = vec3(cos(iTime) + sin(iTime / 2.0) * 10.0, exp(sin(iTime)) * 2.0, 3.0 + iTime * 4.0);
-    vec3 cameraOrigin = vec3(0.0, 0.0, iTime);
-    vec3 cameraTarget = vec3(2.0*mouse.x/iResolution.x, 2.0*mouse.y/iResolution.y, iTime + 1.0);
-    vec3 upDirection = vec3(0.0, 1.0, 0.0);
-    vec3 cameraDir = normalize(cameraTarget - cameraOrigin);
-    vec3 cameraRight = normalize(cross(upDirection, cameraOrigin));
-    vec3 cameraUp = cross(cameraDir, cameraRight);
-    vec3 rayDirection = normalize(cameraRight * p.x + cameraUp * p.y + cameraDir);
+  // camera
+  vec3 cameraOrigin = vec3(0.0, 0.0, u_time);
+  vec3 cameraTarget = vec3(2.0*mouse.x/u_resolution.x, 2.0*mouse.y/u_resolution.y, u_time + 1.0);
+  vec3 upDirection = vec3(0.0, 1.0, 0.0);
+  vec3 cameraDir = normalize(cameraTarget - cameraOrigin);
+  vec3 cameraRight = normalize(cross(upDirection, cameraOrigin));
+  vec3 cameraUp = cross(cameraDir, cameraRight);
+  vec3 rayDirection = normalize(cameraRight * p.x + cameraUp * p.y + cameraDir);
 
-    float depth = 0.0;
-    float ac = 0.0;
-    vec3 rayPos = vec3(0.0);
-    float d = 0.0;
+  float depth = 0.0;
+  float ac = 0.0;
+  vec3 rayPos = vec3(0.0);
+  float d = 0.0;
 
-    for(int i = 0; i < 32; i++)
+  for(int i = 0; i < 48; i++)
+  {
+    rayPos = cameraOrigin + rayDirection * depth;
+    d = getDistance(rayPos, p);
+
+    if(abs(d) < 0.001)
     {
-        rayPos = cameraOrigin + rayDirection * depth;
-        d = getDistance(rayPos, p);
-
-        if(abs(d) < 0.01)
-        {
-            break;
-        }
-
-        ac += exp(-d * mix(5.0, 10.0, abs(sin(iTime))));
-        depth += d;
+        break;
     }
 
-    vec3 col = vec3(0.0, 0.3, 0.7);
-    ac *= 1.2 * (iResolution.x/iResolution.y - abs(p.x)) ;
-    vec3 finalCol = col * ac * 0.06;
-    fragColor = vec4(finalCol, 1.0);
-    fragColor.w = 1.0 - depth * 0.1;
+    ac += exp(-d * 6.);
+    depth += d;
+  }
+
+  vec3 col = vec3(0.0, 0.3, 0.7);
+  ac *= 1.2 * (u_resolution.x/u_resolution.y - abs(p.x)) ;
+  vec3 finalCol = col * ac * 0.06;
+  fragColor = vec4(finalCol, 1.0);
 }
-
-// void mainImage( out vec4 fragColor, in vec2 fragCoord ){
-//     vec2 uv =  (2.0 * fragCoord - iResolution.xy) / min(iResolution.x, iResolution.y);
-
-//     for(float i = 1.0; i < 10.0; i++){
-//         uv.x += 0.6 / i * cos(i * 2.5* uv.y + iTime);
-//         uv.y += 0.6 / i * cos(i * 1.5 * uv.x + iTime);
-//     }
-
-//     fragColor = vec4(vec3(0.1)/abs(sin(iTime-uv.y-uv.x)),1.0);
-// }
 
 void main() {
   mainImage(gl_FragColor, gl_FragCoord.xy);
