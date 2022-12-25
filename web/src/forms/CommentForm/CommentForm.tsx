@@ -1,17 +1,10 @@
-import {
-  FieldError,
-  Form,
-  Label,
-  Submit,
-  TextAreaField,
-  TextField,
-  UseFormReturn,
-} from '@redwoodjs/forms'
+import { Form, Submit, TextAreaField, UseFormReturn } from '@redwoodjs/forms'
 import { Toaster } from '@redwoodjs/web/toast'
-import Window, { WindowPropTypes } from 'src/components/base/Window'
+import classNames from 'classnames'
+import { FC, HTMLAttributes } from 'react'
 import UserInfo from 'src/components/UserInfo'
 
-interface CommentFormPropTypes extends WindowPropTypes {
+export interface CommentFormProps extends HTMLAttributes<HTMLDivElement> {
   user: {
     name: string
     picture?: string
@@ -26,7 +19,7 @@ interface CommentFormPropTypes extends WindowPropTypes {
   ) => void
 }
 
-const CommentForm = ({
+const CommentForm: FC<CommentFormProps> = ({
   className,
   user,
   postId,
@@ -35,15 +28,15 @@ const CommentForm = ({
   formMethods,
   onSubmit,
   ...props
-}: CommentFormPropTypes): JSX.Element => {
+}) => {
   return (
-    <div className='flex rounded-md'>
+    <div className={classNames('flex rounded-md', className)} {...props}>
       <Toaster />
-      <div className='bg-violet-600 flex flex-col items-center gap-4 p-4 rounded-l-md'>
+      <div className='bg-primary-600 flex flex-col items-center gap-4 p-4 rounded-l-md'>
         <UserInfo username={user.name} picture={user.picture} />
       </div>
       <Form
-        className='bg-violet-400 flex-auto flex flex-col items-stretch gap-8 p-4 rounded-r-md'
+        className='bg-primary-400 flex-auto flex flex-col items-stretch gap-8 p-4 rounded-r-md'
         onSubmit={onSubmit}
         error={error}
         formMethods={formMethods}

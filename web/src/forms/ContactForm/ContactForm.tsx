@@ -14,8 +14,9 @@ import {
 import { Toaster } from '@redwoodjs/web/toast'
 import Window from 'src/components/base/Window'
 import classNames from 'classnames'
+import { FC } from 'react'
 
-export interface ContactFormPropTypes extends FormProps {
+export interface ContactFormProps extends FormProps<FieldValues> {
   formMethods?: UseFormReturn<FieldValues, any>
   error?: any
   loading?: boolean
@@ -26,7 +27,7 @@ export interface ContactFormPropTypes extends FormProps {
   ) => void
 }
 
-const ContactForm = ({
+const ContactForm: FC<ContactFormProps> = ({
   className,
   onClose,
   onSubmit,
@@ -34,7 +35,7 @@ const ContactForm = ({
   error,
   loading,
   ...props
-}: ContactFormPropTypes): JSX.Element => {
+}) => {
   return (
     <Window
       className={classNames(

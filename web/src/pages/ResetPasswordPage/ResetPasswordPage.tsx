@@ -53,7 +53,7 @@ const ResetPasswordPage = ({ resetToken }) => {
     <>
       <MetaTags title='Reset Password' />
 
-      <div className='rw-main'>
+      <div className='flex-auto flex-center'>
         <Toaster toastOptions={{ className: 'rw-toast', duration: 6000 }} />
         <ResetPasswordForm
           enabled={enabled}

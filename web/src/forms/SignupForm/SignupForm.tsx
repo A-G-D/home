@@ -8,33 +8,34 @@ import {
   TextField,
 } from '@redwoodjs/forms'
 import Window from 'src/components/base/Window'
+import { FC, MutableRefObject } from 'react'
+import classNames from 'classnames'
 
-export interface SignupFormPropTypes
-  extends React.HTMLAttributes<HTMLDivElement> {
+export interface SignupFormProps extends React.HTMLAttributes<HTMLDivElement> {
   onSubmit?: (
     values: Record<string, any>,
     event?: React.BaseSyntheticEvent<object, any, any>
   ) => void
-  usernameRef?: React.MutableRefObject<HTMLInputElement>
+  usernameRef?: MutableRefObject<HTMLInputElement>
 }
 
-const SignupForm = ({
+const SignupForm: FC<SignupFormProps> = ({
   className,
   onSubmit,
   usernameRef,
   ...props
-}: SignupFormPropTypes): JSX.Element => {
+}) => {
   return (
     <Window
-      className={[
-        'bg-purple-300 flex flex-col rounded-lg w-96',
-        className,
-      ].join(' ')}
+      className={classNames(
+        'bg-primary-300 flex flex-col rounded-lg w-96',
+        className
+      )}
       childrenAttributes={{
         header: {
           children: <Window.Header>Signup</Window.Header>,
           className:
-            'bg-purple-800 text-gray-900 p-3 text-sm font-semibold rounded-t-lg',
+            'bg-primary-800 text-gray-900 p-3 text-sm font-semibold rounded-t-lg',
         },
         body: {
           className: 'p-5 rounded-b-lg',

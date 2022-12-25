@@ -5,7 +5,6 @@ import React, { FC } from 'react'
 import AuthorName from 'src/components/AuthorName'
 import Links from 'src/components/Links'
 import Logo from 'src/components/Logo'
-import Background from 'src/components/Background'
 
 import './HomeLayout.scss'
 
@@ -84,19 +83,15 @@ const HomeLayout: FC<HomeLayoutProps> = ({ children }) => {
   }
 
   return (
-    <Background className='h-fit min-h-full' resolutionFactor={1 / 2}>
-      <div className='flex-auto self-center flex flex-col h-fit min-h-full max-w-[720px] w-full'>
-        <Header
-          isAuthenticated={isAuthenticated}
-          currentUser={currentUser}
-          onLogout={onLogout}
-        />
-        <main className='bg-gray-200/80 flex-auto flex flex-col'>
-          {children}
-        </main>
-        <Footer />
-      </div>
-    </Background>
+    <div className='flex-auto self-center flex flex-col h-fit min-h-full max-w-[720px] w-full'>
+      <Header
+        isAuthenticated={isAuthenticated}
+        currentUser={currentUser}
+        onLogout={onLogout}
+      />
+      <main className='bg-gray-200/80 flex-auto flex flex-col'>{children}</main>
+      <Footer />
+    </div>
   )
 }
 

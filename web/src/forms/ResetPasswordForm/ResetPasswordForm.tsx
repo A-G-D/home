@@ -5,10 +5,10 @@ import {
   PasswordField,
   Submit,
 } from '@redwoodjs/forms'
+import { FC, HTMLAttributes } from 'react'
 import Window from 'src/components/base/Window'
 
-export interface ResetPasswordFormPropTypes
-  extends React.HTMLAttributes<HTMLDivElement> {
+export interface ResetPasswordFormProps extends HTMLAttributes<HTMLDivElement> {
   passwordRef?: React.MutableRefObject<HTMLInputElement>
   enabled?: boolean
   onSubmit?: (
@@ -17,24 +17,24 @@ export interface ResetPasswordFormPropTypes
   ) => void
 }
 
-const ResetPasswordForm = ({
+const ResetPasswordForm: FC<ResetPasswordFormProps> = ({
   className,
   passwordRef,
   enabled,
   onSubmit,
   ...props
-}: ResetPasswordFormPropTypes): JSX.Element => {
+}) => {
   return (
     <Window
       className={[
-        'bg-purple-300 flex flex-col rounded-lg w-96',
+        'bg-primary-200 flex flex-col rounded-lg w-96',
         className,
       ].join(' ')}
       childrenAttributes={{
         header: {
           children: <Window.Header>Reset Password</Window.Header>,
           className:
-            'bg-purple-800 text-gray-900 p-3 text-sm font-semibold rounded-t-lg',
+            'bg-primary-500 text-gray-900 p-3 text-sm font-semibold rounded-t-lg',
         },
         body: {
           className: 'p-5 rounded-b-lg',

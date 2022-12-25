@@ -1,8 +1,8 @@
 import type { CommentsQuery } from 'types/graphql'
 import { CellSuccessProps, CellFailureProps, useMutation } from '@redwoodjs/web'
-import Comment from 'src/components/base/Comment'
 import { useAuth } from '@redwoodjs/auth'
 import { FC } from 'react'
+import Comment from 'src/components/base/Comment'
 
 export const QUERY = gql`
   query CommentsQuery($postId: String!) {
@@ -36,7 +36,7 @@ const CommentsDisplay: FC<CommentsDisplayProps> = ({
       className={['flex flex-col items-stretch gap-8', className].join(' ')}
       {...props}
     >
-      <h2 className='bg-violet-600 text-center text-gray-800 text-md font-semibold p-3 rounded-md'>
+      <h2 className='bg-primary-600 text-center text-gray-800 text-md font-semibold p-3 rounded-md'>
         Comments
       </h2>
       <div className='flex flex-col items-stretch'>{children}</div>

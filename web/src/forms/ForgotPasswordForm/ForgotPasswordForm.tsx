@@ -1,7 +1,9 @@
 import { FieldError, Form, Label, Submit, TextField } from '@redwoodjs/forms'
+import classNames from 'classnames'
+import { FC } from 'react'
 import Window from 'src/components/base/Window'
 
-export interface ForgotPasswordFormPropTypes
+export interface ForgotPasswordFormProps
   extends React.HTMLAttributes<HTMLDivElement> {
   usernameRef?: React.MutableRefObject<HTMLInputElement>
   onSubmit?: (
@@ -10,23 +12,23 @@ export interface ForgotPasswordFormPropTypes
   ) => void
 }
 
-const ForgotPasswordForm = ({
+const ForgotPasswordForm: FC<ForgotPasswordFormProps> = ({
   className,
   usernameRef,
   onSubmit,
   ...props
-}: ForgotPasswordFormPropTypes): JSX.Element => {
+}) => {
   return (
     <Window
-      className={[
-        'bg-purple-300 flex flex-col rounded-lg w-96',
-        className,
-      ].join(' ')}
+      className={classNames(
+        'bg-primary-200 flex flex-col rounded-lg w-96',
+        className
+      )}
       childrenAttributes={{
         header: {
           children: <Window.Header>Forgot Password</Window.Header>,
           className:
-            'bg-purple-800 text-gray-900 p-3 text-sm font-semibold rounded-t-lg',
+            'bg-primary-500 text-gray-900 p-3 text-sm font-semibold rounded-t-lg',
         },
         body: {
           className: 'p-5 rounded-b-lg',

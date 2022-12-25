@@ -1,4 +1,4 @@
-import { Link, navigate, routes } from '@redwoodjs/router'
+import { navigate, routes } from '@redwoodjs/router'
 import { useRef } from 'react'
 import { useAuth } from '@redwoodjs/auth'
 import { MetaTags } from '@redwoodjs/web'
@@ -38,7 +38,7 @@ const SignupPage = () => {
     <>
       <MetaTags title='Signup' />
 
-      <div className='rw-main flex-center'>
+      <div className='flex-auto flex-center'>
         <Toaster toastOptions={{ className: 'rw-toast', duration: 6000 }} />
         <SignupForm onSubmit={onSubmit} usernameRef={usernameRef} />
       </div>

@@ -39,7 +39,7 @@ const ForgotPasswordPage = () => {
     <>
       <MetaTags title='Forgot Password' />
 
-      <div className='rw-main'>
+      <div className='flex-auto flex-center'>
         <Toaster toastOptions={{ className: 'rw-toast', duration: 6000 }} />
         <ForgotPasswordForm usernameRef={usernameRef} onSubmit={onSubmit} />
       </div>

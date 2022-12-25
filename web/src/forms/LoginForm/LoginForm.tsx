@@ -7,10 +7,10 @@ import {
   TextField,
 } from '@redwoodjs/forms'
 import { Link, routes } from '@redwoodjs/router'
+import { FC } from 'react'
 import Window from 'src/components/base/Window'
 
-export interface LoginFormPropTypes
-  extends React.HTMLAttributes<HTMLDivElement> {
+export interface LoginFormProps extends React.HTMLAttributes<HTMLDivElement> {
   onSubmit?: (
     values: Record<string, any>,
     event?: React.BaseSyntheticEvent<object, any, any>
@@ -18,23 +18,23 @@ export interface LoginFormPropTypes
   usernameRef?: React.MutableRefObject<HTMLInputElement>
 }
 
-const LoginForm = ({
+const LoginForm: FC<LoginFormProps> = ({
   className,
   onSubmit,
   usernameRef,
   ...props
-}: LoginFormPropTypes): JSX.Element => {
+}) => {
   return (
     <Window
       className={[
-        'bg-purple-300 flex flex-col rounded-lg w-96',
+        'bg-primary-200 flex flex-col rounded-lg w-96',
         className,
       ].join(' ')}
       childrenAttributes={{
         header: {
           children: <Window.Header>Login</Window.Header>,
           className:
-            'bg-purple-800 text-gray-900 p-3 text-sm font-semibold rounded-t-lg',
+            'bg-primary-500 text-gray-900 p-3 text-sm font-semibold rounded-t-lg',
         },
         body: {
           className: 'flex flex-col items-stretch gap-4 p-5 rounded-b-lg',

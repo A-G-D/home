@@ -48,6 +48,11 @@
   }
 }
 
+/* For backwards compatibility. Use 'font-handwritten' from now on */
+.text-handwritten {
+  font-family: 'Raw Print Formal', sans-serif;
+}
+
 .article.title {
   @apply text-center font-bold;
 }

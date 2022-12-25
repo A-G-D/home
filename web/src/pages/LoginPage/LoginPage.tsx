@@ -36,7 +36,7 @@ const LoginPage = () => {
     <>
       <MetaTags title='Login' />
 
-      <div className='rw-main flex-center'>
+      <div className='flex-auto flex-center'>
         <Toaster toastOptions={{ className: 'rw-toast', duration: 6000 }} />
         <LoginForm onSubmit={onSubmit} usernameRef={usernameRef} />
       </div>

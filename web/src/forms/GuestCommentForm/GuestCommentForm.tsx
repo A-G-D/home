@@ -8,9 +8,11 @@ import {
   UseFormReturn,
 } from '@redwoodjs/forms'
 import { Toaster } from '@redwoodjs/web/toast'
+import classNames from 'classnames'
+import { FC } from 'react'
 import Window, { WindowPropTypes } from 'src/components/base/Window'
 
-interface GuestCommentFormPropTypes extends WindowPropTypes {
+export interface GuestCommentFormProps extends WindowPropTypes {
   postId: string
   loading?: boolean
   error?: any
@@ -21,7 +23,7 @@ interface GuestCommentFormPropTypes extends WindowPropTypes {
   ) => void
 }
 
-const GuestCommentForm = ({
+const GuestCommentForm: FC<GuestCommentFormProps> = ({
   className,
   postId,
   loading,
@@ -29,15 +31,15 @@ const GuestCommentForm = ({
   formMethods,
   onSubmit,
   ...props
-}: GuestCommentFormPropTypes): JSX.Element => {
+}) => {
   return (
     <Window
-      className={['bg-violet-400 rounded-md min-w-full', className].join(' ')}
+      className={classNames('bg-primary-200 rounded-md min-w-full', className)}
       childrenAttributes={{
         header: {
           children: <Window.Header>Leave a Comment</Window.Header>,
           className:
-            'bg-violet-600 text-gray-900 text-sm font-semibold p-3 rounded-t-md',
+            'bg-primary-500 text-gray-900 text-sm font-semibold p-3 rounded-t-md',
         },
         body: {
           className: 'p-5 rounded-b-md',

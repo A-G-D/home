@@ -55,7 +55,9 @@ const ResumePage = () => {
     <>
       <MetaTags title='Resume' description='Resume page' />
 
-      <Resume />
+      <div className='flex-auto flex-center'>
+        <Resume />
+      </div>
     </>
   )
 }

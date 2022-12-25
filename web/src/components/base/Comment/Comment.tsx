@@ -5,8 +5,10 @@ import { RiDeleteBin6Line } from 'react-icons/ri'
 import { formattedDateTime } from 'src/lib/utils'
 import Tippy from '@tippyjs/react'
 import UserInfo from 'src/components/UserInfo'
+import { FC, HTMLAttributes } from 'react'
+import classNames from 'classnames'
 
-interface CommentData {
+export interface CommentData {
   id: string
   name: string
   body: string
@@ -19,31 +21,30 @@ export type CommentActionHandler = (
   comment: CommentData
 ) => void
 
-interface CommentOptionsPropTypes
-  extends React.HTMLAttributes<HTMLUListElement> {
+export interface CommentOptionsProps extends HTMLAttributes<HTMLUListElement> {
   comment?: CommentData
   onShare?: CommentActionHandler
   onReport?: CommentActionHandler
 }
 
-const CommentOptions = ({
+const CommentOptions: FC<CommentOptionsProps> = ({
   className,
   comment,
   onShare,
   onReport,
   ...props
-}: CommentOptionsPropTypes): JSX.Element => {
+}) => {
   return (
     <ul
-      className={[
-        'bg-violet-300 flex flex-col items-stretch rounded py-1',
-        className,
-      ].join(' ')}
+      className={classNames(
+        'bg-primary-800 flex flex-col items-stretch rounded py-1',
+        className
+      )}
       {...props}
     >
       <li>
         <button
-          className='bg-violet-300 hover:bg-violet-400 text-gray-600 hover:text-gray-700 text-sm text-center font-semibold w-full px-4 py-2 hover:cursor-pointer'
+          className='hover:bg-primary-600 text-gray-300 hover:text-white text-sm text-center font-semibold w-full px-4 py-2 hover:cursor-pointer'
           onClick={(e) => {
             onShare(e, comment)
           }}
@@ -53,7 +54,7 @@ const CommentOptions = ({
       </li>
       <li>
         <button
-          className='bg-violet-300 hover:bg-violet-400 text-gray-600 hover:text-gray-700 text-sm text-center font-semibold w-full px-4 py-2 hover:cursor-pointer'
+          className='hover:bg-primary-600 text-gray-300 hover:text-white text-sm text-center font-semibold w-full px-4 py-2 hover:cursor-pointer'
           onClick={(e) => {
             onReport(e, comment)
           }}
@@ -65,23 +66,23 @@ const CommentOptions = ({
   )
 }
 
-interface CommenterInfoPropTypes extends React.HTMLAttributes<HTMLDivElement> {
+export interface CommenterInfoProps extends HTMLAttributes<HTMLDivElement> {
   picture: string
   username: string
 }
 
-const CommenterInfo = ({
+const CommenterInfo: FC<CommenterInfoProps> = ({
   className,
   picture,
   username,
   ...props
-}: CommenterInfoPropTypes): JSX.Element => {
+}) => {
   return (
     <div
-      className={[
-        'bg-violet-600 flex flex-col items-center gap-4 p-4 rounded-l-md',
-        className,
-      ].join(' ')}
+      className={classNames(
+        'bg-primary-600 flex flex-col items-center gap-4 p-4 rounded-l-md',
+        className
+      )}
       {...props}
     >
       <UserInfo username={username} picture={picture} />
@@ -89,7 +90,7 @@ const CommenterInfo = ({
   )
 }
 
-interface CommentInfoPropTypes extends React.HTMLAttributes<HTMLDivElement> {
+export interface CommentInfoProps extends React.HTMLAttributes<HTMLDivElement> {
   comment: CommentData
   onLike?: CommentActionHandler
   onReply?: CommentActionHandler
@@ -98,7 +99,7 @@ interface CommentInfoPropTypes extends React.HTMLAttributes<HTMLDivElement> {
   onReport?: CommentActionHandler
 }
 
-const CommentInfo = ({
+const CommentInfo: FC<CommentInfoProps> = ({
   className,
   comment,
   onLike,
@@ -107,12 +108,13 @@ const CommentInfo = ({
   onShare,
   onReport,
   ...props
-}: CommentInfoPropTypes): JSX.Element => {
+}) => {
   const dateTime = formattedDateTime(comment.createdAt).dateTime
   return (
     <div
-      className={['bg-violet-400 flex flex-col rounded-r-md', className].join(
-        ' '
+      className={classNames(
+        'bg-primary-200 flex flex-col rounded-r-md',
+        className
       )}
       {...props}
     >
@@ -137,13 +139,13 @@ const CommentInfo = ({
           duration={200}
           maxWidth={360}
         >
-          <button className='hover:bg-violet-500 p-1 rounded-full'>
+          <button className='hover:bg-primary-500 p-1 rounded-full'>
             <IoEllipsisHorizontal />
           </button>
         </Tippy>
       </header>
       <div className='flex-auto px-4'>
-        <p className='bg-purple-300 w-full h-full text-sm p-4 rounded-sm'>
+        <p className='bg-primary-100 w-full h-full text-sm p-4 rounded-sm'>
           {comment.body}
         </p>
       </div>
@@ -186,7 +188,7 @@ const CommentInfo = ({
   )
 }
 
-export interface CommentPropTypes extends React.HTMLAttributes<HTMLDivElement> {
+export interface CommentProps extends HTMLAttributes<HTMLDivElement> {
   comment: CommentData
   onLike?: CommentActionHandler
   onReply?: CommentActionHandler
@@ -195,7 +197,7 @@ export interface CommentPropTypes extends React.HTMLAttributes<HTMLDivElement> {
   onReport?: CommentActionHandler
 }
 
-const Comment = ({
+const Comment: FC<CommentProps> = ({
   className,
   comment,
   onLike,
@@ -204,9 +206,9 @@ const Comment = ({
   onShare,
   onReport,
   ...props
-}: CommentPropTypes): JSX.Element => {
+}) => {
   return (
-    <div className={['flex'].join(' ')} {...props}>
+    <div className={classNames('flex', className)} {...props}>
       <CommenterInfo picture='' username={comment.name} />
       <CommentInfo
         className='flex-auto'
