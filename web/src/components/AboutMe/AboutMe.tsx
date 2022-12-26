@@ -8,22 +8,25 @@ const AboutMe = () => {
           HI! I'm <AuthorName className='ml-2 text-4xl' />
         </h1>
         <h2 className='text-2xl text-center'>
-          a <span className='font-bold'>Front End Web Developer</span>.
+          a <span className='font-bold'>Software Engineer</span>.
         </h2>
       </div>
-      <div className='flex flex-col gap-2'>
+      <div className='flex flex-col gap-3'>
         <p className='text-lg text-center'>
           I love turning visual ideas into reality. I value quality, simplicity,
-          and efficiency. I'm a proponent of both adherence to standards as well
-          as in novelty and innovation.
+          and efficiency. I'm a proponent of adhering to standards and to tried
+          and tested solutions, but am also a sucker for novelty, innovation,
+          and experimentation.
         </p>
         <p className='text-lg text-center'>
-          In the past, I've had experience in software development, game
-          modding, and CAD programming. My quest for growth and learning is
-          never-ending.
+          In the past, I've also had experience in game modding, and CAD
+          programming.
         </p>
         <p className='text-lg text-center'>
-          One day, I will become a Full Stack Web Developer.
+          My quest for growth and learning is never-ending.
+        </p>
+        <p className='text-lg text-center'>
+          In the future, I plan to learn on creating digital arts via coding.
         </p>
       </div>
     </section>
