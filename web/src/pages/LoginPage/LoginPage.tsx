@@ -7,7 +7,7 @@ import { useEffect } from 'react'
 import LoginForm from 'src/forms/LoginForm'
 
 const LoginPage = () => {
-  const { isAuthenticated, logIn } = useAuth()
+  const { isAuthenticated, logIn, loading } = useAuth()
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -38,7 +38,11 @@ const LoginPage = () => {
 
       <div className='flex-auto flex-center'>
         <Toaster toastOptions={{ className: 'rw-toast', duration: 6000 }} />
-        <LoginForm onSubmit={onSubmit} usernameRef={usernameRef} />
+        <LoginForm
+          onSubmit={onSubmit}
+          usernameRef={usernameRef}
+          loading={loading}
+        />
       </div>
     </>
   )

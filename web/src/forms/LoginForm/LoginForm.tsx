@@ -7,21 +7,24 @@ import {
   TextField,
 } from '@redwoodjs/forms'
 import { Link, routes } from '@redwoodjs/router'
-import { FC } from 'react'
+import { FC, HTMLAttributes, MutableRefObject } from 'react'
+import Component from 'src/components/base/Component'
 import Window from 'src/components/base/Window'
 
-export interface LoginFormProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface LoginFormProps extends HTMLAttributes<HTMLDivElement> {
   onSubmit?: (
     values: Record<string, any>,
     event?: React.BaseSyntheticEvent<object, any, any>
   ) => void
-  usernameRef?: React.MutableRefObject<HTMLInputElement>
+  usernameRef?: MutableRefObject<HTMLInputElement>
+  loading: boolean
 }
 
 const LoginForm: FC<LoginFormProps> = ({
   className,
   onSubmit,
   usernameRef,
+  loading,
   ...props
 }) => {
   return (
@@ -101,7 +104,9 @@ const LoginForm: FC<LoginFormProps> = ({
           </Link>
         </div>
 
-        <Submit className='self-center submit-button'>Login</Submit>
+        <Submit className='self-center submit-button' disabled={loading}>
+          <Component loading={loading}>Login</Component>
+        </Submit>
       </Form>
 
       <div className='self-center text-gray-700 text-sm'>

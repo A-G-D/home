@@ -8,21 +8,24 @@ import {
   TextField,
 } from '@redwoodjs/forms'
 import Window from 'src/components/base/Window'
-import { FC, MutableRefObject } from 'react'
+import { FC, HTMLAttributes, MutableRefObject } from 'react'
 import classNames from 'classnames'
+import Component from 'src/components/base/Component'
 
-export interface SignupFormProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface SignupFormProps extends HTMLAttributes<HTMLDivElement> {
   onSubmit?: (
     values: Record<string, any>,
     event?: React.BaseSyntheticEvent<object, any, any>
   ) => void
   usernameRef?: MutableRefObject<HTMLInputElement>
+  loading: boolean
 }
 
 const SignupForm: FC<SignupFormProps> = ({
   className,
   onSubmit,
   usernameRef,
+  loading,
   ...props
 }) => {
   return (
@@ -93,7 +96,9 @@ const SignupForm: FC<SignupFormProps> = ({
             </div>
           </div>
 
-          <Submit className='self-center submit-button'>Sign Up</Submit>
+          <Submit className='self-center submit-button' disabled={loading}>
+            <Component loading={loading}>Sign Up</Component>
+          </Submit>
         </Form>
 
         <div className='self-center text-gray-700 text-sm'>

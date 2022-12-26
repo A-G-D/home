@@ -10,9 +10,10 @@ import {
 import { Toaster } from '@redwoodjs/web/toast'
 import classNames from 'classnames'
 import { FC } from 'react'
-import Window, { WindowPropTypes } from 'src/components/base/Window'
+import Component from 'src/components/base/Component'
+import Window, { WindowProps } from 'src/components/base/Window'
 
-export interface GuestCommentFormProps extends WindowPropTypes {
+export interface GuestCommentFormProps extends WindowProps {
   postId: string
   loading?: boolean
   error?: any
@@ -88,8 +89,8 @@ const GuestCommentForm: FC<GuestCommentFormProps> = ({
             <FieldError name='body' className='input-error' />
           </div>
         </div>
-        <Submit disabled={loading} className='submit-button'>
-          Submit
+        <Submit className='submit-button' disabled={loading}>
+          <Component loading={loading}>Submit</Component>
         </Submit>
       </Form>
     </Window>

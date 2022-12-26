@@ -2,6 +2,7 @@ import { Form, Submit, TextAreaField, UseFormReturn } from '@redwoodjs/forms'
 import { Toaster } from '@redwoodjs/web/toast'
 import classNames from 'classnames'
 import { FC, HTMLAttributes } from 'react'
+import Component from 'src/components/base/Component/Component'
 import UserInfo from 'src/components/UserInfo'
 
 export interface CommentFormProps extends HTMLAttributes<HTMLDivElement> {
@@ -47,8 +48,8 @@ const CommentForm: FC<CommentFormProps> = ({
           errorClassName='flex-auto input-field input-field-error'
           validation={{ required: true }}
         />
-        <Submit disabled={loading} className='submit-button'>
-          Add Comment
+        <Submit className='submit-button' disabled={loading}>
+          <Component loading={loading}>Add Comment</Component>
         </Submit>
       </Form>
     </div>

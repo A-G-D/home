@@ -1,4 +1,6 @@
-export interface WindowPropTypes extends React.HTMLAttributes<HTMLElement> {
+import { HTMLAttributes } from 'react'
+
+export interface WindowProps extends HTMLAttributes<HTMLElement> {
   childrenAttributes?: {
     header?: React.HTMLAttributes<HTMLDivElement>
     body?: React.HTMLAttributes<HTMLDivElement>
@@ -10,7 +12,7 @@ const Window = ({
   children,
   className,
   ...props
-}: WindowPropTypes): JSX.Element => {
+}: WindowProps): JSX.Element => {
   return (
     <article
       className={['flex flex-col h-fit', className].join(' ')}

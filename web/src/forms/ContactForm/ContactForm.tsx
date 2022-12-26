@@ -1,3 +1,4 @@
+import { FC } from 'react'
 import { RiCloseFill } from 'react-icons/ri'
 import {
   FieldError,
@@ -14,7 +15,7 @@ import {
 import { Toaster } from '@redwoodjs/web/toast'
 import Window from 'src/components/base/Window'
 import classNames from 'classnames'
-import { FC } from 'react'
+import Component from 'src/components/base/Component'
 
 export interface ContactFormProps extends FormProps<FieldValues> {
   formMethods?: UseFormReturn<FieldValues, any>
@@ -141,7 +142,7 @@ const ContactForm: FC<ContactFormProps> = ({
         </div>
 
         <Submit className='submit-button' disabled={loading}>
-          Submit
+          <Component loading={loading}>Submit</Component>
         </Submit>
       </Form>
     </Window>

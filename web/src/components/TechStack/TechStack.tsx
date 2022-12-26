@@ -36,7 +36,7 @@ interface TechTipPropTypes {
 
 const TechTip = ({ children, href }: TechTipPropTypes) => {
   return (
-    <div className='flex gap-1 px-2 py-1 rounded-[4px]'>
+    <div className='flex items-center gap-1 px-3 py-1 rounded-[4px] text-white'>
       {children}
       {href && (
         <a href={href} target='_blank'>
