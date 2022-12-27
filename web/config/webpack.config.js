@@ -13,7 +13,5 @@ module.exports = (config, { mode }) => {
 
   rules.forEach((value) => config.module.rules.push(value))
 
-  config.devServer.allowedHosts = ['localhost', 'resume.localhost']
-
   return config
 }
