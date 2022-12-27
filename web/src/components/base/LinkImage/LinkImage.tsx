@@ -1,6 +1,7 @@
-import { updateElement } from "src/lib/utils"
+import { forwardRef, HTMLAttributes, RefObject } from 'react'
+import { updateElement } from 'src/lib/utils'
 
-export interface LinkImagePropTypes extends React.HTMLAttributes<HTMLLinkElement> {
+export interface LinkImageProps extends HTMLAttributes<HTMLLinkElement> {
   className?: string
   href?: string
   src?: string
@@ -8,10 +9,10 @@ export interface LinkImagePropTypes extends React.HTMLAttributes<HTMLLinkElement
   alt: string
 }
 
-const LinkImage = React.forwardRef(
+const LinkImage = forwardRef<HTMLImageElement, LinkImageProps>(
   (
-    { className, href, src, svg, alt }: LinkImagePropTypes,
-    ref: React.RefObject<HTMLAnchorElement & HTMLImageElement>
+    { className, href, src, svg, alt },
+    ref: RefObject<HTMLAnchorElement & HTMLImageElement>
   ): JSX.Element => {
     return !!href ? (
       <a ref={ref} className={className} href={href}>

@@ -1,9 +1,9 @@
 import Modal from 'react-modal'
-import { useForm } from "@redwoodjs/forms"
-import { useMutation } from "@redwoodjs/web"
-import { toast } from "@redwoodjs/web/dist/toast"
-import { useListener } from "src/lib/hooks"
-import ContactForm from 'src/forms/ContactForm'
+import { useForm } from '@redwoodjs/forms'
+import { useMutation } from '@redwoodjs/web'
+import { toast } from '@redwoodjs/web/dist/toast'
+import { useListener } from 'src/lib/hooks'
+import ContactForm from 'src/components/forms/ContactForm'
 
 const CREATE_CONTACT = gql`
   mutation CreateContactMutation($input: CreateContactInput) {
@@ -23,10 +23,11 @@ const ContactFormModal = ({ onClose, ...props }) => {
   })
   const onSubmit = useListener((input) => {
     createContact({ variables: { input } })
-  });
+  })
 
   return (
     <Modal
+      ariaHideApp={false}
       className='max-w-full m-auto z-[101]'
       style={{
         overlay: {

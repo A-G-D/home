@@ -1,11 +1,13 @@
+import { FC, HTMLAttributes } from 'react'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 import { useForm } from '@redwoodjs/forms'
 import { useAuth } from '@redwoodjs/auth'
 import { QUERY as CommentsQuery } from 'src/components/CommentsCell'
-import GuestCommentForm from 'src/forms/GuestCommentForm'
+import GuestCommentForm from 'src/components/forms/GuestCommentForm'
+import CommentForm from 'src/components/forms/CommentForm'
 import CommentsCell from 'src/components/CommentsCell'
-import CommentForm from 'src/forms/CommentForm'
+import classNames from 'classnames'
 
 const CREATE = gql`
   mutation CreateCommentMutation($input: CreateCommentInput!) {
@@ -18,16 +20,15 @@ const CREATE = gql`
   }
 `
 
-export interface CommentsSectionPropTypes
-  extends React.HTMLAttributes<HTMLDivElement> {
+export interface CommentsSectionProps extends HTMLAttributes<HTMLDivElement> {
   postId: string
 }
 
-const CommentsSection = ({
+const CommentsSection: FC<CommentsSectionProps> = ({
   className,
   postId,
   ...props
-}: CommentsSectionPropTypes): JSX.Element => {
+}) => {
   const { currentUser } = useAuth()
   const formMethods = useForm({ mode: 'onBlur' })
   const [createComment, { loading, error }] = useMutation(CREATE, {
@@ -43,10 +44,10 @@ const CommentsSection = ({
 
   return (
     <div
-      className={[
+      className={classNames(
         'flex flex-col items-stretch gap-8 px-12 py-12',
-        className,
-      ].join(' ')}
+        className
+      )}
       {...props}
     >
       <CommentsCell postId={postId} />

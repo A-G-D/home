@@ -60,7 +60,7 @@ const ContactForm: FC<ContactFormProps> = ({
             </Window.Header>
           ),
           className:
-            'bg-primary-500 text-gray-900 p-3 text-sm font-semibold rounded-t-[6px]',
+            'bg-primary-500 text-gray-200 p-3 text-sm font-semibold rounded-t-[6px]',
         },
         body: {
           className: 'p-5 rounded-b-[6px]',

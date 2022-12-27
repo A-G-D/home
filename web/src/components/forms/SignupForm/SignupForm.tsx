@@ -31,14 +31,14 @@ const SignupForm: FC<SignupFormProps> = ({
   return (
     <Window
       className={classNames(
-        'bg-primary-300 flex flex-col rounded-lg w-96',
+        'bg-primary-200 flex flex-col rounded-lg w-96',
         className
       )}
       childrenAttributes={{
         header: {
           children: <Window.Header>Signup</Window.Header>,
           className:
-            'bg-primary-800 text-gray-900 p-3 text-sm font-semibold rounded-t-lg',
+            'bg-primary-500 text-gray-200 p-3 text-sm font-semibold rounded-t-lg',
         },
         body: {
           className: 'p-5 rounded-b-lg',

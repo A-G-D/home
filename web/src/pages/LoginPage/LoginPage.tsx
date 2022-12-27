@@ -4,7 +4,7 @@ import { useAuth } from '@redwoodjs/auth'
 import { MetaTags } from '@redwoodjs/web'
 import { toast, Toaster } from '@redwoodjs/web/toast'
 import { useEffect } from 'react'
-import LoginForm from 'src/forms/LoginForm'
+import LoginForm from 'src/components/forms/LoginForm'
 
 const LoginPage = () => {
   const { isAuthenticated, logIn, loading } = useAuth()

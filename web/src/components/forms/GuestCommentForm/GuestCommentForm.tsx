@@ -40,7 +40,7 @@ const GuestCommentForm: FC<GuestCommentFormProps> = ({
         header: {
           children: <Window.Header>Leave a Comment</Window.Header>,
           className:
-            'bg-primary-500 text-gray-900 text-sm font-semibold p-3 rounded-t-md',
+            'bg-primary-500 text-gray-200 text-sm font-semibold p-3 rounded-t-md',
         },
         body: {
           className: 'p-5 rounded-b-md',

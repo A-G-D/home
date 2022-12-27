@@ -1,12 +1,13 @@
 import { MetaTags } from '@redwoodjs/web'
 import { Library } from 'src/lib/utils'
 import { Screenshot } from 'src/assets'
+import { FC } from 'react'
 
 const getScreenshot = (path: string): string => {
   return Library.Pictures.get(`screenshots/${path}`)
 }
 
-interface ProjectItemPropTypes extends React.HTMLAttributes<HTMLDivElement> {
+interface ProjectItemProps extends React.HTMLAttributes<HTMLDivElement> {
   projectTitle: string
   imgSrc?: string
   imgLeft?: boolean
@@ -20,7 +21,7 @@ interface ProjectItemPropTypes extends React.HTMLAttributes<HTMLDivElement> {
   }
 }
 
-const ProjectItem = ({
+const ProjectItem: FC<ProjectItemProps> = ({
   children,
   className,
   projectTitle,
@@ -29,7 +30,7 @@ const ProjectItem = ({
   repo,
   site,
   ...props
-}: ProjectItemPropTypes): JSX.Element => {
+}) => {
   return (
     <div
       className={[

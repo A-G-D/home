@@ -1,9 +1,10 @@
-import { HTMLAttributes } from 'react'
+import classNames from 'classnames'
+import { HTMLAttributes, ReactNode } from 'react'
 
 export interface WindowProps extends HTMLAttributes<HTMLElement> {
   childrenAttributes?: {
-    header?: React.HTMLAttributes<HTMLDivElement>
-    body?: React.HTMLAttributes<HTMLDivElement>
+    header?: HTMLAttributes<HTMLDivElement>
+    body?: HTMLAttributes<HTMLDivElement>
   }
 }
 
@@ -15,14 +16,14 @@ const Window = ({
 }: WindowProps): JSX.Element => {
   return (
     <article
-      className={['flex flex-col h-fit', className].join(' ')}
+      className={classNames('flex flex-col h-fit', className)}
       {...props}
     >
       <header
-        className={[
+        className={classNames(
           'flex flex-row justify-between items-center',
-          header?.className,
-        ].join(' ')}
+          header?.className
+        )}
       >
         {header?.children}
       </header>
@@ -39,8 +40,8 @@ Window.Header = ({
   controlBar,
   controlBarPosition = 'right',
 }: {
-  children?: React.ReactNode
-  controlBar?: React.ReactNode
+  children?: ReactNode
+  controlBar?: ReactNode
   controlBarPosition?: string
 }): JSX.Element => {
   const placeLeft = controlBarPosition === 'left'

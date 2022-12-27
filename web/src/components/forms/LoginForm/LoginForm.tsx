@@ -7,6 +7,7 @@ import {
   TextField,
 } from '@redwoodjs/forms'
 import { Link, routes } from '@redwoodjs/router'
+import classNames from 'classnames'
 import { FC, HTMLAttributes, MutableRefObject } from 'react'
 import Component from 'src/components/base/Component'
 import Window from 'src/components/base/Window'
@@ -29,15 +30,15 @@ const LoginForm: FC<LoginFormProps> = ({
 }) => {
   return (
     <Window
-      className={[
+      className={classNames(
         'bg-primary-200 flex flex-col rounded-lg w-96',
-        className,
-      ].join(' ')}
+        className
+      )}
       childrenAttributes={{
         header: {
           children: <Window.Header>Login</Window.Header>,
           className:
-            'bg-primary-500 text-gray-900 p-3 text-sm font-semibold rounded-t-lg',
+            'bg-primary-500 text-gray-200 p-3 text-sm font-semibold rounded-t-lg',
         },
         body: {
           className: 'flex flex-col items-stretch gap-4 p-5 rounded-b-lg',

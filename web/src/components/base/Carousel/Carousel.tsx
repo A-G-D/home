@@ -1,26 +1,32 @@
-import React from 'react'
-import { useEvent, usePrev, useResizeObserver } from 'src/lib/hooks'
-import { clamp, rotate, toArray, updateElement } from 'src/lib/utils'
+import classNames from 'classnames'
+import React, {
+  forwardRef,
+  HTMLAttributes,
+  MutableRefObject,
+  ReactElement,
+  useEffect,
+  useRef,
+  useState,
+} from 'react'
+import { useResizeObserver } from 'src/lib/hooks'
+import { clamp, toArray, updateElement } from 'src/lib/utils'
 
-export interface CarouselPropTypes
-  extends React.HTMLAttributes<HTMLDivElement> {
-  children?: React.ReactElement | React.ReactElement[]
+export interface CarouselProps extends HTMLAttributes<HTMLDivElement> {
+  children?: ReactElement | ReactElement[]
   activeIndex?: number
 }
 
-const Carousel = React.forwardRef(
+const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
   (
-    { children, className, activeIndex = 0, ...props }: CarouselPropTypes,
-    ref: React.MutableRefObject<HTMLDivElement>
-  ): JSX.Element => {
-    const indexRef = React.useRef(0)
-    const [width, setWidth] = React.useState(0)
-    const [gap, setGap] = React.useState(0)
-    const [items, setItems] = React.useState(
-      toArray<React.ReactElement>(children)
-    )
+    { children, className, activeIndex = 0, ...props },
+    ref: MutableRefObject<HTMLDivElement>
+  ) => {
+    const indexRef = useRef(0)
+    const [width, setWidth] = useState(0)
+    const [gap, setGap] = useState(0)
+    const [items, setItems] = useState(toArray<ReactElement>(children))
 
-    const iRef = React.useRef<HTMLDivElement>()
+    const iRef = useRef<HTMLDivElement>()
     ref = ref ?? iRef
 
     useResizeObserver(
@@ -37,7 +43,7 @@ const Carousel = React.forwardRef(
     activeIndex = clamp(activeIndex, 0, items.length - 1)
     indexRef.current = activeIndex
 
-    React.useEffect(() => {
+    useEffect(() => {
       if (ref.current != null) {
         const style = getComputedStyle(ref.current)
         setWidth(ref.current.clientWidth)
@@ -51,10 +57,10 @@ const Carousel = React.forwardRef(
     return (
       <div
         ref={ref}
-        className={[
+        className={classNames(
           'Carousel flex items-stretch overflow-hidden',
-          className,
-        ].join(' ')}
+          className
+        )}
         style={{ gap }}
         {...props}
       >

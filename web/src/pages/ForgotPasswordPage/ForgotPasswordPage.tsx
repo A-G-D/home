@@ -3,7 +3,7 @@ import { useAuth } from '@redwoodjs/auth'
 import { navigate, routes } from '@redwoodjs/router'
 import { MetaTags } from '@redwoodjs/web'
 import { toast, Toaster } from '@redwoodjs/web/toast'
-import ForgotPasswordForm from 'src/forms/ForgotPasswordForm'
+import ForgotPasswordForm from 'src/components/forms/ForgotPasswordForm'
 
 const ForgotPasswordPage = () => {
   const { isAuthenticated, forgotPassword } = useAuth()
@@ -15,8 +15,10 @@ const ForgotPasswordPage = () => {
   }, [isAuthenticated])
 
   const usernameRef = useRef<HTMLInputElement>()
+
   useEffect(() => {
-    usernameRef.current.focus()
+    if (usernameRef.current == null) return
+    setTimeout(() => usernameRef.current.focus(), 0)
   }, [])
 
   const onSubmit = async (data) => {

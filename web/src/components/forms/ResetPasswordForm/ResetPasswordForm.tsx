@@ -34,7 +34,7 @@ const ResetPasswordForm: FC<ResetPasswordFormProps> = ({
         header: {
           children: <Window.Header>Reset Password</Window.Header>,
           className:
-            'bg-primary-500 text-gray-900 p-3 text-sm font-semibold rounded-t-lg',
+            'bg-primary-500 text-gray-200 p-3 text-sm font-semibold rounded-t-lg',
         },
         body: {
           className: 'p-5 rounded-b-lg',

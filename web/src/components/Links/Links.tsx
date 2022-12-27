@@ -33,9 +33,9 @@ const Links = () => {
             </Link>
             <span
               ref={portfolioDropdownRef}
-              className='bg-primary-700 hover:bg-primary-600 rounded-md p-[2px]'
+              className='bg-primary-800 hover:bg-transparent text-white hover:text-primary-800 border border-primary-800 rounded-md p-[2px]'
             >
-              <MdOutlineKeyboardArrowDown className='text-white' />
+              <MdOutlineKeyboardArrowDown />
             </span>
           </div>
         </li>

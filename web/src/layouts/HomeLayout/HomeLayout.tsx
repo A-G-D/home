@@ -89,7 +89,7 @@ const Footer: FC<FooterProps> = ({ className, ...props }) => {
   return (
     <footer
       className={classNames(
-        'bg-primary-600/80 px-6 py-6 flex flex-col gap-4 items-center',
+        'bg-primary-600/80 px-6 py-6 text-gray-200 flex flex-col gap-4 items-center',
         className
       )}
       {...props}
@@ -97,7 +97,7 @@ const Footer: FC<FooterProps> = ({ className, ...props }) => {
       <div className='text-sm italic'>
         The background shader pattern is an edited fork from{' '}
         <a
-          className='text-link font-bold'
+          className='text-link text-primary-200 font-bold'
           href='https://www.shadertoy.com/view/WldSRn'
         >
           this source
@@ -110,7 +110,10 @@ const Footer: FC<FooterProps> = ({ className, ...props }) => {
         </div>
         <div>
           Made with{' '}
-          <a className='text-link font-bold' href='https://redwoodjs.com'>
+          <a
+            className='text-link text-primary-200 font-bold'
+            href='https://redwoodjs.com'
+          >
             RedwoodJS
           </a>
           .
@@ -149,7 +152,7 @@ const HomeLayout: FC<HomeLayoutProps> = ({ children, className, ...props }) => {
   return (
     <div
       className={classNames(
-        'flex-auto self-center flex flex-col h-fit min-h-full max-w-[720px] w-full',
+        'flex-auto self-center flex flex-col h-fit min-h-full max-w-[768px] w-full',
         className
       )}
       {...props}

@@ -11,7 +11,7 @@ const Spinner: FC<SpinnerProps> = ({ className, ...props }) => (
     role='status'
     aria-hidden='true'
     className={classNames(
-      'mr-2 w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600',
+      'mr-2 w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-primary-600',
       className
     )}
     viewBox='0 0 100 101'

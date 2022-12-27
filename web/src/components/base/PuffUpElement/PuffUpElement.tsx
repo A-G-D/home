@@ -1,27 +1,31 @@
-import React from 'react'
+import classNames from 'classnames'
+import {
+  Children,
+  cloneElement,
+  forwardRef,
+  HTMLAttributes,
+  JSXElementConstructor,
+  ReactElement,
+} from 'react'
 
-type JSXNode = React.ReactElement<
-  any,
-  string | React.JSXElementConstructor<any>
->
+type JSXNode = ReactElement<any, string | JSXElementConstructor<any>>
 
-const PuffUpElement = React.forwardRef(
-  (
-    { children, className, ...props }: React.HTMLAttributes<HTMLDivElement>,
-    ref: React.ForwardedRef<HTMLDivElement>
-  ): JSX.Element => {
+export interface PuffUpElement extends HTMLAttributes<HTMLDivElement> {}
+
+const PuffUpElement = forwardRef<HTMLDivElement, PuffUpElement>(
+  ({ children, className, ...props }, ref) => {
     return (
       <div
         ref={ref}
-        className={['flex justify-center items-center', className].join(' ')}
+        className={classNames('flex justify-center items-center', className)}
         {...props}
       >
-        {React.Children.map(children as JSXNode, (child: React.ReactElement) =>
-          React.cloneElement(child, {
-            className: [
+        {Children.map(children as JSXNode, (child: ReactElement) =>
+          cloneElement(child, {
+            className: classNames(
               'transition-all hover:w-full hover:h-full',
-              child.props.className,
-            ].join(' '),
+              child.props.className
+            ),
           })
         )}
       </div>
