@@ -1,3 +1,4 @@
+import { useRef } from 'react'
 import { Link, routes, useMatch } from '@redwoodjs/router'
 import Tippy from '@tippyjs/react'
 import classNames from 'classnames'
@@ -13,10 +14,9 @@ const Links = () => {
   const navStyle =
     'hover:border-b-primary-800 hover:text-primary-900 border-y-4 border-transparent flex items-center gap-2 px-[8px] py-[4px] font-bold'
 
-  const portfolioDropdownRef = React.useRef()
+  const portfolioDropdownRef = useRef()
   const portfolioMatchInfo = useMatch(routes.projects())
   const blogMatchInfo = useMatch(routes.blog())
-  const resumeMatchInfo = useMatch(routes.resume())
 
   return (
     <nav className='flex items-center'>
@@ -53,11 +53,8 @@ const Links = () => {
         </li>
         <li>
           <a
-            className={classNames(
-              navStyle,
-              resumeMatchInfo.match ? activeNavStyle : inactiveNavStyle
-            )}
-            href={routes.resume()}
+            className={classNames(navStyle, inactiveNavStyle)}
+            href={`resume.${getDomain()}`}
             target='_blank'
           >
             Resume
