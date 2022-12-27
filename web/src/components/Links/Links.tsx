@@ -54,7 +54,7 @@ const Links = () => {
         <li>
           <a
             className={classNames(navStyle, inactiveNavStyle)}
-            href={`resume.${getDomain()}`}
+            href={`${window.location.protocol}//resume.${getDomain()}`}
             target='_blank'
           >
             Resume
