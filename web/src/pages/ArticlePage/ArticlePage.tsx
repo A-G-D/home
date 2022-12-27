@@ -8,8 +8,10 @@ const ArticlePage = ({ id }) => {
     <>
       <MetaTags title='Article' description='Article page' />
 
-      <ArticleCell id={id} />
-      <CommentsSection postId={id} />
+      <div className='flex flex-col items-stretch gap-24 px-6 py-12'>
+        <ArticleCell id={id} />
+        <CommentsSection postId={id} />
+      </div>
     </>
   )
 }

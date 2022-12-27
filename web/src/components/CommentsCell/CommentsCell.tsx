@@ -1,7 +1,11 @@
 import type { CommentsQuery } from 'types/graphql'
 import { CellSuccessProps, CellFailureProps, useMutation } from '@redwoodjs/web'
-import Comment from 'src/components/Comment'
 import { useAuth } from '@redwoodjs/auth'
+import { FC } from 'react'
+import classNames from 'classnames'
+import { useListener } from 'src/lib/hooks'
+import Comment from 'src/components/base/Comment'
+import Spinner from 'src/components/base/Spinner'
 
 export const QUERY = gql`
   query CommentsQuery($postId: String!) {
@@ -23,19 +27,19 @@ export const DELETE = gql`
   }
 `
 
-type CommentsDisplayPropTypes = React.HTMLAttributes<HTMLElement>
+type CommentsDisplayProps = React.HTMLAttributes<HTMLElement>
 
-const CommentsDisplay = ({
+const CommentsDisplay: FC<CommentsDisplayProps> = ({
   children,
   className,
   ...props
-}: CommentsDisplayPropTypes) => {
+}) => {
   return (
     <section
-      className={['flex flex-col items-stretch gap-8', className].join(' ')}
+      className={classNames('flex flex-col items-stretch gap-8', className)}
       {...props}
     >
-      <h2 className='bg-violet-600 text-center text-gray-800 text-md font-semibold p-3 rounded-md'>
+      <h2 className='bg-primary-600 text-center text-gray-200 text-md font-semibold p-3 rounded-md'>
         Comments
       </h2>
       <div className='flex flex-col items-stretch'>{children}</div>
@@ -46,7 +50,7 @@ const CommentsDisplay = ({
 export const Loading = () => (
   <CommentsDisplay>
     <div className='flex-center gap-2'>
-      <div className='spin' />
+      <Spinner />
       Loading...
     </div>
   </CommentsDisplay>
@@ -79,13 +83,15 @@ export const Success = ({ comments }: CellSuccessProps<CommentsQuery>) => {
 
   const isModerator = hasRole('admin') || hasRole('moderator')
 
-  const onLike = (e, comment) => {}
-  const onReply = (e, comment) => {}
-  const onDelete = (e, comment) => {
+  const onLike = useListener((e, comment) => {})
+
+  const onReply = useListener((e, comment) => {})
+
+  const onDelete = useListener((e, comment) => {
     if (confirm('Confirm Delete Reply')) {
       deleteComment({ variables: { id: comment.id } })
     }
-  }
+  })
 
   return (
     <CommentsDisplay>

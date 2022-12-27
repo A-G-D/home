@@ -1,3 +1,5 @@
+import classNames from 'classnames'
+
 export interface AuthorNamePropTypes
   extends React.HTMLAttributes<HTMLSpanElement> {}
 
@@ -8,7 +10,7 @@ const AuthorName = ({
 }: AuthorNamePropTypes): JSX.Element => {
   return (
     <span
-      className={["font-['Raw_Print_Formal'] font-black", className].join(' ')}
+      className={classNames('font-handwritten font-black', className)}
       {...props}
     >
       Aloever Dulay

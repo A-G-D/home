@@ -3,7 +3,7 @@ import { useAuth } from '@redwoodjs/auth'
 import { navigate, routes } from '@redwoodjs/router'
 import { MetaTags } from '@redwoodjs/web'
 import { toast, Toaster } from '@redwoodjs/web/toast'
-import ResetPasswordForm from 'src/forms/ResetPasswordForm'
+import ResetPasswordForm from 'src/components/forms/ResetPasswordForm'
 
 const ResetPasswordPage = ({ resetToken }) => {
   const { isAuthenticated, reauthenticate, validateResetToken, resetPassword } =
@@ -53,7 +53,7 @@ const ResetPasswordPage = ({ resetToken }) => {
     <>
       <MetaTags title='Reset Password' />
 
-      <div className='rw-main'>
+      <div className='flex-auto flex-center'>
         <Toaster toastOptions={{ className: 'rw-toast', duration: 6000 }} />
         <ResetPasswordForm
           enabled={enabled}

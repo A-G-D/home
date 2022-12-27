@@ -1,11 +1,12 @@
 import type { ArticlesQuery } from 'types/graphql'
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
+import { Fragment } from 'react'
 import { Link, routes } from '@redwoodjs/router'
 import { MdOutlineArrowDropUp } from 'react-icons/md'
-
 import { formattedDate } from 'src/lib/utils'
-
 import ArticleCell from 'src/components/ArticleCell'
+import CollapsibleArticlePreview from 'src/components/CollapsibleArticlePreview'
+import Spinner from 'src/components/base/Spinner'
 
 export const QUERY = gql`
   query ArticlesQuery {
@@ -20,7 +21,7 @@ export const QUERY = gql`
 
 export const Loading = () => (
   <div className='flex-auto flex flex-col gap-4 justify-center items-center'>
-    <div className='spin' />
+    <Spinner />
     <h2>Loading...</h2>
   </div>
 )
@@ -39,130 +40,6 @@ export const Failure = ({ error }: CellFailureProps) => (
     <h2>Error: {error.message}</h2>
   </div>
 )
-
-interface CollapsiblePreviewPropTypes
-  extends React.HTMLAttributes<HTMLElement> {
-  options?: {
-    open?: boolean
-    header?: { open?: React.ReactNode; closed?: React.ReactNode }
-    footer?: { open?: React.ReactNode; closed?: React.ReactNode }
-    viewportClassName?: { open?: string; closed?: string }
-  }
-  eventHandlers?: {
-    onHeaderClick?: (e: React.MouseEvent) => boolean
-    onBodyClick?: (e: React.MouseEvent) => boolean
-    onFooterClick?: (e: React.MouseEvent) => boolean
-  }
-}
-
-const CollapsiblePreview = ({
-  children,
-  className,
-  options: { open = false, header, footer, viewportClassName } = {
-    open: false,
-  },
-  eventHandlers = {},
-  ...props
-}: CollapsiblePreviewPropTypes) => {
-  const ref: React.RefObject<HTMLDivElement> = React.useRef()
-  const overlayRef: React.RefObject<HTMLDivElement> = React.useRef()
-  const [minHeight, setMinHeight] = React.useState(0)
-
-  const [isOpen, setIsOpen] = React.useState(open)
-  const [articlePaperHeader, setArticlePaperHeader] =
-    React.useState<HTMLElement>()
-  const [articlePaperPaddingTop, setArticlePaperPaddingTop] = React.useState(0)
-
-  const headerOffsetHeight = articlePaperHeader
-    ? articlePaperHeader.clientHeight
-    : 0
-
-  const onHeaderClickHandler = (e: React.MouseEvent) => {
-    if (eventHandlers?.onHeaderClick?.(e)) {
-      setIsOpen((isOpenFlag) => !isOpenFlag)
-    }
-  }
-  const onBodyClickHandler = (e: React.MouseEvent) => {
-    if (eventHandlers?.onBodyClick?.(e)) {
-      setIsOpen((isOpenFlag) => !isOpenFlag)
-    }
-  }
-  const onFooterClickHandler = (e: React.MouseEvent) => {
-    if (eventHandlers?.onFooterClick?.(e)) {
-      setIsOpen((isOpenFlag) => !isOpenFlag)
-    }
-  }
-
-  React.useEffect(() => {
-    if (ref.current != null) {
-      setArticlePaperHeader(ref.current.querySelector('header'))
-      const padding = window.getComputedStyle(
-        ref.current.children[0]
-      ).paddingTop
-      setArticlePaperPaddingTop(Number.parseInt(padding))
-    }
-  }, [isOpen])
-
-  React.useEffect(() => {
-    setIsOpen(open)
-  }, [open])
-
-  React.useEffect(() => {
-    let height = 0
-    for (let i = 0; i < overlayRef.current.children.length; ++i) {
-      const child = overlayRef.current.children[i] as HTMLElement
-      height += child.offsetHeight
-    }
-    setMinHeight(height)
-  })
-
-  return (
-    <section
-      className={['bg-white/80 relative overflow-hidden', className].join(' ')}
-      style={{ height: minHeight }}
-      {...props}
-    >
-      <div
-        ref={overlayRef}
-        className='absolute top-0 bottom-0 left-0 right-0 flex flex-col items-stretch z-[1]'
-      >
-        <div
-          className='bg-gradient-to-b from-white via-white'
-          onClick={onHeaderClickHandler}
-        >
-          {isOpen ? header.open : header.closed}
-        </div>
-        <div
-          className={[
-            'relative',
-            isOpen ? viewportClassName.open : viewportClassName.closed,
-          ].join(' ')}
-          onClick={onBodyClickHandler}
-        >
-          {isOpen ? (
-            <div className=''>{children}</div>
-          ) : (
-            <div
-              ref={ref}
-              className='absolute left-0 right-0 z-[-1]'
-              style={{
-                top: -(headerOffsetHeight + articlePaperPaddingTop),
-              }}
-            >
-              {children}
-            </div>
-          )}
-        </div>
-        <div
-          className='bg-gradient-to-t from-white'
-          onClick={onFooterClickHandler}
-        >
-          {isOpen ? footer.open : footer.closed}
-        </div>
-      </div>
-    </section>
-  )
-}
 
 export const Success = ({ posts }: CellSuccessProps<ArticlesQuery>) => {
   return (
@@ -203,14 +80,14 @@ export const Success = ({ posts }: CellSuccessProps<ArticlesQuery>) => {
             ),
           }
           return (
-            <>
+            <Fragment key={post.id}>
               {i > 0 && (
-                <li key={`${post.id}-rule`}>
+                <li>
                   <hr className='bg-white border-white' />
                 </li>
               )}
-              <li key={post.id}>
-                <CollapsiblePreview
+              <li>
+                <CollapsibleArticlePreview
                   className=''
                   options={{
                     header,
@@ -220,9 +97,9 @@ export const Success = ({ posts }: CellSuccessProps<ArticlesQuery>) => {
                   eventHandlers={{ onFooterClick: (e) => true }}
                 >
                   <ArticleCell id={post.id} />
-                </CollapsiblePreview>
+                </CollapsibleArticlePreview>
               </li>
-            </>
+            </Fragment>
           )
         })}
     </ul>
