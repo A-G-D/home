@@ -94,7 +94,7 @@ const Footer: FC<FooterProps> = ({ className, ...props }) => {
       )}
       {...props}
     >
-      <div className='text-sm italic'>
+      <div className='text-center text-sm italic'>
         The background shader pattern is an edited fork from{' '}
         <a
           className='text-link text-primary-200 font-bold'

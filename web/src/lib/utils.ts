@@ -86,3 +86,18 @@ export const Library = {
     get: (path: string): string => Library.Root.get(`Videos/${path}`),
   },
 }
+
+// Reference: https://javascript.plainenglish.io/manage-dynamic-and-custom-subdomains-in-react-31154559694
+export const getSubdomain = () => {
+  const host = window.location.host
+  const subdomains = host
+    .split('.')
+    .slice(0, host.includes('localhost') ? -1 : -2)
+  return subdomains.length > 0 ? subdomains.join('.') : null
+}
+
+export const getDomain = () => {
+  const host = window.location.host
+  const domain = host.split('.').slice(host.includes('localhost') ? -1 : -2)
+  return domain.join('.')
+}

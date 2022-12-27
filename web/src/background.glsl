@@ -61,8 +61,11 @@ float getDistance(vec3 pos, vec2 uv)
 }
 
 float getTargetZ(vec2 target) {
-  float cameraDistance = mix(1., sqrt(2.), (abs(target.x) + abs(target.y)) * 0.5);
-  return sqrt(cameraDistance * cameraDistance - (target.x * target.x + target.y * target.y));
+  float cameraDistance = mix(1., sqrt(2.0), (abs(target.x) + abs(target.y)) * 0.5);
+  float squareDistance = cameraDistance * cameraDistance - target.x * target.x - target.y * target.y;
+  float absSquareDistance = abs(squareDistance);
+  float sign = squareDistance / absSquareDistance;
+  return sign * sqrt(absSquareDistance);
 }
 
 void mainImage( out vec4 fragColor, in vec2 fragCoord )

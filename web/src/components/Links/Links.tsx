@@ -3,6 +3,7 @@ import Tippy from '@tippyjs/react'
 import classNames from 'classnames'
 import { MdOutlineKeyboardArrowDown } from 'react-icons/md'
 import PortfolioMenu from 'src/components/PortfolioMenu'
+import { getDomain } from 'src/lib/utils'
 
 import 'tippy.js/animations/shift-away.css'
 
@@ -51,17 +52,16 @@ const Links = () => {
           </Link>
         </li>
         <li>
-          <Link
+          <a
             className={classNames(
               navStyle,
               resumeMatchInfo.match ? activeNavStyle : inactiveNavStyle
             )}
-            to={routes.resume()}
+            href={routes.resume()}
             target='_blank'
-            rel='noopener noreferrer'
           >
             Resume
-          </Link>
+          </a>
         </li>
       </ul>
       <Tippy

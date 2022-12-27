@@ -50,9 +50,5 @@ export const Success = ({ article }: CellSuccessProps<ArticleQuery>) => {
     .replace('${title}', article.title)
     .replace('${createdAt}', date)
 
-  return (
-    <div className='flex flex-col gap-4'>
-      <ArticlePaper className='gap-8 px-12 py-12' bodyHTML={bodyHTML} />
-    </div>
-  )
+  return <ArticlePaper className='' bodyHTML={bodyHTML} />
 }

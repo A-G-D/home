@@ -44,10 +44,7 @@ const CommentsSection: FC<CommentsSectionProps> = ({
 
   return (
     <div
-      className={classNames(
-        'flex flex-col items-stretch gap-8 px-12 py-12',
-        className
-      )}
+      className={classNames('flex flex-col items-stretch gap-8', className)}
       {...props}
     >
       <CommentsCell postId={postId} />

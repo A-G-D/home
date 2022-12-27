@@ -19,8 +19,7 @@ const AboutMe = () => {
           and experimentation.
         </p>
         <p className='text-lg text-center'>
-          In the past, I've also had experience in game modding, and CAD
-          programming.
+          In the past, I've had experience in game modding and CAD programming.
         </p>
         <p className='text-lg text-center'>
           My quest for growth and learning is never-ending.
