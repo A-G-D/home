@@ -60,17 +60,23 @@ float getDistance(vec3 pos, vec2 uv)
   return max(max(d1, -dd2), -d0);
 }
 
+float getTargetZ(vec2 target) {
+  float cameraDistance = mix(1., sqrt(2.), (abs(target.x) + abs(target.y)) * 0.5);
+  return sqrt(cameraDistance * cameraDistance - (target.x * target.x + target.y * target.y));
+}
+
 void mainImage( out vec4 fragColor, in vec2 fragCoord )
 {
   vec2 p = (fragCoord.xy * 2.0 - u_resolution.xy) / min(u_resolution.x, u_resolution.y);
-  vec2 mouse = u_mouse.xy - 0.5*u_resolution.xy;
+  vec2 mouse = (u_mouse.xy * 2.0 - u_resolution.xy) / u_resolution;
+  float targetZOffset = getTargetZ(mouse);
 
   // camera
   vec3 cameraOrigin = vec3(0.0, 0.0, u_time);
-  vec3 cameraTarget = vec3(2.0*mouse.x/u_resolution.x, 2.0*mouse.y/u_resolution.y, u_time + 1.0);
+  vec3 cameraTarget = vec3(mouse.x, mouse.y, u_time + targetZOffset);
   vec3 upDirection = vec3(0.0, 1.0, 0.0);
   vec3 cameraDir = normalize(cameraTarget - cameraOrigin);
-  vec3 cameraRight = normalize(cross(upDirection, cameraOrigin));
+  vec3 cameraRight = normalize(cross(upDirection, cameraDir));
   vec3 cameraUp = cross(cameraDir, cameraRight);
   vec3 rayDirection = normalize(cameraRight * p.x + cameraUp * p.y + cameraDir);
 
