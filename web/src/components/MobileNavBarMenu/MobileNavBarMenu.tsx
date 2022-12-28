@@ -1,6 +1,7 @@
 import { FC, HTMLAttributes, useState } from 'react'
 import { Link, routes } from '@redwoodjs/router'
 import classNames from 'classnames'
+import { getDomain } from 'src/lib/utils'
 
 export interface MobileNavBarMenuProps
   extends HTMLAttributes<HTMLUListElement> {
@@ -22,8 +23,9 @@ const MobileNavBarMenu: FC<MobileNavBarMenuProps> = ({
       label: 'Blog',
     },
     {
-      route: routes.resume(),
+      route: `${window.location.protocol}//resume.${getDomain()}`,
       label: 'Resume',
+      target: '_blank',
     },
   ])
 
@@ -32,9 +34,9 @@ const MobileNavBarMenu: FC<MobileNavBarMenuProps> = ({
       className={classNames('flex flex-col items-stretch', className)}
       {...props}
     >
-      {navMenuOptions.map(({ route, label }) => (
+      {navMenuOptions.map(({ route, label, target }) => (
         <li key={route}>
-          <Link to={route} onClick={() => onMenuSelect(route)}>
+          <Link to={route} target={target} onClick={() => onMenuSelect(route)}>
             <p className='px-6 py-3 font-semibold text-white hover:bg-primary-700'>
               {label}
             </p>
