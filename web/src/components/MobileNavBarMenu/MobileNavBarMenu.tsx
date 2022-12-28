@@ -1,4 +1,4 @@
-import { FC, HTMLAttributes, useState } from 'react'
+import { FC, HTMLAttributes } from 'react'
 import { Link, routes } from '@redwoodjs/router'
 import classNames from 'classnames'
 import { getDomain } from 'src/lib/utils'
@@ -13,22 +13,6 @@ const MobileNavBarMenu: FC<MobileNavBarMenuProps> = ({
   className,
   ...props
 }) => {
-  const [navMenuOptions] = useState([
-    {
-      route: routes.projects(),
-      label: 'Portfolio',
-    },
-    {
-      route: routes.blog(),
-      label: 'Blog',
-    },
-    {
-      route: `${window.location.protocol}//resume.${getDomain()}`,
-      label: 'Resume',
-      target: '_blank',
-    },
-  ])
-
   return (
     <ul
       className={classNames('flex flex-col items-stretch', className)}
