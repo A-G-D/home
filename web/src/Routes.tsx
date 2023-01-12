@@ -16,6 +16,7 @@ const Routes = () => {
   return (
     <Router>
       <Set wrap={MainLayout}>
+        <Route path='/background' page={() => <></>} name='background' />
         <Route path='/signup' page={SignupPage} name='signup' />
         <Route path='/login' page={LoginPage} name='login' />
         <Route path='/forgot-password' page={ForgotPasswordPage} name='forgotPassword' />
