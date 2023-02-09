@@ -25,6 +25,11 @@ import {
   Csharp,
   Lua,
   Bash,
+  Django,
+  NextJS,
+  Java,
+  Pandas,
+  Gitlab,
 } from 'src/assets'
 
 import 'tippy.js/animations/scale.css'
@@ -161,6 +166,18 @@ const TechStack = () => {
             <TechStackItem
               containerClassName='w-[48px] h-[48px]'
               contentClassName='w-[32px] h-[32px]'
+              svg={<Django className={smallItemShadow} />}
+              alt='Django'
+              tooltip={
+                <TechTip href='https://www.djangoproject.com/'>Django</TechTip>
+              }
+              tooltipInteractive
+            />
+          </li>
+          <li>
+            <TechStackItem
+              containerClassName='w-[48px] h-[48px]'
+              contentClassName='w-[32px] h-[32px]'
               svg={<ReactJS className={smallItemShadow} />}
               alt='ReactJS'
               tooltip={<TechTip href='https://reactjs.org'>ReactJS</TechTip>}
@@ -249,9 +266,31 @@ const TechStack = () => {
             <TechStackItem
               containerClassName='w-[48px] h-[48px]'
               contentClassName='w-[32px] h-[32px]'
+              svg={<NextJS className={smallItemShadow} />}
+              alt='NextJS'
+              tooltip={<TechTip href='https://nextjs.org'>NextJS</TechTip>}
+              tooltipInteractive
+            />
+          </li>
+          <li>
+            <TechStackItem
+              containerClassName='w-[48px] h-[48px]'
+              contentClassName='w-[32px] h-[32px]'
               svg={<Github className={smallItemShadow} />}
               alt='GitHub'
               tooltip={<TechTip href='https://github.com'>GitHub</TechTip>}
+              tooltipInteractive
+            />
+          </li>
+          <li>
+            <TechStackItem
+              containerClassName='w-[48px] h-[48px]'
+              contentClassName='w-[32px] h-[32px]'
+              svg={<Gitlab className={smallItemShadow} />}
+              alt='Gitlab'
+              tooltip={
+                <TechTip href='https://about.gitlab.com'>Gitlab</TechTip>
+              }
               tooltipInteractive
             />
           </li>
@@ -272,6 +311,28 @@ const TechStack = () => {
               svg={<Jupyter className={smallItemShadow} />}
               alt='Jupyter'
               tooltip={<TechTip href='https://jupyter.org'>Jupyter</TechTip>}
+              tooltipInteractive
+            />
+          </li>
+          <li>
+            <TechStackItem
+              containerClassName='w-[48px] h-[48px]'
+              contentClassName='w-[32px] h-[32px]'
+              svg={<Pandas className={smallItemShadow} />}
+              alt='Pandas'
+              tooltip={
+                <TechTip href='https://pandas.pydata.org'>Pandas</TechTip>
+              }
+              tooltipInteractive
+            />
+          </li>
+          <li>
+            <TechStackItem
+              containerClassName='w-[48px] h-[48px]'
+              contentClassName='w-[32px] h-[32px]'
+              svg={<Java className={smallItemShadow} />}
+              alt='Java'
+              tooltip={<TechTip href='https://www.java.com'>Java</TechTip>}
               tooltipInteractive
             />
           </li>

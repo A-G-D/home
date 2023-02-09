@@ -3,7 +3,9 @@ import Css3SVG from 'assets/css3-original.svg'
 import JavascriptSVG from 'assets/javascript-original.svg'
 import TypescriptSVG from 'assets/typescript-original.svg'
 import GitSVG from 'assets/git-original.svg'
+import NextJSSVG from 'assets/nextjs-original.svg'
 import ReactJSSVG from 'assets/react-original.svg'
+import DjangoSVG from 'assets/django-plain.svg'
 import TailwindcssSVG from 'assets/tailwindcss-plain.svg'
 import SassSVG from 'assets/sass-original.svg'
 import LessSVG from 'assets/less-plain-wordmark.svg'
@@ -11,8 +13,11 @@ import StorybookSVG from 'assets/storybook-original.svg'
 import JestSVG from 'assets/jest-plain.svg'
 import WebpackSVG from 'assets/webpack-original.svg'
 import GithubSVG from 'assets/github-original.svg'
+import GitlabSVG from 'assets/gitlab-original.svg'
 import PythonSVG from 'assets/python-original.svg'
 import JupyterSVG from 'assets/jupyter-original-wordmark.svg'
+import PandasSVG from 'assets/pandas-original.svg'
+import JavaSVG from 'assets/java-original.svg'
 import CplusplusSVG from 'assets/cplusplus-original.svg'
 import CsharpSVG from 'assets/csharp-original.svg'
 import LuaSVG from 'assets/lua-original.svg'
@@ -23,7 +28,9 @@ export const Css3 = (props) => <Css3SVG {...props} />
 export const Javascript = (props) => <JavascriptSVG {...props} />
 export const Typescript = (props) => <TypescriptSVG {...props} />
 export const Git = (props) => <GitSVG {...props} />
+export const NextJS = (props) => <NextJSSVG {...props} />
 export const ReactJS = (props) => <ReactJSSVG {...props} />
+export const Django = (props) => <DjangoSVG {...props} />
 export const Tailwindcss = (props) => <TailwindcssSVG {...props} />
 export const Sass = (props) => <SassSVG {...props} />
 export const Less = (props) => <LessSVG {...props} />
@@ -31,8 +38,11 @@ export const Storybook = (props) => <StorybookSVG {...props} />
 export const Jest = (props) => <JestSVG {...props} />
 export const Webpack = (props) => <WebpackSVG {...props} />
 export const Github = (props) => <GithubSVG {...props} />
+export const Gitlab = (props) => <GitlabSVG {...props} />
 export const Python = (props) => <PythonSVG {...props} />
 export const Jupyter = (props) => <JupyterSVG {...props} />
+export const Pandas = (props) => <PandasSVG {...props} />
+export const Java = (props) => <JavaSVG {...props} />
 export const Cplusplus = (props) => <CplusplusSVG {...props} />
 export const Csharp = (props) => <CsharpSVG {...props} />
 export const Lua = (props) => <LuaSVG {...props} />
