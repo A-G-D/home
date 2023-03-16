@@ -24,6 +24,8 @@ export const schema = gql`
   }
 
   type Mutation {
-    createContact(input: CreateContactInput): Contact @skipAuth
+    createContact(input: CreateContactInput): Contact! @skipAuth
+    deleteContact(id: String!): Contact!
+      @requireAuth(roles: ["admin", "moderator"])
   }
 `
