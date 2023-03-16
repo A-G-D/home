@@ -19,29 +19,24 @@ export const Comment = {
     db.comment.findUnique({ where: { id: root.id } }).post(),
 }
 
-interface CreateCommentArgs {
-  input: Prisma.CommentCreateInput
-}
-
-export const createComment = ({ input }: CreateCommentArgs) => {
+export const createComment = ({ data }: Prisma.CommentCreateArgs) => {
   return db.comment.create({
-    data: input,
+    data,
   })
 }
 
-interface UpdateCommentArgs extends Prisma.CommentWhereUniqueInput {
-  input: Prisma.CommentUpdateInput
-}
-
-export const updateComment = ({ id, input }: UpdateCommentArgs) => {
+export const updateComment = ({
+  data,
+  where: { id },
+}: Prisma.CommentUpdateArgs) => {
   requireAuth({ roles: ['admin', 'moderator', 'owner'] })
   return db.comment.update({
-    data: input,
+    data,
     where: { id },
   })
 }
 
-export const deleteComment = ({ id }) => {
+export const deleteComment = ({ where: { id } }: Prisma.CommentDeleteArgs) => {
   requireAuth({ roles: ['admin', 'moderator'] })
   return db.comment.delete({
     where: { id },

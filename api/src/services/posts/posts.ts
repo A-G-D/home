@@ -12,28 +12,20 @@ export const post = ({ id }: Prisma.PostWhereUniqueInput) => {
   })
 }
 
-interface CreatePostArgs {
-  input: Prisma.PostCreateInput
-}
-
-export const createPost = ({ input }: CreatePostArgs) => {
+export const createPost = ({ data }: Prisma.PostCreateArgs) => {
   return db.post.create({
-    data: input,
+    data,
   })
 }
 
-interface UpdatePostArgs extends Prisma.PostWhereUniqueInput {
-  input: Prisma.PostUpdateInput
-}
-
-export const updatePost = ({ id, input }: UpdatePostArgs) => {
+export const updatePost = ({ data, where: { id } }: Prisma.PostUpdateArgs) => {
   return db.post.update({
-    data: input,
+    data,
     where: { id },
   })
 }
 
-export const deletePost = ({ id }: Prisma.PostWhereUniqueInput) => {
+export const deletePost = ({ where: { id } }: Prisma.PostDeleteArgs) => {
   return db.post.delete({
     where: { id },
   })
