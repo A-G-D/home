@@ -1,8 +1,8 @@
 import { useEffect, useRef } from 'react'
 import { navigate, routes } from '@redwoodjs/router'
-import { useAuth } from '@redwoodjs/auth'
 import { MetaTags } from '@redwoodjs/web'
 import { toast, Toaster } from '@redwoodjs/web/toast'
+import { useAuth } from 'src/auth'
 import SignupForm from 'src/components/forms/SignupForm'
 
 const SignupPage = () => {

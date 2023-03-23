@@ -6,7 +6,7 @@ import { useListener } from 'src/lib/hooks'
 import ContactForm from 'src/components/forms/ContactForm'
 
 const CREATE_CONTACT = gql`
-  mutation CreateContactMutation($input: CreateContactInput) {
+  mutation CreateContactMutation($input: CreateContactInput!) {
     createContact(input: $input) {
       id
     }

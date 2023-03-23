@@ -5,19 +5,12 @@ import { MdMenu } from 'react-icons/md'
 import { useScreenSize } from 'src/lib/hooks'
 import Links from 'src/components/Links'
 import Logo from 'src/components/Logo'
-import UserRibbon from 'src/components/UserRibbon'
 
 export interface HeaderProps extends HTMLAttributes<HTMLElement> {
-  isAuthenticated: boolean
-  currentUser: any
-  onLogout: () => void
   onMobileMenuClick: () => void
 }
 
 const Header: FC<HeaderProps> = ({
-  isAuthenticated,
-  currentUser,
-  onLogout,
   onMobileMenuClick,
   className,
   ...props
@@ -40,9 +33,6 @@ const Header: FC<HeaderProps> = ({
         <button className='p-2' onClick={onMobileMenuClick}>
           <MdMenu className='text-4xl text-primary-100' />
         </button>
-      )}
-      {isAuthenticated && (
-        <UserRibbon currentUser={currentUser} onLogout={onLogout} />
       )}
       <Toaster />
     </header>

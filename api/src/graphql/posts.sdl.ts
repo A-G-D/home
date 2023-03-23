@@ -1,9 +1,14 @@
 export const schema = gql`
   type Post {
     id: String!
+    createdAt: DateTime!
+    updatedAt: DateTime
     title: String!
     body: String!
-    createdAt: DateTime!
+    likes: Int
+    comments: [Comment]!
+    user: User
+    userId: String
   }
 
   type Query {
@@ -14,16 +19,21 @@ export const schema = gql`
   input CreatePostInput {
     title: String!
     body: String!
+    likes: Int
+    userId: String
   }
 
   input UpdatePostInput {
     title: String
     body: String
+    likes: Int
+    userId: String
   }
 
   type Mutation {
-    createPost(input: CreatePostInput!): Post! @requireAuth
-    updatePost(id: String!, input: UpdatePostInput!): Post! @requireAuth
-    deletePost(id: String!): Post! @requireAuth
+    createPost(input: CreatePostInput!): Post! @requireAuth(roles: ["admin"])
+    updatePost(id: String!, input: UpdatePostInput!): Post!
+      @requireAuth(roles: ["admin"])
+    deletePost(id: String!): Post! @requireAuth(roles: ["admin"])
   }
 `

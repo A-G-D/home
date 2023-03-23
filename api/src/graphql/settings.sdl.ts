@@ -1,19 +1,20 @@
 export const schema = gql`
-  type Settings {
+  type Setting {
     id: Int!
+    updatedAt: DateTime
     status: Int!
   }
 
-  input UpdateSettingsInput {
+  type Query {
+    settings: Setting! @skipAuth
+  }
+
+  input UpdateSettingInput {
     status: Int
   }
 
-  type Query {
-    settings: Settings! @skipAuth
-  }
-
   type Mutation {
-    updateSettings(input: UpdateSettingsInput): Settings!
+    updateSetting(id: Int!, input: UpdateSettingInput!): Setting!
       @requireAuth(roles: ["admin"])
   }
 `

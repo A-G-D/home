@@ -2,14 +2,11 @@ import { Form, Submit, TextAreaField, UseFormReturn } from '@redwoodjs/forms'
 import { Toaster } from '@redwoodjs/web/toast'
 import classNames from 'classnames'
 import { FC, HTMLAttributes } from 'react'
+import { useAuth } from 'src/auth'
 import Component from 'src/components/base/Component/Component'
 import UserInfo from 'src/components/UserInfo'
 
 export interface CommentFormProps extends HTMLAttributes<HTMLDivElement> {
-  user: {
-    name: string
-    picture?: string
-  }
   postId: string
   loading?: boolean
   error?: any
@@ -22,7 +19,6 @@ export interface CommentFormProps extends HTMLAttributes<HTMLDivElement> {
 
 const CommentForm: FC<CommentFormProps> = ({
   className,
-  user,
   postId,
   loading,
   error,
@@ -30,11 +26,14 @@ const CommentForm: FC<CommentFormProps> = ({
   onSubmit,
   ...props
 }) => {
+  const { currentUser } = useAuth()
+  const userName = currentUser.name ?? currentUser.email.split('@')[0]
+
   return (
     <div className={classNames('flex rounded-md', className)} {...props}>
       <Toaster />
       <div className='bg-primary-600 flex flex-col items-center gap-4 p-4 rounded-l-md'>
-        <UserInfo username={user.name} picture={user.picture} />
+        <UserInfo username={userName} picture={currentUser.picture as any} />
       </div>
       <Form
         className='bg-primary-400 flex-auto flex flex-col items-stretch gap-8 p-4 rounded-r-md'

@@ -12,9 +12,11 @@ import PostsLayout from 'src/layouts/PostsLayout'
 import HomeLayout from 'src/layouts/HomeLayout'
 import MainLayout from 'src/layouts/MainLayout'
 
+import { useAuth } from './auth'
+
 const Routes = () => {
   return (
-    <Router>
+    <Router useAuth={useAuth}>
       <Set wrap={MainLayout}>
         <Route path='/background' page={() => <></>} name='background' />
         <Route path='/signup' page={SignupPage} name='signup' />

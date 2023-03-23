@@ -1,14 +1,17 @@
-import type { Prisma } from '@prisma/client'
-import { db } from 'src/lib/db'
+import type { QueryResolvers, MutationResolvers } from 'types/graphql'
 
-export const settings = () => {
-  return db.settings.findUnique({ where: { id: 1 } })
+import { db } from 'src/lib/db'
+import { requireAuth } from 'src/lib/auth'
+
+export const settings: QueryResolvers['settings'] = () => {
+  return db.settings.findFirst()
 }
 
-export const updateSettings = ({
-  data,
-  where: { id },
-}: Prisma.SettingsUpdateArgs) => {
+export const updateSetting: MutationResolvers['updateSetting'] = ({
+  id,
+  input: data,
+}) => {
+  requireAuth({ roles: ['admin'] })
   return db.settings.update({
     data,
     where: { id },

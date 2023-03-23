@@ -2,14 +2,14 @@ import { FC, HTMLAttributes } from 'react'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 import { useForm } from '@redwoodjs/forms'
-import { useAuth } from '@redwoodjs/auth'
-import { QUERY as CommentsQuery } from 'src/components/CommentsCell'
+import classNames from 'classnames'
+import { useAuth } from 'src/auth'
+import { QUERY as QUERY_COMMENTS } from 'src/components/CommentsCell'
 import GuestCommentForm from 'src/components/forms/GuestCommentForm'
 import CommentForm from 'src/components/forms/CommentForm'
 import CommentsCell from 'src/components/CommentsCell'
-import classNames from 'classnames'
 
-const CREATE = gql`
+const CREATE_COMMENT = gql`
   mutation CreateCommentMutation($input: CreateCommentInput!) {
     createComment(input: $input) {
       id
@@ -31,15 +31,16 @@ const CommentsSection: FC<CommentsSectionProps> = ({
 }) => {
   const { currentUser } = useAuth()
   const formMethods = useForm({ mode: 'onBlur' })
-  const [createComment, { loading, error }] = useMutation(CREATE, {
-    refetchQueries: [{ query: CommentsQuery, variables: { postId } }],
+  const [createComment, { loading, error }] = useMutation(CREATE_COMMENT, {
+    refetchQueries: [{ query: QUERY_COMMENTS, variables: { postId } }],
     onCompleted: () => {
       toast.success('Comment Submitted!')
       formMethods.reset()
     },
   })
   const onSubmit = (input) => {
-    createComment({ variables: { input: { postId, ...input } } })
+    const name = currentUser.name ?? currentUser.email.split('@')[0]
+    createComment({ variables: { input: { postId, name, ...input } } })
   }
 
   return (
@@ -58,7 +59,6 @@ const CommentsSection: FC<CommentsSectionProps> = ({
         />
       ) : (
         <CommentForm
-          user={{ name: currentUser.email }}
           postId={postId}
           loading={loading}
           error={error}

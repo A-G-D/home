@@ -1,7 +1,7 @@
 import { MetaTags } from '@redwoodjs/web'
+import { FC } from 'react'
 import { Library } from 'src/lib/utils'
 import { Screenshot } from 'src/assets'
-import { FC } from 'react'
 
 const getScreenshot = (path: string): string => {
   return Library.Pictures.get(`screenshots/${path}`)

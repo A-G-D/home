@@ -1,8 +1,8 @@
 import type { CommentsQuery } from 'types/graphql'
 import { CellSuccessProps, CellFailureProps, useMutation } from '@redwoodjs/web'
-import { useAuth } from '@redwoodjs/auth'
 import { FC } from 'react'
 import classNames from 'classnames'
+import { useAuth } from 'src/auth'
 import { useListener } from 'src/lib/hooks'
 import Comment from 'src/components/base/Comment'
 import Spinner from 'src/components/base/Spinner'
@@ -13,13 +13,14 @@ export const QUERY = gql`
       id
       name
       body
+      likes
       createdAt
       postId
     }
   }
 `
 
-export const DELETE = gql`
+export const DELETE_COMMENT = gql`
   mutation DeleteCommentMutation($id: String!) {
     deleteComment(id: $id) {
       postId
@@ -72,7 +73,7 @@ export const Failure = ({ error }: CellFailureProps) => (
 
 export const Success = ({ comments }: CellSuccessProps<CommentsQuery>) => {
   const { hasRole } = useAuth()
-  const [deleteComment] = useMutation(DELETE, {
+  const [deleteComment] = useMutation(DELETE_COMMENT, {
     refetchQueries: [
       {
         query: QUERY,

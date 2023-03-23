@@ -13,3 +13,4 @@ web/types/graphql.d.ts
 api/types/graphql.d.ts
 site-data
 *.old
+.yarn

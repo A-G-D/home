@@ -8,12 +8,30 @@ import UserInfo from 'src/components/UserInfo'
 import { FC, HTMLAttributes } from 'react'
 import classNames from 'classnames'
 
+interface IconButtonProps extends HTMLAttributes<HTMLButtonElement> {
+  text: string
+  iconElement: JSX.Element
+}
+
+const IconButton: FC<IconButtonProps> = ({
+  text,
+  iconElement,
+  className,
+  ...props
+}) => (
+  <button className={classNames('flex gap-1', className)} {...props}>
+    {iconElement}
+    <span className='text-xs font-semibold'>{text}</span>
+  </button>
+)
+
 export interface CommentData {
   id: string
   name: string
   body: string
+  likes?: number
   createdAt: string
-  postId: string
+  postId?: string
 }
 
 export type CommentActionHandler = (
@@ -151,37 +169,25 @@ const CommentInfo: FC<CommentInfoProps> = ({
       </div>
       <footer className='flex gap-4 p-4 rounded-b-md'>
         {onLike && (
-          <button
-            className='flex gap-1'
-            onClick={(e) => {
-              onLike(e, comment)
-            }}
-          >
-            <BiLike />
-            <span className='text-xs font-semibold'>Like</span>
-          </button>
+          <IconButton
+            text='Like'
+            iconElement={<BiLike />}
+            onClick={(e) => onLike(e, comment)}
+          />
         )}
         {onReply && (
-          <button
-            className='flex gap-1'
-            onClick={(e) => {
-              onReply(e, comment)
-            }}
-          >
-            <BsReply />
-            <span className='text-xs font-semibold'>Reply</span>
-          </button>
+          <IconButton
+            text='Reply'
+            iconElement={<BsReply />}
+            onClick={(e) => onReply(e, comment)}
+          />
         )}
         {onDelete && (
-          <button
-            className='flex gap-1'
-            onClick={(e) => {
-              onDelete(e, comment)
-            }}
-          >
-            <RiDeleteBin6Line />
-            <span className='text-xs font-semibold'>Delete</span>
-          </button>
+          <IconButton
+            text='Delete'
+            iconElement={<RiDeleteBin6Line />}
+            onClick={(e) => onDelete(e, comment)}
+          />
         )}
       </footer>
     </div>

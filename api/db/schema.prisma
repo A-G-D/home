@@ -5,30 +5,35 @@ datasource db {
 
 generator client {
   provider      = "prisma-client-js"
-  binaryTargets = "native"
+  binaryTargets = ["native", "debian-openssl-1.1.x"]
 }
 
 // Define your own datamodels here and run `yarn redwood prisma migrate dev`
 // to create migrations for them and apply to your dev DB.
 // TODO: Please remove the following example:
 model Post {
-  id        String   @id @default(uuid())
+  id        String    @id @default(uuid())
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt
   title     String
   body      String
+  likes     Int?      @default(0)
   comments  Comment[]
-  createdAt DateTime @default(now())
+  user      User?     @relation(fields: [userId], references: [id])
+  userId    String?
 }
 
 model Contact {
   id        String    @id @default(uuid())
+  createdAt DateTime? @default(now())
   name      String
   email     String
   message   String
-  createdAt DateTime  @default(now())
 }
 
 model User {
   id                  String    @id @default(uuid())
+  createdAt           DateTime? @default(now())
   name                String?
   email               String    @unique
   hashedPassword      String
@@ -36,18 +41,35 @@ model User {
   resetToken          String?
   resetTokenExpiresAt DateTime?
   roles               String    @default("user")
+  posts               Post[]
+  comments            Comment[]
 }
 
 model Comment {
   id        String    @id @default(uuid())
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt
   name      String
   body      String
-  post      Post      @relation(fields: [postId], references: [id])
-  postId    String
-  createdAt DateTime  @default(now())
+  likes     Int?      @default(0)
+  post      Post?     @relation(fields: [postId], references: [id])
+  postId    String?
+  user      User?     @relation(fields: [userId], references: [id])
+  userId    String?
+  comments  Comment[] @relation("NestedComments")
+  parent    Comment?  @relation("NestedComments", fields: [parentId], references: [id])
+  parentId  String?
 }
 
-model Settings {
+model Setting {
   id        Int       @id @default(autoincrement())
+  updatedAt DateTime? @updatedAt
   status    Int       @default(0)
+	@@map("Settings")
+}
+
+enum UserRole {
+  USER            @map("user")
+  MODERATOR       @map("moderator")
+  ADMINISTRATOR   @map("admin")
 }

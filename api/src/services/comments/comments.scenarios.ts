@@ -1,4 +1,5 @@
-import type { Prisma } from '@prisma/client'
+import type { Prisma, Comment } from '@prisma/client'
+import type { ScenarioData } from '@redwoodjs/testing/api'
 
 export const standard = defineScenario<Prisma.CommentCreateArgs>({
   comment: {
@@ -30,4 +31,4 @@ export const postOnly = defineScenario({
   },
 })
 
-export type StandardScenario = typeof standard
+export type StandardScenario = ScenarioData<Comment, 'comment'>

@@ -1,8 +1,10 @@
+import type { Post } from '@prisma/client'
+
 import { posts, post, createPost, updatePost, deletePost } from './posts'
 import type { StandardScenario } from './posts.scenarios'
 
 // Generated boilerplate tests do not account for all circumstances
-// and can fail without adjustments, e.g. Float and DateTime types.
+// and can fail without adjustments, e.g. Float.
 //           Please refer to the RedwoodJS Testing Docs:
 //       https://redwoodjs.com/docs/testing#testing-services
 // https://redwoodjs.com/docs/testing#jest-expect-type-considerations
@@ -30,7 +32,7 @@ describe('posts', () => {
   })
 
   scenario('updates a post', async (scenario: StandardScenario) => {
-    const original = await post({ id: scenario.post.one.id })
+    const original = (await post({ id: scenario.post.one.id })) as Post
     const result = await updatePost({
       id: original.id,
       input: { title: 'String2' },
@@ -40,7 +42,7 @@ describe('posts', () => {
   })
 
   scenario('deletes a post', async (scenario: StandardScenario) => {
-    const original = await deletePost({ id: scenario.post.one.id })
+    const original = (await deletePost({ id: scenario.post.one.id })) as Post
     const result = await post({ id: original.id })
 
     expect(result).toEqual(null)

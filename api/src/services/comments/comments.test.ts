@@ -1,9 +1,17 @@
+import type { Comment } from '@prisma/client'
 import { db } from 'src/lib/db'
-import { comments, createComment } from './comments'
+
+import {
+  comments,
+  comment,
+  createComment,
+  updateComment,
+  deleteComment,
+} from './comments'
 import type { StandardScenario } from './comments.scenarios'
 
 // Generated boilerplate tests do not account for all circumstances
-// and can fail without adjustments, e.g. Float and DateTime types.
+// and can fail without adjustments, e.g. Float.
 //           Please refer to the RedwoodJS Testing Docs:
 //       https://redwoodjs.com/docs/testing#testing-services
 // https://redwoodjs.com/docs/testing#jest-expect-type-considerations
@@ -28,7 +36,13 @@ describe('comments', () => {
     }
   )
 
-  scenario('postOnly', 'creates a new comment', async (scenario) => {
+  scenario('returns a single comment', async (scenario: StandardScenario) => {
+    const result = await comment({ id: scenario.comment.one.id })
+
+    expect(result).toEqual(scenario.comment.one)
+  })
+
+  scenario('postOnly', 'creates a comment', async (scenario) => {
     const comment = await createComment({
       input: {
         name: 'Billy Bob',
@@ -41,5 +55,24 @@ describe('comments', () => {
     expect(comment.body).toEqual('What is your favorite tree bark?')
     expect(comment.postId).toEqual(scenario.post.bark.id)
     expect(comment.createdAt).not.toEqual(null)
+  })
+
+  scenario('updates a comment', async (scenario: StandardScenario) => {
+    const original = (await comment({ id: scenario.comment.one.id })) as Comment
+    const result = await updateComment({
+      id: original.id,
+      input: { name: 'String2' },
+    })
+
+    expect(result.name).toEqual('String2')
+  })
+
+  scenario('deletes a comment', async (scenario: StandardScenario) => {
+    const original = (await deleteComment({
+      id: scenario.comment.one.id,
+    })) as Comment
+    const result = await comment({ id: original.id })
+
+    expect(result).toEqual(null)
   })
 })

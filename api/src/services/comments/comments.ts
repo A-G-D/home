@@ -1,44 +1,61 @@
-import type { Prisma } from '@prisma/client'
-import type { ResolverArgs } from '@redwoodjs/graphql-server'
+import type {
+  QueryResolvers,
+  MutationResolvers,
+  CommentRelationResolvers,
+} from 'types/graphql'
 import { requireAuth } from 'src/lib/auth'
 
 import { db } from 'src/lib/db'
 
-export const comments = ({ postId }) => {
+export const comments: QueryResolvers['comments'] = ({
+  postId,
+}: {
+  postId: string
+}) => {
   return db.comment.findMany({ where: { postId } })
 }
 
-export const comment = ({ id }: Prisma.CommentWhereUniqueInput) => {
+export const comment: QueryResolvers['comment'] = ({ id }) => {
   return db.comment.findUnique({
     where: { id },
   })
 }
 
-export const Comment = {
-  post: (_obj, { root }: ResolverArgs<ReturnType<typeof comment>>) =>
-    db.comment.findUnique({ where: { id: root.id } }).post(),
-}
-
-export const createComment = ({ data }: Prisma.CommentCreateArgs) => {
+export const createComment: MutationResolvers['createComment'] = ({
+  input,
+}) => {
   return db.comment.create({
-    data,
+    data: input,
   })
 }
 
-export const updateComment = ({
-  data,
-  where: { id },
-}: Prisma.CommentUpdateArgs) => {
-  requireAuth({ roles: ['admin', 'moderator', 'owner'] })
+export const updateComment: MutationResolvers['updateComment'] = ({
+  id,
+  input,
+}) => {
   return db.comment.update({
-    data,
+    data: input,
     where: { id },
   })
 }
 
-export const deleteComment = ({ where: { id } }: Prisma.CommentDeleteArgs) => {
-  requireAuth({ roles: ['admin', 'moderator'] })
+export const deleteComment: MutationResolvers['deleteComment'] = ({ id }) => {
   return db.comment.delete({
     where: { id },
   })
+}
+
+export const Comment: CommentRelationResolvers = {
+  post: (_obj, { root }) => {
+    return db.comment.findUnique({ where: { id: root?.id } }).post()
+  },
+  user: (_obj, { root }) => {
+    return db.comment.findUnique({ where: { id: root?.id } }).user()
+  },
+  comments: (_obj, { root }) => {
+    return db.comment.findUnique({ where: { id: root?.id } }).comments()
+  },
+  parent: (_obj, { root }) => {
+    return db.comment.findUnique({ where: { id: root?.id } }).parent()
+  },
 }
